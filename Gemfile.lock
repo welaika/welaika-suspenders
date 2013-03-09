@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    suspenders (1.2.0)
+    suspenders (1.2.2)
       bundler (>= 1.1)
       hub (~> 1.10.2)
       rails (= 3.2.12)
@@ -66,7 +66,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
-    multi_json (1.6.0)
+    multi_json (1.6.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
