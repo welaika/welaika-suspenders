@@ -66,26 +66,27 @@ module Suspenders
     end
 
     def create_shared_flashes
-      copy_file '_flashes.html.erb', 'app/views/application/_flashes.html.erb'
+      copy_file '_flashes.html.slim', 'app/views/application/_flashes.html.slim'
     end
 
     def create_shared_javascripts
-      copy_file '_javascript.html.erb', 'app/views/application/_javascript.html.erb'
+      copy_file '_javascript.html.slim', 'app/views/application/_javascript.html.slim'
     end
 
     def create_application_layout
-      template 'suspenders_layout.html.erb.erb',
-        'app/views/layouts/application.html.erb',
+      remove_file 'app/views/layouts/application.html.erb'
+      template 'suspenders_layout.html.slim.erb',
+        'app/views/layouts/application.html.slim',
         :force => true
     end
 
-    def create_common_javascripts
-      directory 'javascripts', 'app/assets/javascripts'
+    def setup_javascripts
+      remove_file 'app/assets/javascripts/application.js'
+      copy_file 'import_common_javascripts', 'app/assets/javascripts/application.js.coffee'
     end
 
-    def add_jquery_ui
-      inject_into_file 'app/assets/javascripts/application.js',
-        "//= require jquery-ui\n", :before => '//= require_tree .'
+    def setup_presenters
+      copy_file 'presenters.rb', 'config/initializers/basic_presenter.rb'
     end
 
     def use_postgres_config_template
@@ -108,10 +109,6 @@ module Suspenders
     end
 
     def enable_database_cleaner
-      replace_in_file 'spec/spec_helper.rb',
-        'config.use_transactional_fixtures = true',
-        'config.use_transactional_fixtures = false'
-
       copy_file 'database_cleaner_rspec.rb', 'spec/support/database_cleaner.rb'
     end
 
@@ -119,17 +116,6 @@ module Suspenders
       remove_file '.rspec'
       copy_file 'rspec', '.rspec'
       prepend_file 'spec/spec_helper.rb', simplecov_init
-
-      replace_in_file 'spec/spec_helper.rb',
-        '# config.mock_with :mocha',
-        'config.mock_with :mocha'
-
-      rspec_expect_syntax = <<-RUBY
-
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
-      RUBY
 
       config = <<-RUBY
     config.generators do |generate|
@@ -142,9 +128,12 @@ module Suspenders
 
       RUBY
 
-      inject_into_file 'spec/spec_helper.rb', rspec_expect_syntax,
-        :after => 'RSpec.configure do |config|'
       inject_into_class 'config/application.rb', 'Application', config
+      replace_in_file 'spec/spec_helper.rb', /RSpec.configure do.*end\n/m, ""
+
+      copy_file 'rspec_config.rb', 'spec/support/rspec_config.rb'
+      copy_file 'unit_spec_helper.rb', 'spec/unit_spec_helper.rb'
+      copy_file 'model_spec_helper.rb', 'spec/model_spec_helper.rb'
     end
 
     def blacklist_active_record_attributes
@@ -197,23 +186,21 @@ module Suspenders
 
     def setup_foreman
       copy_file 'sample.env', '.sample.env'
+      copy_file 'sample.env', '.env'
       copy_file 'Procfile', 'Procfile'
     end
 
     def setup_stylesheets
-      copy_file 'app/assets/stylesheets/application.css',
-        'app/assets/stylesheets/application.css.scss'
       remove_file 'app/assets/stylesheets/application.css'
-      concat_file 'import_scss_styles', 'app/assets/stylesheets/application.css.scss'
-      create_file 'app/assets/stylesheets/_screen.scss'
+      copy_file 'import_sass_styles', 'app/assets/stylesheets/application.css.sass'
     end
 
     def gitignore_files
       concat_file 'suspenders_gitignore', '.gitignore'
       [
         'app/models',
+        'app/presenters',
         'app/assets/images',
-        'app/views/pages',
         'db/migrate',
         'log',
         'spec/support',
@@ -221,7 +208,9 @@ module Suspenders
         'spec/models',
         'spec/views',
         'spec/controllers',
+        'spec/features',
         'spec/helpers',
+        'spec/presenters',
         'spec/support/matchers',
         'spec/support/mixins',
         'spec/support/shared_examples'

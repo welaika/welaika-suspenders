@@ -1,8 +1,8 @@
-# Suspenders [![Build Status](https://secure.travis-ci.org/thoughtbot/suspenders.png?branch=master)](http://travis-ci.org/thoughtbot/suspenders)
+# Suspenders [![Build Status](https://secure.travis-ci.org/welaika/suspenders.png?branch=master)](http://travis-ci.org/welaika/suspenders)
 
-Suspenders is the base Rails application used at [thoughtbot](http://thoughtbot.com/community).
-
-  ![Suspenders boy](http://media.tumblr.com/1TEAMALpseh5xzf0Jt6bcwSMo1_400.png)
+This is a Suspenders fork in use at [weLaika](http://dev.welaika.com). Big thanks
+to [thoughtbot](http://thoughtbot.com/community) for providing such a great starting
+point.
 
 Installation
 ------------

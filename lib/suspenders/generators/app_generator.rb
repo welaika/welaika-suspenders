@@ -23,14 +23,14 @@ module Suspenders
     def suspenders_customization
       invoke :remove_files_we_dont_need
       invoke :customize_gemfile
+      invoke :setup_database
       invoke :setup_development_environment
       invoke :setup_test_environment
       invoke :setup_production_environment
       invoke :setup_staging_environment
       invoke :create_suspenders_views
-      invoke :create_common_javascripts
-      invoke :add_jquery_ui
-      invoke :setup_database
+      invoke :setup_javascripts
+      invoke :setup_presenters
       invoke :configure_app
       invoke :setup_stylesheets
       invoke :copy_miscellaneous_files
@@ -83,14 +83,14 @@ module Suspenders
       build :create_application_layout
     end
 
-    def create_common_javascripts
-      say 'Pulling in some common javascripts'
-      build :create_common_javascripts
+    def setup_javascripts
+      say 'Setting up javascripts'
+      build :setup_javascripts
     end
 
-    def add_jquery_ui
-      say 'Add jQuery ui to the standard application.js'
-      build :add_jquery_ui
+    def setup_presenters
+      say 'Setting up presenters'
+      build :setup_presenters
     end
 
     def customize_gemfile

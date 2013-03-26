@@ -4,7 +4,9 @@
 .env
 bin/stubs
 coverage/*
+log/*
 public/system
 rerun.txt
 tags
+tmp/*
 vendor/bundler_gems
