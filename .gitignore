@@ -3,7 +3,7 @@
 .bundle
 .rake_tasks
 /bin/*
-!bin/suspenders
+!bin/welaika-suspenders
 pkg
 test_project
 tmp/aruba
