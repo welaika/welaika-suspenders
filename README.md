@@ -9,11 +9,11 @@ Installation
 
 First install the suspenders gem:
 
-    gem install suspenders
+    gem install welaika-suspenders
 
 Then run:
 
-    suspenders projectname
+    welaika-suspenders projectname
 
 This will create a Rails 3.2 app in `projectname`. This script creates a
 new git repository. It is not meant to be used against an existing repo.
@@ -60,7 +60,7 @@ Heroku
 
 You can optionally create Heroku staging and production apps:
 
-    suspenders app --heroku true
+    welaika-suspenders app --heroku true
 
 This has the same effect as running:
 
@@ -72,7 +72,7 @@ Github
 
 You can optionally create a Github repository:
 
-    suspenders app --github organization/project
+    welaika-suspenders app --github organization/project
 
 This has the same effect as running:
 

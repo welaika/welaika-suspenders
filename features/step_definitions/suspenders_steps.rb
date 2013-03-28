@@ -24,12 +24,12 @@ When 'I ensure no databases exist for "$project_name"' do |project_name|
 end
 
 When 'I suspend a project called "$project_name"' do |project_name|
-  suspenders_bin = File.expand_path(File.join('..', '..', 'bin', 'suspenders'), File.dirname(__FILE__))
+  suspenders_bin = File.expand_path(File.join('..', '..', 'bin', 'welaika-suspenders'), File.dirname(__FILE__))
   run_simple "#{suspenders_bin} #{project_name}"
 end
 
 When /^I suspend a project called "([^"]*)" with:$/ do |project_name, arguments_table|
-  suspenders_bin = File.expand_path(File.join('..', '..', 'bin', 'suspenders'), File.dirname(__FILE__))
+  suspenders_bin = File.expand_path(File.join('..', '..', 'bin', 'welaika-suspenders'), File.dirname(__FILE__))
   arguments = arguments_table.hashes.inject([]) do |accum, argument|
     accum << "#{argument['argument']}=#{argument['value']}"
   end.join

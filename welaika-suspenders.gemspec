@@ -4,14 +4,14 @@ require 'suspenders/version'
 require 'date'
 
 Gem::Specification.new do |s|
-  s.name     = 'suspenders'
+  s.name     = 'welaika-suspenders'
   s.version  = Suspenders::VERSION
   s.date     = Date.today.strftime('%Y-%m-%d')
-  s.authors  = ['thoughtbot']
-  s.email    = 'support@thoughtbot.com'
-  s.homepage = 'http://github.com/thoughtbot/suspenders'
+  s.authors  = ['thoughtbot', 'welaika']
+  s.email    = 'info@welaika.com'
+  s.homepage = 'http://github.com/welaika/welaika-suspenders'
 
-  s.summary     = "Generate a Rails app using thoughtbot's best practices."
+  s.summary     = "Generate a Rails app using weLaika's best practices."
   s.description = <<-HERE
 Suspenders is a base Rails project that you can upgrade. It is used by
 thoughtbot to get a jump start on a working app. Use Suspenders if you're in a
