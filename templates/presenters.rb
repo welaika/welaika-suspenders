@@ -1,1 +1,1 @@
-ActionController::Base.send :helper, BasicPresenter::Helpers
+ActionController::Base.send :include, Showcase::Helpers
