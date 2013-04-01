@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require 'suspenders/version'
+require 'welaika_suspenders/version'
 require 'date'
 
 Gem::Specification.new do |s|
   s.name     = 'welaika-suspenders'
-  s.version  = Suspenders::VERSION
+  s.version  = WelaikaSuspenders::VERSION
   s.date     = Date.today.strftime('%Y-%m-%d')
   s.authors  = ['thoughtbot', 'welaika']
   s.email    = 'info@welaika.com'

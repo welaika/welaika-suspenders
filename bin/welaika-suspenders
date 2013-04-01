@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 
-require File.expand_path(File.join('..', 'lib', 'suspenders', 'generators', 'app_generator'), File.dirname(__FILE__))
-require File.expand_path(File.join('..', 'lib', 'suspenders', 'actions'), File.dirname(__FILE__))
-require File.expand_path(File.join('..', 'lib', 'suspenders', 'app_builder'), File.dirname(__FILE__))
+require File.expand_path(File.join('..', 'lib', 'welaika_suspenders', 'generators', 'app_generator'), File.dirname(__FILE__))
+require File.expand_path(File.join('..', 'lib', 'welaika_suspenders', 'actions'), File.dirname(__FILE__))
+require File.expand_path(File.join('..', 'lib', 'welaika_suspenders', 'app_builder'), File.dirname(__FILE__))
 
 if ['create', '--create'].include? ARGV[0]
   ARGV.shift
-  puts "[WARNING] the suspenders create argument is deprecated. Just use `suspenders #{ARGV.join}` instead"
+  puts "[WARNING] the welaika-suspenders create argument is deprecated. Just use `suspenders #{ARGV.join}` instead"
 end
 
 templates_root = File.expand_path(File.join("..", "templates"), File.dirname(__FILE__))
-Suspenders::AppGenerator.source_root templates_root
-Suspenders::AppGenerator.source_paths << Rails::Generators::AppGenerator.source_root << templates_root
+WelaikaSuspenders::AppGenerator.source_root templates_root
+WelaikaSuspenders::AppGenerator.source_paths << Rails::Generators::AppGenerator.source_root << templates_root
 
-Suspenders::AppGenerator.start
+WelaikaSuspenders::AppGenerator.start

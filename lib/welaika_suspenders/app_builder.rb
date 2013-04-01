@@ -1,6 +1,6 @@
-module Suspenders
+module WelaikaSuspenders
   class AppBuilder < Rails::AppBuilder
-    include Suspenders::Actions
+    include WelaikaSuspenders::Actions
 
     def readme
       template 'README.md.erb', 'README.md'
