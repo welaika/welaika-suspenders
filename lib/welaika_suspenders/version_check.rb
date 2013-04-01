@@ -1,5 +1,4 @@
 require 'open-uri'
-require 'json'
 require 'timeout'
 require 'welaika_suspenders/version'
 
@@ -9,7 +8,7 @@ module WelaikaSuspenders
 
     def self.check_if_up_to_date!
       data = Timeout::timeout(10) do
-        JSON.parse(open(ENDPOINT).read)
+        ActiveSupport::JSON.decode(open(ENDPOINT).read)
       end
       latest_version = data.first["number"]
       up_to_date = Gem::Version.new(latest_version) <= Gem::Version.new(WelaikaSuspenders::VERSION)

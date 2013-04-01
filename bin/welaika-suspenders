@@ -1,9 +1,12 @@
 #!/usr/bin/env ruby
 
-require File.expand_path(File.join('..', 'lib', 'welaika_suspenders', 'generators', 'app_generator'), File.dirname(__FILE__))
-require File.expand_path(File.join('..', 'lib', 'welaika_suspenders', 'actions'), File.dirname(__FILE__))
-require File.expand_path(File.join('..', 'lib', 'welaika_suspenders', 'app_builder'), File.dirname(__FILE__))
-require File.expand_path(File.join('..', 'lib', 'welaika_suspenders', 'version_check'), File.dirname(__FILE__))
+root = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(root) unless $LOAD_PATH.include?(root)
+
+require 'welaika_suspenders/generators/app_generator'
+require 'welaika_suspenders/actions'
+require 'welaika_suspenders/app_builder'
+require 'welaika_suspenders/version_check'
 
 if ['create', '--create'].include? ARGV[0]
   ARGV.shift
