@@ -1,5 +1,5 @@
 require 'active_support/dependencies'
-require 'basic_presenter'
+require 'showcase'
 
 # add project root to load path
 RAILS_ROOT = File.expand_path('../../', __FILE__)
