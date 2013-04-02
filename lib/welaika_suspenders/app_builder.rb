@@ -39,13 +39,25 @@ module WelaikaSuspenders
       prepend_file 'config/environments/production.rb',
         "require Rails.root.join('config/initializers/smtp')\n"
 
-      config = <<-RUBY
+      production_config = <<-RUBY
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = SMTP_SETTINGS
       RUBY
 
-      inject_into_file 'config/environments/production.rb', config,
+      development_config = <<-RUBY
+      RUBY
+
+      inject_into_file(
+        'config/environments/production.rb',
+        production_config,
         :after => 'config.action_mailer.raise_delivery_errors = false'
+      )
+
+      inject_into_file(
+        'config/environments/development.rb',
+        "\n\n  config.action_mailer.delivery_method = :letter_opener",
+        :before => "\nend"
+      )
     end
 
     def setup_staging_environment
