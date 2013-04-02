@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    welaika-suspenders (1.2.6)
+    welaika-suspenders (1.2.7)
       bundler
       hub
       rails
