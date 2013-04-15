@@ -226,7 +226,7 @@ module WelaikaSuspenders
         'spec/support',
         'spec/support/matchers',
         'spec/support/mixins',
-        'spec/support/shared_contexts'
+        'spec/support/shared_contexts',
         'spec/support/shared_examples',
         'spec/views',
       ].each do |dir|
