@@ -98,7 +98,7 @@ module WelaikaSuspenders
     end
 
     def setup_presenters
-      copy_file 'presenters.rb', 'config/initializers/basic_presenter.rb'
+      copy_file 'presenters.rb', 'config/initializers/showoff.rb'
     end
 
     def use_postgres_config_template
@@ -210,22 +210,25 @@ module WelaikaSuspenders
     def gitignore_files
       concat_file 'suspenders_gitignore', '.gitignore'
       [
+        'app/assets/images',
         'app/models',
         'app/presenters',
-        'app/assets/images',
+        'app/services',
         'db/migrate',
         'log',
-        'spec/support',
-        'spec/lib',
-        'spec/models',
-        'spec/views',
         'spec/controllers',
         'spec/features',
         'spec/helpers',
+        'spec/lib',
+        'spec/models',
         'spec/presenters',
+        'spec/services',
+        'spec/support',
         'spec/support/matchers',
         'spec/support/mixins',
-        'spec/support/shared_examples'
+        'spec/support/shared_contexts'
+        'spec/support/shared_examples',
+        'spec/views',
       ].each do |dir|
         empty_directory_with_gitkeep dir
       end
@@ -305,3 +308,4 @@ module WelaikaSuspenders
     end
   end
 end
+
