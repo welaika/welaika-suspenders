@@ -200,6 +200,7 @@ module WelaikaSuspenders
       copy_file 'sample.env', '.sample.env'
       copy_file 'sample.env', '.env'
       copy_file 'Procfile', 'Procfile'
+      copy_file 'unicorn.rb', 'config/unicorn.rb'
     end
 
     def setup_stylesheets

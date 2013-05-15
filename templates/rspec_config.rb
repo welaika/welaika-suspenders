@@ -1,3 +1,5 @@
+require 'bourne'
+
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
@@ -10,3 +12,4 @@ RSpec.configure do |config|
     config.infer_base_class_for_anonymous_controllers = false
   end
 end
+
