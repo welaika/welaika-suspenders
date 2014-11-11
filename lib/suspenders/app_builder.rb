@@ -227,6 +227,14 @@ end
       action_mailer_host 'production', "#{app_name}.com"
     end
 
+    def configure_available_locales
+      config = <<-RUBY
+    config.i18n.available_locales = [:en, :it]
+      RUBY
+
+      inject_into_class 'config/application.rb', 'Application', config
+    end
+
     def fix_i18n_deprecation_warning
       config = <<-RUBY
     config.i18n.enforce_available_locales = true

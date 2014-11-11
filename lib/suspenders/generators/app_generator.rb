@@ -126,6 +126,7 @@ module Suspenders
       build :configure_time_formats
       build :configure_rack_timeout
       build :disable_xml_params
+      build :configure_available_locales
       build :fix_i18n_deprecation_warning
       build :setup_default_rake_task
       build :configure_unicorn
