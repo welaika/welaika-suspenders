@@ -11,6 +11,18 @@ module Suspenders
         'raise_delivery_errors = false', 'raise_delivery_errors = true'
     end
 
+    def configure_letter_opener
+      config = <<-RUBY
+
+  config.action_mailer.delivery_method = :letter_opener
+      RUBY
+
+      # this method must be called after `raise_on_delivery_errors`
+      # because the `after` clause search for `raise_delivery_errors = true`
+      inject_into_file 'config/environments/development.rb', config,
+        :after => 'config.action_mailer.raise_delivery_errors = true'
+    end
+
     def raise_on_unpermitted_parameters
       config = <<-RUBY
     config.action_controller.action_on_unpermitted_parameters = :raise
