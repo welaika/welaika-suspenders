@@ -59,6 +59,16 @@ feature 'Suspend a new project with default configuration' do
     )
   end
 
+  scenario "set up available locales" do
+    run_suspenders
+
+    result = IO.read("#{project_path}/config/application.rb")
+
+    expect(result).to match(
+      /^ +config.i18n.available_locales = \[:en, :it\]$/
+    )
+  end
+
   scenario "raises on unpermitted parameters in all environments" do
     run_suspenders
 
