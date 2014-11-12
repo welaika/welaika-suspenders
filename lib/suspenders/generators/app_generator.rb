@@ -39,7 +39,6 @@ module Suspenders
       invoke :setup_database
       invoke :create_heroku_apps
       invoke :create_github_repo
-      invoke :setup_segment_io
       invoke :outro
     end
 
@@ -167,11 +166,6 @@ module Suspenders
         say 'Creating Github repo'
         build :create_github_repo, options[:github]
       end
-    end
-
-    def setup_segment_io
-      say 'Setting up Segment.io'
-      build :setup_segment_io
     end
 
     def setup_gitignore

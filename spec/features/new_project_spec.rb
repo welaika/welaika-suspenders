@@ -59,15 +59,6 @@ feature 'Suspend a new project with default configuration' do
     )
   end
 
-  scenario 'records pageviews through Segment.io if ENV variable set' do
-    run_suspenders
-
-    expect(analytics_partial).
-      to include(%{<% if ENV["SEGMENT_IO_KEY"] %>})
-    expect(analytics_partial).
-      to include(%{window.analytics.load("<%= ENV["SEGMENT_IO_KEY"] %>");})
-  end
-
   scenario "raises on unpermitted parameters in all environments" do
     run_suspenders
 
@@ -111,7 +102,4 @@ feature 'Suspend a new project with default configuration' do
     expect(locales_en_file).to match(/application: #{app_name.humanize}/)
   end
 
-  def analytics_partial
-    IO.read("#{project_path}/app/views/application/_analytics.html.erb")
-  end
 end

@@ -345,11 +345,6 @@ fi
       run "#{path_addition} hub create #{repo_name}"
     end
 
-    def setup_segment_io
-      copy_file '_analytics.html.erb',
-        'app/views/application/_analytics.html.erb'
-    end
-
     def copy_miscellaneous_files
       copy_file 'errors.rb', 'config/initializers/errors.rb'
     end
