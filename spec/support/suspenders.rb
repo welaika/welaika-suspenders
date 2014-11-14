@@ -40,7 +40,7 @@ module SuspendersTestHelpers
   end
 
   def suspenders_bin
-    File.join(root_path, 'bin', 'suspenders')
+    File.join(root_path, 'bin', 'welaika-suspenders')
   end
 
   def root_path
