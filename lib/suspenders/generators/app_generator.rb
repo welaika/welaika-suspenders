@@ -191,8 +191,8 @@ module Suspenders
     end
 
     def outro
-      say 'Congratulations! You just pulled our suspenders.'
-      say "Remember to run 'rails generate airbrake' with your API key."
+      say "Congratulations!"
+      say "Remember to run 'bin/setup' and configure errbit"
     end
 
     def run_bundle
