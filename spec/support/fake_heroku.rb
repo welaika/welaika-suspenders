@@ -25,7 +25,7 @@ class FakeHeroku
 
   def self.has_created_app_for?(remote_name)
     app_name = "#{SuspendersTestHelpers::APP_NAME}-#{remote_name}"
-    expected_line = "create #{app_name} --remote #{remote_name}\n"
+    expected_line = "create #{app_name} --region eu --remote #{remote_name}\n"
 
     File.foreach(RECORDER).any? { |line| line == expected_line }
   end
