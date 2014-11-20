@@ -18,6 +18,9 @@ Then run:
 This will create a rails app in `projectname`. This script creates a
 new git repository. It is not meant to be used against an existing repo.
 
+If you want to add an existing repo, run
+
+    git remote add origin git@github.com:welaika/projectname.git
 
 Version number
 --------------
