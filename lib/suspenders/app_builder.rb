@@ -150,6 +150,11 @@ end
         ''
     end
 
+    def rename_application_js
+      copy_file 'app/assets/javascripts/application.js', 'app/assets/javascripts/application.js.coffee'
+      remove_file 'app/assets/javascripts/application.js'
+    end
+
     def use_postgres_config_template
       template 'postgresql_database.yml.erb', 'config/database.yml',
         force: true
@@ -271,8 +276,8 @@ end
 
     def setup_stylesheets
       remove_file 'app/assets/stylesheets/application.css'
-      copy_file 'application.css.scss',
-        'app/assets/stylesheets/application.css.scss'
+      copy_file 'application.css.sass',
+        'app/assets/stylesheets/application.css.sass'
     end
 
     def install_bitters
