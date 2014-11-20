@@ -301,8 +301,8 @@ end
     end
 
     def create_heroku_apps
-      run_heroku "create #{app_name}-production", "production"
-      run_heroku "create #{app_name}-staging", "staging"
+      run_heroku "create #{app_name}-production --region eu", "production"
+      run_heroku "create #{app_name}-staging --region eu", "staging"
       run_heroku "config:add RACK_ENV=staging RAILS_ENV=staging", "staging"
     end
 

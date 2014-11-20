@@ -40,4 +40,5 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - remove segment.io javascript code
 - add [slim-rails](https://github.com/slim-template/slim-rails) gem
 - add some html meta tags
+- use EU region as default for Heroku
 
