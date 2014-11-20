@@ -48,4 +48,5 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add [slim-rails](https://github.com/slim-template/slim-rails) gem
 - add some html meta tags
 - use EU region as default for Heroku
+- create .ruby-gemset; use project name as gemset name
 

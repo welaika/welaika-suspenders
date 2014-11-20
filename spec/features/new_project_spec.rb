@@ -29,6 +29,15 @@ feature 'Suspend a new project with default configuration' do
     expect(ruby_version_file).to eq "#{RUBY_VERSION}\n"
   end
 
+  scenario 'generated .ruby-gemset is pulled from Suspenders .ruby-gemset' do
+    run_suspenders
+
+    ruby_gemset_file = IO.read("#{project_path}/.ruby-gemset")
+
+    app_name = SuspendersTestHelpers::APP_NAME
+    expect(ruby_gemset_file).to eq "#{app_name}\n"
+  end
+
   scenario 'secrets.yml reads secret from env' do
     run_suspenders
 

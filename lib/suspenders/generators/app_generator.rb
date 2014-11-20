@@ -45,6 +45,7 @@ module Suspenders
     def customize_gemfile
       build :replace_gemfile
       build :set_ruby_to_version_being_used
+      build :create_ruby_gemset
 
       if options[:heroku]
         build :setup_heroku_specific_gems

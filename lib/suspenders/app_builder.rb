@@ -168,6 +168,10 @@ end
       create_file '.ruby-version', "#{Suspenders::RUBY_VERSION}\n"
     end
 
+    def create_ruby_gemset
+      create_file '.ruby-gemset', "#{app_name}\n"
+    end
+
     def setup_heroku_specific_gems
       inject_into_file 'Gemfile', "\n\s\sgem 'rails_12factor'",
         after: /group :staging, :production do/
