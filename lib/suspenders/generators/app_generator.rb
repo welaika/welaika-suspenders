@@ -39,6 +39,7 @@ module Suspenders
       invoke :setup_database
       invoke :create_heroku_apps
       invoke :create_github_repo
+      invoke :setup_bundler_audit
       invoke :outro
     end
 
@@ -170,6 +171,11 @@ module Suspenders
 
     def setup_gitignore
       build :gitignore_files
+    end
+
+    def setup_bundler_audit
+      say "Setting up bundler-audit"
+      build :setup_bundler_audit
     end
 
     def init_git

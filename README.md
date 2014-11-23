@@ -21,7 +21,7 @@ new git repository. It is not meant to be used against an existing repo.
 If you want to add an existing repo, run
 
     git remote add origin git@github.com:welaika/projectname.git
-    
+
 Then run:
 
     cd projectname && bin/setup

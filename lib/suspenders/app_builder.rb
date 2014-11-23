@@ -346,6 +346,11 @@ fi
       run "#{path_addition} hub create #{repo_name}"
     end
 
+    def setup_bundler_audit
+      copy_file "bundler_audit.rake", "lib/tasks/bundler_audit.rake"
+      append_file "Rakefile", %{\ntask default: "bundler:audit"\n}
+    end
+
     def copy_miscellaneous_files
       copy_file 'errors.rb', 'config/initializers/errors.rb'
     end
