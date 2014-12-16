@@ -4,8 +4,7 @@ This is a [suspenders](https://github.com/thoughtbot/suspenders) fork in use at 
 Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a great starting point.
 
 
-Installation
-------------
+## Installation
 
 First install the suspenders gem:
 
@@ -26,14 +25,11 @@ Then run:
 
     cd projectname && bin/setup
 
-Version number
---------------
+## Version number
 
 `welaika-suspenders` version number isn't related to thoughbot's [suspenders](https://github.com/thoughtbot/suspenders).
 
-
-Changelog
----------
+## Changelog
 
 We merge commits from thoughbot's [suspenders](https://github.com/thoughtbot/suspenders) periodically.
 
@@ -48,4 +44,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add [slim-rails](https://github.com/slim-template/slim-rails) gem
 - add some html meta tags
 - use EU region as default for Heroku
-
+- use pry-byebug instead of byebug
