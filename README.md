@@ -10,6 +10,11 @@ First install the suspenders gem:
 
     gem install welaika-suspenders
 
+If you are using RVM, please create a new gemset named like `projectname`:
+
+    rvm gemset create projectname
+    rvm gemset use projectname
+
 Then run:
 
     welaika-suspenders projectname
@@ -17,13 +22,13 @@ Then run:
 This will create a rails app in `projectname`. This script creates a
 new git repository. It is not meant to be used against an existing repo.
 
-If you want to add an existing repo, run
-
-    git remote add origin git@github.com:welaika/projectname.git
-
 Then run:
 
     cd projectname && bin/setup
+
+If you want to add an empty bare repository as origin, run
+
+    git remote add origin git@github.com:welaika/projectname.git
 
 ## Version number
 
@@ -46,3 +51,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - use EU region as default for Heroku
 - use pry-byebug instead of byebug
 - use CDATA wrapper for javascript
+- create a .ruby-gemset file with app name
