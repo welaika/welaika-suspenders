@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    welaika-suspenders (2.2.1)
+    welaika-suspenders (2.3.0)
       bitters (~> 0.10.0)
       bundler (~> 1.3)
       rails (= 4.1.8)
@@ -74,7 +74,7 @@ GEM
       mime-types (>= 1.16, < 3)
     mime-types (1.25.1)
     mini_portile (0.6.0)
-    minitest (5.4.3)
+    minitest (5.5.0)
     multi_json (1.10.1)
     multi_test (0.1.1)
     nokogiri (1.6.2.1)
