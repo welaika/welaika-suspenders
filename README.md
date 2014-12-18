@@ -45,3 +45,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add some html meta tags
 - use EU region as default for Heroku
 - use pry-byebug instead of byebug
+- use CDATA wrapper for javascript

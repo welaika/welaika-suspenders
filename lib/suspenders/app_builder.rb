@@ -233,6 +233,10 @@ end
       copy_file 'rack_timeout.rb', 'config/initializers/rack_timeout.rb'
     end
 
+    def configure_slim
+      copy_file 'slim.rb', 'config/initializers/slim.rb'
+    end
+
     def configure_action_mailer
       action_mailer_host 'development', "localhost:#{port_number}"
       action_mailer_host 'test', 'www.example.com'
