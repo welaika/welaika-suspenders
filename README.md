@@ -3,7 +3,6 @@
 This is a [suspenders](https://github.com/thoughtbot/suspenders) fork in use at [weLaika](http://dev.welaika.com).
 Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a great starting point.
 
-
 ## Installation
 
 First install the suspenders gem:

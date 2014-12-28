@@ -120,4 +120,10 @@ feature 'Suspend a new project with default configuration' do
     expect(locales_en_file).to match(/application: #{app_name.humanize}/)
   end
 
+  scenario "config simple_form" do
+    run_suspenders
+
+    expect(File).to exist("#{project_path}/config/initializers/simple_form.rb")
+  end
+
 end

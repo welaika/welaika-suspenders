@@ -127,6 +127,7 @@ module Suspenders
       build :configure_time_zone
       build :configure_time_formats
       build :configure_rack_timeout
+      build :configure_simple_form
       build :configure_slim
       build :disable_xml_params
       build :configure_available_locales
