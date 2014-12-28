@@ -295,10 +295,18 @@ end
       remove_file '.gitignore'
       copy_file 'suspenders_gitignore', '.gitignore'
       [
+        'app/forms',
+        'app/presenters',
+        'app/queries',
+        'app/services',
         'app/views/pages',
-        'spec/lib',
         'spec/controllers',
+        'spec/forms',
         'spec/helpers',
+        'spec/lib',
+        'spec/presenters',
+        'spec/queries',
+        'spec/services',
         'spec/support/matchers',
         'spec/support/mixins',
         'spec/support/shared_examples'
