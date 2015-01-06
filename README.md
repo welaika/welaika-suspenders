@@ -18,6 +18,16 @@ Then run:
 
     welaika-suspenders projectname
 
+You can optionally specify alternate Heroku flags:
+
+    welaika-suspenders projectname \
+      --heroku true \
+      --heroku-flags "--region eu --addons newrelic,pgbackups,sendgrid,ssl"
+
+See all possible Heroku flags:
+
+    heroku help create
+
 This will create a rails app in `projectname`. This script creates a
 new git repository. It is not meant to be used against an existing repo.
 

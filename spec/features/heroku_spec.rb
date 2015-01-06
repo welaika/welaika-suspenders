@@ -1,13 +1,13 @@
 require "spec_helper"
 
 feature "Heroku" do
-  scenario "Suspend a project with --heroku=true" do
+  scenario "Suspend a project for Heroku" do
     run_suspenders("--heroku=true")
 
     expect(FakeHeroku).
       to have_gem_included(project_path, "rails_stdout_logging")
-    expect(FakeHeroku).to have_created_app_for("staging")
-    expect(FakeHeroku).to have_created_app_for("production")
+    expect(FakeHeroku).to have_created_app_for("staging", "--region eu")
+    expect(FakeHeroku).to have_created_app_for("production", "--region eu")
     expect(FakeHeroku).to have_configured_vars("staging", "SECRET_KEY_BASE")
     expect(FakeHeroku).to have_configured_vars("production", "SECRET_KEY_BASE")
 
@@ -25,5 +25,12 @@ feature "Heroku" do
 
     expect(readme).to include("./bin/deploy staging")
     expect(readme).to include("./bin/deploy production")
+  end
+
+  scenario "Suspend a project with extra Heroku flags" do
+    run_suspenders(%{--heroku=true --heroku-flags="--region eu"})
+
+    expect(FakeHeroku).to have_created_app_for("staging", "--region eu")
+    expect(FakeHeroku).to have_created_app_for("production", "--region eu")
   end
 end
