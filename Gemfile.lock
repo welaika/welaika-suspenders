@@ -53,7 +53,7 @@ GEM
       bourbon (>= 3.2)
       sass (>= 3.2)
       thor
-    bourbon (4.0.2)
+    bourbon (4.1.0)
       sass (~> 3.3)
       thor
     builder (3.2.2)
