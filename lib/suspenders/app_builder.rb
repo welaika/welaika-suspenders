@@ -107,7 +107,7 @@ module Suspenders
 
       inject_into_file(
         "config/environments/production.rb",
-        'config.static_cache_control = "public, max-age=#{1.year.to_i}"',
+        '  config.static_cache_control = "public, max-age=#{1.year.to_i}"',
         after: serve_static_files_line
       )
     end
@@ -128,6 +128,10 @@ end
 
     def setup_secret_token
       template 'secrets.yml', 'config/secrets.yml', force: true
+    end
+
+    def disallow_wrapping_parameters
+      remove_file "config/initializers/wrap_parameters.rb"
     end
 
     def create_partials_directory
@@ -373,6 +377,7 @@ fi
       copy_file "bin_deploy", "bin/deploy"
 
       instructions = <<-MARKDOWN
+
 ## Deploying
 
 If you have previously run the `./bin/setup` script,
