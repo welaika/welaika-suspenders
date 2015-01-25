@@ -64,3 +64,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - create common folders like `app/queries`, `app/services`, etc.
 - use `application.css.sass` instead of `application.css.scss`
 - do not import refills/flashes
+- add `quiet_assets` gem
