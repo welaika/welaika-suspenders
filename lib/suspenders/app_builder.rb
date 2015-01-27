@@ -240,11 +240,6 @@ end
       inject_into_class 'config/application.rb', 'Application', config
     end
 
-    def configure_time_formats
-      remove_file "config/locales/en.yml"
-      template "config_locales_en.yml.erb", "config/locales/en.yml"
-    end
-
     def configure_rack_timeout
       copy_file 'rack_timeout.rb', 'config/initializers/rack_timeout.rb'
     end
