@@ -226,14 +226,6 @@ end
       copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
     end
 
-    def configure_time_zone
-      config = <<-RUBY
-    config.active_record.default_timezone = :utc
-      RUBY
-
-      inject_into_class 'config/application.rb', 'Application', config
-    end
-
     def configure_rack_timeout
       copy_file 'rack_timeout.rb', 'config/initializers/rack_timeout.rb'
     end
