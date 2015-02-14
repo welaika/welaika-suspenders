@@ -21,6 +21,9 @@ module Suspenders
     class_option :skip_turbolinks, type: :boolean, default: true,
       desc: "Skip turbolinks gem"
 
+    class_option :skip_bundle, type: :boolean, aliases: "-B", default: true,
+      desc: "Don't run bundle install"
+
     def finish_template
       invoke :suspenders_customization
       super
@@ -201,10 +204,6 @@ module Suspenders
     def outro
       say "Congratulations!"
       say "Remember to run 'bin/setup' and configure errbit"
-    end
-
-    def run_bundle
-      # Let's not: We'll bundle manually at the right spot
     end
 
     protected
