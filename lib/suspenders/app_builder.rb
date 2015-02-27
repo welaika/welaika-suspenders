@@ -12,15 +12,11 @@ module Suspenders
     end
 
     def configure_letter_opener
-      config = <<-RUBY
-
-  config.action_mailer.delivery_method = :letter_opener
-      RUBY
-
-      # this method must be called after `raise_on_delivery_errors`
-      # because the `after` clause search for `raise_delivery_errors = true`
-      inject_into_file 'config/environments/development.rb', config,
-        :after => 'config.action_mailer.raise_delivery_errors = true'
+      inject_into_file(
+        "config/environments/development.rb",
+        "\n  config.action_mailer.delivery_method = :letter_opener",
+        after: "config.action_mailer.raise_delivery_errors = true",
+      )
     end
 
     def raise_on_unpermitted_parameters
@@ -99,7 +95,7 @@ module Suspenders
     def setup_asset_host
       replace_in_file 'config/environments/production.rb',
         "# config.action_controller.asset_host = 'http://assets.example.com'",
-        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST")'
+        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("HOST"))'
 
       replace_in_file 'config/initializers/assets.rb',
         "config.assets.version = '1.0'",
@@ -373,6 +369,7 @@ you can deploy to staging and production with:
       MARKDOWN
 
       append_file "README.md", instructions
+      run "chmod a+x bin/deploy"
     end
 
     def create_github_repo(repo_name)

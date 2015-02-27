@@ -126,4 +126,15 @@ feature 'Suspend a new project with default configuration' do
     expect(File).to exist("#{project_path}/config/initializers/simple_form.rb")
   end
 
+  scenario "config :letter_opener as email delivery method for development" do
+    run_suspenders
+
+    dev_env_file = IO.read("#{project_path}/config/environments/development.rb")
+    expect(dev_env_file).
+      to match(/^ +config.action_mailer.delivery_method = :letter_opener$/)
+  end
+
+  def analytics_partial
+    IO.read("#{project_path}/app/views/application/_analytics.html.erb")
+  end
 end
