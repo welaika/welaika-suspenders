@@ -65,3 +65,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - use `application.css.sass` instead of `application.css.scss`
 - do not import refills/flashes
 - add `quiet_assets` gem
+- add `brakeman` gem
