@@ -114,10 +114,12 @@ feature 'Suspend a new project with default configuration' do
   scenario "generated en.yml is evaluated" do
     run_suspenders
 
-    locales_en_file = IO.read("#{project_path}/config/locales/en.yml")
+    locales_en_file = "#{project_path}/config/locales/en.yml"
+    locales_it_file = "#{project_path}/config/locales/it.yml"
     app_name = SuspendersTestHelpers::APP_NAME
 
-    expect(locales_en_file).to match(/application: #{app_name.humanize}/)
+    expect(File.exist?(locales_en_file)).to eq(false)
+    expect(IO.read(locales_it_file)).to match(/application: #{app_name.humanize}/)
   end
 
   scenario "config simple_form" do

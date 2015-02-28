@@ -127,6 +127,7 @@ module Suspenders
     def configure_app
       say 'Configuring app'
       build :configure_action_mailer
+      build :configure_locales
       build :configure_rack_timeout
       build :configure_simple_form
       build :configure_slim

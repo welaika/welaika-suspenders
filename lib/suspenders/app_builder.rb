@@ -222,6 +222,11 @@ end
       copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
     end
 
+    def configure_locales
+      remove_file "config/locales/en.yml"
+      template "config_locales_it.yml.erb", "config/locales/it.yml"
+    end
+
     def configure_rack_timeout
       copy_file 'rack_timeout.rb', 'config/initializers/rack_timeout.rb'
     end
