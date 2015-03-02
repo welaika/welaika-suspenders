@@ -14,6 +14,10 @@ If you are using RVM, please create a new gemset named like `projectname`:
     rvm gemset create projectname
     rvm gemset use projectname
 
+If you want to use heroku, please install the [heroku toolbelt](https://toolbelt.heroku.com/) and run
+
+    heroku login
+
 Then run:
 
     welaika-suspenders projectname
