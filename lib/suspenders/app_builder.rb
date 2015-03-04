@@ -225,6 +225,14 @@ end
     def configure_locales
       remove_file "config/locales/en.yml"
       template "config_locales_it.yml.erb", "config/locales/it.yml"
+
+      replace_in_file "config/application.rb",
+        "# config.time_zone = 'Central Time (US & Canada)'",
+        "config.time_zone = 'Rome'"
+
+      replace_in_file "config/application.rb",
+        "# config.i18n.default_locale = :de",
+        "config.i18n.default_locale = :it"
     end
 
     def configure_rack_timeout

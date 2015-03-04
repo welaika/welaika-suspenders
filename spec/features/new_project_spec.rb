@@ -67,14 +67,16 @@ feature 'Suspend a new project with default configuration' do
     )
   end
 
-  scenario "set up available locales" do
+  scenario "set up locale and timezone" do
     run_suspenders
 
     result = IO.read("#{project_path}/config/application.rb")
 
-    expect(result).to match(
-      /^ +config.i18n.available_locales = \[:en, :it\]$/
-    )
+    expect(result).to match(/^ +config.i18n.enforce_available_locales = true$/)
+    expect(result).to match(/^ +config.i18n.available_locales = \[:en, :it\]$/)
+    expect(result).to match(/^ +config.i18n.default_locale = :it$/)
+
+    expect(result).to match(/^ +config.time_zone = 'Rome'$/)
   end
 
   scenario "raises on unpermitted parameters in all environments" do

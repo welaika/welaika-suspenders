@@ -71,3 +71,5 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add `quiet_assets` gem
 - add `brakeman` gem
 - change `i18n_tasks` configuration: set `it` as base locale
+- set `Rome` as `time_zone`
+- set `:it` as `default_locale`
