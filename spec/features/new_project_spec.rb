@@ -138,6 +138,14 @@ feature 'Suspend a new project with default configuration' do
       to match(/^ +config.action_mailer.delivery_method = :letter_opener$/)
   end
 
+  scenario "set up simplecov" do
+    run_suspenders
+
+    spec_helper_file = IO.read("#{project_path}/spec/spec_helper.rb")
+    expect(spec_helper_file).to match(/^require "simplecov"$/)
+    expect(spec_helper_file).to match(/^SimpleCov.start "rails" do$/)
+  end
+
   def analytics_partial
     IO.read("#{project_path}/app/views/application/_analytics.html.erb")
   end

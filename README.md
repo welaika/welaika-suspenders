@@ -73,3 +73,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - change `i18n_tasks` configuration: set `it` as base locale
 - set `Rome` as `time_zone`
 - set `:it` as `default_locale`
+- add [simplecov](https://github.com/colszowka/simplecov)
