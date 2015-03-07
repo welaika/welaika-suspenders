@@ -162,9 +162,10 @@ module Suspenders
       if options[:heroku]
         say "Creating Heroku apps"
         build :create_heroku_apps, options[:heroku_flags]
+        build :set_heroku_serve_static_files
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
-        build :set_memory_management_variable
+        build :set_heroku_memory_management_variable
         build :provide_deploy_script
       end
     end
