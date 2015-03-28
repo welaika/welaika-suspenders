@@ -1,6 +1,9 @@
-if ENV.fetch("COVERAGE", false)
-  require "simplecov"
-  SimpleCov.start "rails"
+require "simplecov"
+SimpleCov.start "rails" do
+  add_group "Queries", "app/queries"
+  add_group "Services", "app/services"
+  add_group "Validators", "app/validators"
+  add_group "Presenter", "app/presenters"
 end
 
 require "webmock/rspec"

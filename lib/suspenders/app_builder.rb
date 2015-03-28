@@ -221,19 +221,6 @@ end
       copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
     end
 
-    def configure_simplecov
-      simplecov_configuration = <<-RUBY
-require "simplecov"
-SimpleCov.start "rails" do
-  add_group "Queries", "app/queries"
-  add_group "Services", "app/services"
-  add_group "Validators", "app/validators"
-  add_group "Presenter", "app/presenters"
-end
-RUBY
-      prepend_to_file "spec/spec_helper.rb", simplecov_configuration
-    end
-
     def configure_locales
       remove_file "config/locales/en.yml"
       template "config_locales_it.yml.erb", "config/locales/it.yml"
