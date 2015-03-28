@@ -248,7 +248,11 @@ RUBY
     end
 
     def configure_rack_timeout
-      copy_file 'rack_timeout.rb', 'config/initializers/rack_timeout.rb'
+      rack_timeout_config = <<-RUBY
+Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
+      RUBY
+
+      append_file "config/environments/production.rb", rack_timeout_config
     end
 
     def configure_slim
