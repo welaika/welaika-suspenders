@@ -22,6 +22,8 @@ Then run:
 
     welaika-suspenders projectname
 
+This will create a Rails app in `projectname` using the latest version of Rails.
+
 You can optionally specify alternate Heroku flags:
 
     welaika-suspenders projectname \

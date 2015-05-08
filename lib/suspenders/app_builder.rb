@@ -78,6 +78,20 @@ module Suspenders
         :after => 'config.action_mailer.raise_delivery_errors = false'
     end
 
+    def enable_rack_canonical_host
+      config = <<-RUBY
+
+  # Ensure requests are only served from one, canonical host name
+  config.middleware.use Rack::CanonicalHost, ENV.fetch("HOST")
+      RUBY
+
+      inject_into_file(
+        "config/environments/production.rb",
+        config,
+        after: serve_static_files_line
+      )
+    end
+
     def enable_rack_deflater
       config = <<-RUBY
 
@@ -136,6 +150,7 @@ end
 
     def create_shared_flashes
       copy_file '_flashes.html.slim', 'app/views/application/_flashes.html.slim'
+      copy_file "flashes_helper.rb", "app/helpers/flashes_helper.rb"
     end
 
     def create_shared_javascripts
@@ -415,6 +430,7 @@ you can deploy to staging and production with:
     end
 
     def copy_miscellaneous_files
+      copy_file "browserslist", "browserslist"
       copy_file "errors.rb", "config/initializers/errors.rb"
       copy_file "json_encoding.rb", "config/initializers/json_encoding.rb"
     end
