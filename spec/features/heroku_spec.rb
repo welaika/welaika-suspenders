@@ -1,7 +1,7 @@
 require "spec_helper"
 
-feature "Heroku" do
-  scenario "Suspend a project for Heroku" do
+RSpec.describe "Heroku" do
+  it "suspends a project for Heroku" do
     run_suspenders("--heroku=true")
 
     expect(FakeHeroku).to have_gem_included(project_path, "rails_stdout_logging")
@@ -30,7 +30,7 @@ feature "Heroku" do
     expect(readme).to include("./bin/deploy production")
   end
 
-  scenario "Suspend a project with extra Heroku flags" do
+  it "suspends a project with extra Heroku flags" do
     run_suspenders(%{--heroku=true --heroku-flags="--region eu"})
 
     expect(FakeHeroku).to have_created_app_for("staging", "--region eu")

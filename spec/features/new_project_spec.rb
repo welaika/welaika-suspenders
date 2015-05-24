@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
-feature 'Suspend a new project with default configuration' do
-  scenario 'specs pass' do
+RSpec.describe "Suspend a new project with default configuration" do
+  it "ensures project specs pass" do
     run_suspenders
 
     Dir.chdir(project_path) do
@@ -11,7 +11,7 @@ feature 'Suspend a new project with default configuration' do
     end
   end
 
-  scenario 'staging config is inherited from production' do
+  it "inherits staging config from production" do
     run_suspenders
 
     staging_file = IO.read("#{project_path}/config/environments/staging.rb")
@@ -21,7 +21,7 @@ feature 'Suspend a new project with default configuration' do
     expect(staging_file).to match(/#{config_stub}/), staging_file
   end
 
-  scenario 'generated .ruby-version is pulled from Suspenders .ruby-version' do
+  it "creates .ruby-version from Suspenders .ruby-version" do
     run_suspenders
 
     ruby_version_file = IO.read("#{project_path}/.ruby-version")
@@ -29,7 +29,7 @@ feature 'Suspend a new project with default configuration' do
     expect(ruby_version_file).to eq "#{RUBY_VERSION}\n"
   end
 
-  scenario 'generated .ruby-gemset is pulled from app name' do
+  it 'creates .ruby-gemset from app name' do
     run_suspenders
 
     ruby_gemset_file = IO.read("#{project_path}/.ruby-gemset")
@@ -37,7 +37,7 @@ feature 'Suspend a new project with default configuration' do
     expect(ruby_gemset_file).to eq "#{SuspendersTestHelpers::APP_NAME}\n"
   end
 
-  scenario 'secrets.yml reads secret from env' do
+  it "loads secret_key_base from env" do
     run_suspenders
 
     secrets_file = IO.read("#{project_path}/config/secrets.yml")
@@ -45,19 +45,19 @@ feature 'Suspend a new project with default configuration' do
     expect(secrets_file).to match(/secret_key_base: <%= ENV\["SECRET_KEY_BASE"\] %>/)
   end
 
-  scenario 'action mailer support file is added' do
+  it "adds support file for action mailer" do
     run_suspenders
 
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
 
-  scenario "i18n support file is added" do
+  it "adds support file for i18n" do
     run_suspenders
 
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
 
-  scenario 'newrelic.yml reads NewRelic license from env' do
+  it "ensures newrelic.yml reads NewRelic license from env" do
     run_suspenders
 
     newrelic_file = IO.read("#{project_path}/config/newrelic.yml")
@@ -67,7 +67,7 @@ feature 'Suspend a new project with default configuration' do
     )
   end
 
-  scenario "set up locale and timezone" do
+  it "configs locale and timezone" do
     run_suspenders
 
     result = IO.read("#{project_path}/config/application.rb")
@@ -79,7 +79,7 @@ feature 'Suspend a new project with default configuration' do
     expect(result).to match(/^ +config.time_zone = 'Rome'$/)
   end
 
-  scenario "raises on unpermitted parameters in all environments" do
+  it "raises on unpermitted parameters in all environments" do
     run_suspenders
 
     result = IO.read("#{project_path}/config/application.rb")
@@ -89,7 +89,7 @@ feature 'Suspend a new project with default configuration' do
     )
   end
 
-  scenario "raises on missing translations in development and test" do
+  it "raises on missing translations in development and test" do
     run_suspenders
 
     %w[development test].each do |environment|
@@ -101,19 +101,19 @@ feature 'Suspend a new project with default configuration' do
     end
   end
 
-  scenario "specs for missing or unused translations" do
+  it "adds specs for missing or unused translations" do
     run_suspenders
 
     expect(File).to exist("#{project_path}/spec/i18n_spec.rb")
   end
 
-  scenario "config file for i18n tasks" do
+  it "configs i18n-tasks" do
     run_suspenders
 
     expect(File).to exist("#{project_path}/config/i18n-tasks.yml")
   end
 
-  scenario "generated en.yml is evaluated" do
+  it "evaluates en.yml.erb" do
     run_suspenders
 
     locales_en_file = "#{project_path}/config/locales/en.yml"
@@ -124,13 +124,13 @@ feature 'Suspend a new project with default configuration' do
     expect(IO.read(locales_it_file)).to match(/application: #{app_name.humanize}/)
   end
 
-  scenario "config simple_form" do
+  it "configs simple_form" do
     run_suspenders
 
     expect(File).to exist("#{project_path}/config/initializers/simple_form.rb")
   end
 
-  scenario "config :letter_opener as email delivery method for development" do
+  it "configs :letter_opener as email delivery method for development" do
     run_suspenders
 
     dev_env_file = IO.read("#{project_path}/config/environments/development.rb")
@@ -138,7 +138,7 @@ feature 'Suspend a new project with default configuration' do
       to match(/^ +config.action_mailer.delivery_method = :letter_opener$/)
   end
 
-  scenario "set up simplecov" do
+  it "configs simplecov" do
     run_suspenders
 
     spec_helper_file = IO.read("#{project_path}/spec/spec_helper.rb")
@@ -146,7 +146,7 @@ feature 'Suspend a new project with default configuration' do
     expect(spec_helper_file).to match(/^SimpleCov.start "rails" do$/)
   end
 
-  scenario "config active job queue adapter" do
+  it "configs active job queue adapter" do
     run_suspenders
 
     application_config = IO.read("#{project_path}/config/application.rb")
