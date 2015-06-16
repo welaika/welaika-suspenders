@@ -1,9 +1,13 @@
 require "spec_helper"
 
 RSpec.describe "Suspend a new project with default configuration" do
-  it "ensures project specs pass" do
+  before(:all) do
+    drop_dummy_database
+    remove_project_directory
     run_suspenders
+  end
 
+  it "ensures project specs pass" do
     Dir.chdir(project_path) do
       Bundler.with_clean_env do
         expect(`rake`).to include('0 failures')
@@ -12,8 +16,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "inherits staging config from production" do
-    run_suspenders
-
     staging_file = IO.read("#{project_path}/config/environments/staging.rb")
     config_stub = "Rails.application.configure do"
 
@@ -22,8 +24,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "creates .ruby-version from Suspenders .ruby-version" do
-    run_suspenders
-
     ruby_version_file = IO.read("#{project_path}/.ruby-version")
 
     expect(ruby_version_file).to eq "#{RUBY_VERSION}\n"
@@ -38,28 +38,26 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "loads secret_key_base from env" do
-    run_suspenders
-
     secrets_file = IO.read("#{project_path}/config/secrets.yml")
 
     expect(secrets_file).to match(/secret_key_base: <%= ENV\["SECRET_KEY_BASE"\] %>/)
   end
 
   it "adds support file for action mailer" do
-    run_suspenders
-
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
 
   it "adds support file for i18n" do
-    run_suspenders
-
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
 
-  it "ensures newrelic.yml reads NewRelic license from env" do
-    run_suspenders
+  it "creates good default .hound.yml" do
+    hound_config_file = IO.read("#{project_path}/.hound.yml")
 
+    expect(hound_config_file).to include "enabled: true"
+  end
+
+  it "ensures newrelic.yml reads NewRelic license from env" do
     newrelic_file = IO.read("#{project_path}/config/newrelic.yml")
 
     expect(newrelic_file).to match(
@@ -80,8 +78,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "raises on unpermitted parameters in all environments" do
-    run_suspenders
-
     result = IO.read("#{project_path}/config/application.rb")
 
     expect(result).to match(
@@ -90,8 +86,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "raises on missing translations in development and test" do
-    run_suspenders
-
     %w[development test].each do |environment|
       environment_file =
         IO.read("#{project_path}/config/environments/#{environment}.rb")
@@ -102,37 +96,24 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "adds specs for missing or unused translations" do
-    run_suspenders
-
     expect(File).to exist("#{project_path}/spec/i18n_spec.rb")
   end
 
   it "configs i18n-tasks" do
-    run_suspenders
-
     expect(File).to exist("#{project_path}/config/i18n-tasks.yml")
   end
 
   it "evaluates en.yml.erb" do
-    run_suspenders
-
-    locales_en_file = "#{project_path}/config/locales/en.yml"
-    locales_it_file = "#{project_path}/config/locales/it.yml"
+    locales_it_file = IO.read("#{project_path}/config/locales/it.yml")
     app_name = SuspendersTestHelpers::APP_NAME
-
-    expect(File.exist?(locales_en_file)).to eq(false)
-    expect(IO.read(locales_it_file)).to match(/application: #{app_name.humanize}/)
+    expect(locales_it_file).to match(/application: #{app_name.humanize}/)
   end
 
   it "configs simple_form" do
-    run_suspenders
-
     expect(File).to exist("#{project_path}/config/initializers/simple_form.rb")
   end
 
   it "configs :letter_opener as email delivery method for development" do
-    run_suspenders
-
     dev_env_file = IO.read("#{project_path}/config/environments/development.rb")
     expect(dev_env_file).
       to match(/^ +config.action_mailer.delivery_method = :letter_opener$/)
@@ -147,8 +128,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "configs active job queue adapter" do
-    run_suspenders
-
     application_config = IO.read("#{project_path}/config/application.rb")
     test_config = IO.read("#{project_path}/config/environments/test.rb")
 
@@ -161,8 +140,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "adds spring to binstubs" do
-    run_suspenders
-
     expect(File).to exist("#{project_path}/bin/spring")
 
     spring_line = /^ +load File.expand_path\("\.\.\/spring", __FILE__\)$/

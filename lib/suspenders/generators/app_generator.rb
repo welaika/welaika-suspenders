@@ -40,6 +40,7 @@ module Suspenders
       invoke :configure_app
       invoke :setup_stylesheets
       invoke :install_bitters
+      invoke :install_refills
       invoke :copy_miscellaneous_files
       invoke :customize_error_pages
       invoke :remove_routes_comment_lines
@@ -88,6 +89,7 @@ module Suspenders
     def setup_test_environment
       say 'Setting up the test environment'
       build :set_up_factory_girl_for_rspec
+      build :set_up_hound
       build :generate_rspec
       build :configure_rspec
       build :configure_background_jobs_for_rspec
@@ -152,6 +154,11 @@ module Suspenders
     def install_bitters
       say 'Install Bitters'
       build :install_bitters
+    end
+
+    def install_refills
+      say "Install Refills"
+      build :install_refills
     end
 
     def setup_git

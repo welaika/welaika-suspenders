@@ -58,6 +58,10 @@ module Suspenders
       copy_file 'factory_girl_rspec.rb', 'spec/support/factory_girl.rb'
     end
 
+    def set_up_hound
+      copy_file "hound.yml", ".hound.yml"
+    end
+
     def configure_newrelic
       template 'newrelic.yml.erb', 'config/newrelic.yml'
     end
@@ -312,6 +316,12 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       remove_file 'app/assets/stylesheets/application.css'
       copy_file 'application.css.sass',
         'app/assets/stylesheets/application.css.sass'
+    end
+
+    def install_refills
+      run "rails generate refills:import flashes"
+      run "rm app/views/refills/_flashes.html.erb"
+      run "rmdir app/views/refills"
     end
 
     def install_bitters
