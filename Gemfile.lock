@@ -141,3 +141,6 @@ DEPENDENCIES
   pry-byebug
   rspec (~> 3.2)
   welaika-suspenders!
+
+BUNDLED WITH
+   1.10.5
