@@ -75,3 +75,5 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - set `Rome` as `time_zone`
 - set `:it` as `default_locale`
 - add [simplecov](https://github.com/colszowka/simplecov)
+- add fixtures helper for `rspec`
+- add queries helper for `rspec`
