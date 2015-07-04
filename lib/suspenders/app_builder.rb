@@ -58,6 +58,11 @@ module Suspenders
       copy_file 'factory_girl_rspec.rb', 'spec/support/factory_girl.rb'
     end
 
+    def add_helpers_for_rspec
+      copy_file 'queries_helper_rspec.rb', 'spec/support/queries_helper.rb'
+      copy_file 'fixtures_helper_rspec.rb', 'spec/support/fixtures_helper.rb'
+    end
+
     def set_up_hound
       copy_file "hound.yml", ".hound.yml"
     end
@@ -344,6 +349,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         'spec/presenters',
         'spec/queries',
         'spec/services',
+        'spec/fixtures',
         'spec/support/matchers',
         'spec/support/mixins',
         'spec/support/shared_examples'

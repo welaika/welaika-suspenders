@@ -51,6 +51,14 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
 
+  it "adds rspec helper for fixtures" do
+    expect(File).to exist("#{project_path}/spec/support/fixtures_helper.rb")
+  end
+
+  it "adds rspec helper for queries" do
+    expect(File).to exist("#{project_path}/spec/support/queries_helper.rb")
+  end
+
   it "creates good default .hound.yml" do
     hound_config_file = IO.read("#{project_path}/.hound.yml")
 
