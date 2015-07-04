@@ -51,6 +51,10 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
 
+  it "adds support file for factory girl" do
+    expect(File).to exist("#{project_path}/spec/support/factory_girl.rb")
+  end
+
   it "adds rspec helper for fixtures" do
     expect(File).to exist("#{project_path}/spec/support/fixtures_helper.rb")
   end
@@ -155,6 +159,11 @@ RSpec.describe "Suspend a new project with default configuration" do
     bin_stubs.each do |bin_stub|
       expect(IO.read("#{project_path}/bin/#{bin_stub}")).to match(spring_line)
     end
+  end
+
+  it "adds rspec's helper files" do
+    expect(File).to exist("#{project_path}/spec/spec_helper.rb")
+    expect(File).to exist("#{project_path}/spec/rails_helper.rb")
   end
 
   def analytics_partial
