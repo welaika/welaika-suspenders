@@ -58,6 +58,10 @@ module Suspenders
       copy_file 'factory_girl_rspec.rb', 'spec/support/factory_girl.rb'
     end
 
+    def set_up_capybara_for_rspec
+      template 'capybara_rspec.rb.erb', 'spec/support/capybara.rb', port_number: port
+    end
+
     def add_helpers_for_rspec
       copy_file 'queries_helper_rspec.rb', 'spec/support/queries_helper.rb'
       copy_file 'fixtures_helper_rspec.rb', 'spec/support/fixtures_helper.rb'

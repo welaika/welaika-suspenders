@@ -77,3 +77,5 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add [simplecov](https://github.com/colszowka/simplecov)
 - add fixtures helper for `rspec`
 - add queries helper for `rspec`
+- configure asset host for capybara
+- add helpers for capybara (`page!`, `screenshot!`)
