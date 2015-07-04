@@ -166,6 +166,10 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/rails_helper.rb")
   end
 
+  it "creates binstubs" do
+    expect(File).to exist("#{project_path}/bin/brakeman")
+  end
+
   def analytics_partial
     IO.read("#{project_path}/app/views/application/_analytics.html.erb")
   end

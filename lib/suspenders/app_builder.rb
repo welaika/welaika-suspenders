@@ -449,6 +449,10 @@ you can deploy to staging and production with:
       bundle_command "exec spring binstub --all"
     end
 
+    def create_binstubs
+      bundle_command "binstubs brakeman"
+    end
+
     def copy_miscellaneous_files
       copy_file "browserslist", "browserslist"
       copy_file "errors.rb", "config/initializers/errors.rb"

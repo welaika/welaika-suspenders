@@ -50,6 +50,7 @@ module Suspenders
       invoke :create_github_repo
       invoke :setup_bundler_audit
       invoke :setup_spring
+      invoke :create_binstubs
       invoke :outro
     end
 
@@ -200,6 +201,11 @@ module Suspenders
     def setup_spring
       say "Springifying binstubs"
       build :setup_spring
+    end
+
+    def create_binstubs
+      say "Create binstubs"
+      build :create_binstubs
     end
 
     def init_git
