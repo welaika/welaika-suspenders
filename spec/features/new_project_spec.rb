@@ -30,8 +30,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it 'creates .ruby-gemset from app name' do
-    run_suspenders
-
     ruby_gemset_file = IO.read("#{project_path}/.ruby-gemset")
 
     expect(ruby_gemset_file).to eq "#{SuspendersTestHelpers::APP_NAME}\n"
@@ -78,8 +76,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "configs locale and timezone" do
-    run_suspenders
-
     result = IO.read("#{project_path}/config/application.rb")
 
     expect(result).to match(/^ +config.i18n.enforce_available_locales = true$/)
@@ -132,8 +128,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "configs simplecov" do
-    run_suspenders
-
     spec_helper_file = IO.read("#{project_path}/spec/spec_helper.rb")
     expect(spec_helper_file).to match(/^require "simplecov"$/)
     expect(spec_helper_file).to match(/^SimpleCov.start "rails" do$/)
