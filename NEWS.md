@@ -23,7 +23,7 @@
 * Add code of conduct to CONTRIBUTING document
 * Only use rack-timeout in staging and production
 * Add SimpleCov
-* Avoid generation of extra _flashes view
+* Avoid generation of extra `_flashes` view
 * Fix Travis CI install step
 * Cache bundle in Travis CI runs
 
