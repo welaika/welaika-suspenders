@@ -69,7 +69,6 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - create a .ruby-gemset file with app name
 - create common folders like `app/queries`, `app/services`, etc.
 - use `application.css.sass` instead of `application.css.scss`
-- do not import refills/flashes
 - add `quiet_assets` gem
 - add `brakeman` gem
 - change `i18n_tasks` configuration: set `it` as base locale
