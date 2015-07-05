@@ -19,6 +19,19 @@ module Suspenders
       )
     end
 
+    def configure_bullet
+      config = <<-RUBY.strip_heredoc
+      config.after_initialize do
+          Bullet.enable = true
+          Bullet.bullet_logger = true
+          Bullet.console = true
+          Bullet.rails_logger = true
+          # Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
+        end
+      RUBY
+      configure_environment "development", config
+    end
+
     def raise_on_unpermitted_parameters
       config = <<-RUBY
     config.action_controller.action_on_unpermitted_parameters = :raise
