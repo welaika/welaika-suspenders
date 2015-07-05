@@ -92,7 +92,6 @@ module Suspenders
       build :set_up_factory_girl_for_rspec
       build :set_up_capybara_for_rspec
       build :add_helpers_for_rspec
-      build :set_up_hound
       build :generate_rspec
       build :configure_rspec
       build :configure_background_jobs_for_rspec
