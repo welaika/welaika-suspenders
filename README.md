@@ -82,3 +82,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - drop support for IE 9 in AutoPrefixer
 - removed [hound](https://houndci.com) configuration
 - add [bullet](https://github.com/flyerhzm/bullet)
+- set `unicorn` workers to 1 for `webconsole`
