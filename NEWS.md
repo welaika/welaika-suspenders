@@ -1,3 +1,12 @@
+1.30.0 (July 30, 2015)
+
+* Update to RSpec 3.3
+* Replace TravisCI with CircleCI
+* Rename development data concept to avoid confusion with db/seeds
+* Remove Unicorn in favor of Puma, as [recommended by Heroku]
+
+[recommended by Heroku]: https://devcenter.heroku.com/changelog-items/594
+
 1.29.0 (June 16, 2015)
 
 * Generate rake, rails and rspec binstubs with Spring

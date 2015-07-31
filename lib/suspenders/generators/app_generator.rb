@@ -98,7 +98,7 @@ module Suspenders
       build :configure_background_jobs_for_rspec
       build :enable_database_cleaner
       build :configure_spec_support_features
-      build :configure_travis
+      build :configure_ci
       build :configure_i18n_for_test_environment
       build :configure_i18n_tasks
       build :configure_action_mailer_in_specs
@@ -146,7 +146,7 @@ module Suspenders
       build :configure_available_locales
       build :fix_i18n_deprecation_warning
       build :setup_default_rake_task
-      build :configure_unicorn
+      build :configure_puma
       build :setup_foreman
     end
 

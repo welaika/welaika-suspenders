@@ -46,7 +46,7 @@ module Suspenders
     end
 
     def provide_dev_prime_task
-      copy_file 'development_seeds.rb', 'lib/tasks/development_seeds.rake'
+      copy_file 'dev.rake', 'lib/tasks/dev.rake'
     end
 
     def configure_generators
@@ -236,8 +236,8 @@ end
       copy_file "spec_helper.rb", "spec/spec_helper.rb"
     end
 
-    def configure_travis
-      template 'travis.yml.erb', '.travis.yml'
+    def configure_ci
+      template "circle.yml.erb", "circle.yml"
     end
 
     def configure_i18n_for_test_environment
@@ -325,8 +325,8 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       generate 'rspec:install'
     end
 
-    def configure_unicorn
-      copy_file 'unicorn.rb', 'config/unicorn.rb'
+    def configure_puma
+      copy_file "puma.rb", "config/puma.rb"
     end
 
     def setup_foreman
