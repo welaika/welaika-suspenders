@@ -9,7 +9,7 @@ First install the suspenders gem:
 
     gem install welaika-suspenders
 
-If you are using RVM, please create a new gemset named like `projectname`:
+If you are using RVM, please before create a new gemset named like `projectname`:
 
     rvm gemset create projectname
     rvm gemset use projectname
