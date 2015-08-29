@@ -101,7 +101,7 @@ module Suspenders
       RUBY
 
       inject_into_file 'config/environments/production.rb', config,
-        :after => 'config.action_mailer.raise_delivery_errors = false'
+        after: "config.action_mailer.raise_delivery_errors = false"
     end
 
     def enable_rack_canonical_host
@@ -135,7 +135,7 @@ module Suspenders
     def setup_asset_host
       replace_in_file 'config/environments/production.rb',
         "# config.action_controller.asset_host = 'http://assets.example.com'",
-        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("HOST"))'
+        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))'
 
       replace_in_file 'config/initializers/assets.rb',
         "config.assets.version = '1.0'",
@@ -376,6 +376,10 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       end
     end
 
+    def copy_dotfiles
+      directory("dotfiles", ".")
+    end
+
     def init_git
       run 'git init'
     end
@@ -484,7 +488,7 @@ you can deploy to staging and production with:
       EOS
 
       %w(500 404 422).each do |page|
-        inject_into_file "public/#{page}.html", meta_tags, :after => "<head>\n"
+        inject_into_file "public/#{page}.html", meta_tags, after: "<head>\n"
         replace_in_file "public/#{page}.html", /<!--.+-->\n/, ''
       end
     end

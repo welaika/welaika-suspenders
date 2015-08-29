@@ -35,6 +35,10 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(ruby_gemset_file).to eq "#{SuspendersTestHelpers::APP_NAME}\n"
   end
 
+  it "copies dotfiles" do
+    expect(File).to exist("#{project_path}/.ctags")
+  end
+
   it "loads secret_key_base from env" do
     secrets_file = IO.read("#{project_path}/config/secrets.yml")
 
