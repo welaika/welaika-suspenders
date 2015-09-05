@@ -2,7 +2,6 @@ Capybara.javascript_driver = :webkit
 Capybara.asset_host = "http://localhost:<%= config[:port_number] %>"
 
 module CapybaraHelper
-
   def page!
     save_and_open_page
   end
