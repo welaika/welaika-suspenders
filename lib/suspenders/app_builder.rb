@@ -355,7 +355,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       copy_file 'suspenders_gitignore', '.gitignore'
       [
         'app/forms',
-        'app/presenters',
+        'app/decorators',
         'app/queries',
         'app/services',
         'app/views/pages',
@@ -363,7 +363,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         'spec/forms',
         'spec/helpers',
         'spec/lib',
-        'spec/presenters',
+        'spec/decorators',
         'spec/queries',
         'spec/services',
         'spec/fixtures',

@@ -83,3 +83,5 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - drop support for IE 9 in AutoPrefixer
 - removed [hound](https://houndci.com) configuration
 - add [bullet](https://github.com/flyerhzm/bullet)
+- add [draper](https://github.com/drapergem/draper) gem and rename `presenters` folder to `decorators`
+

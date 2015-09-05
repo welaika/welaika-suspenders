@@ -1,10 +1,7 @@
 require "simplecov"
 require "simplecov-json"
 SimpleCov.start "rails" do
-  add_group "Queries", "app/queries"
   add_group "Services", "app/services"
-  add_group "Validators", "app/validators"
-  add_group "Presenter", "app/presenters"
 end
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 
