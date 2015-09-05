@@ -84,4 +84,5 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - removed [hound](https://houndci.com) configuration
 - add [bullet](https://github.com/flyerhzm/bullet)
 - add [draper](https://github.com/drapergem/draper) gem and rename `presenters` folder to `decorators`
-- add default task for brakeman
+- add [rubocop](https://github.com/bbatsov/rubocop) and a template of `.rubocop.yml`
+- change rake default task: now includes rubocop and brakeman too
