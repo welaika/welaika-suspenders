@@ -50,9 +50,6 @@ module Suspenders
       invoke :setup_database
       invoke :create_heroku_apps
       invoke :create_github_repo
-      invoke :setup_rubocop
-      invoke :setup_brakeman
-      invoke :setup_bundler_audit
       invoke :setup_spring
       invoke :create_binstubs
       invoke :outro
@@ -90,6 +87,9 @@ module Suspenders
       build :provide_dev_prime_task
       build :configure_generators
       build :configure_i18n_for_missing_translations
+      build :setup_rubocop
+      build :setup_brakeman
+      build :setup_bundler_audit
     end
 
     def setup_test_environment
@@ -201,11 +201,6 @@ module Suspenders
 
     def setup_gitignore
       build :gitignore_files
-    end
-
-    def setup_bundler_audit
-      say "Setting up bundler-audit"
-      build :setup_bundler_audit
     end
 
     def setup_spring
