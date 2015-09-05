@@ -1,0 +1,23 @@
+AllCops:
+  RunRailsCops: true
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/*'
+
+Metrics/LineLength:
+  Max: 100
+
+Style/StringLiterals:
+  Enabled: false
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 18
+
+Lint/Debugger:
+  Exclude:
+    - 'spec/support/capybara.rb'

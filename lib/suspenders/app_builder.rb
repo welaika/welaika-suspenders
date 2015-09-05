@@ -471,12 +471,19 @@ you can deploy to staging and production with:
       append_file "Rakefile", %{\ntask default: "brakeman:check"\n}
     end
 
+    def setup_rubocop
+      copy_file "rubocop.rake", "lib/tasks/rubocop.rake"
+      copy_file "rubocop.yml", ".rubocop.yml"
+      append_file "Rakefile", %{\ntask default: :rubocop\n}
+    end
+
     def setup_spring
       bundle_command "exec spring binstub --all"
     end
 
     def create_binstubs
       bundle_command "binstubs brakeman"
+      bundle_command "binstubs rubocop"
     end
 
     def copy_miscellaneous_files

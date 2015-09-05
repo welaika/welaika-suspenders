@@ -158,8 +158,13 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/rails_helper.rb")
   end
 
+  it "adds rubocop configuration file" do
+    expect(File).to exist("#{project_path}/.rubocop.yml")
+  end
+
   it "creates binstubs" do
     expect(File).to exist("#{project_path}/bin/brakeman")
+    expect(File).to exist("#{project_path}/bin/rubocop")
   end
 
   it "removes comments and extra newlines from config files" do

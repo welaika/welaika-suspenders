@@ -50,6 +50,7 @@ module Suspenders
       invoke :setup_database
       invoke :create_heroku_apps
       invoke :create_github_repo
+      invoke :setup_rubocop
       invoke :setup_brakeman
       invoke :setup_bundler_audit
       invoke :setup_spring
