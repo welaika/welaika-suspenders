@@ -466,6 +466,11 @@ you can deploy to staging and production with:
       append_file "Rakefile", %{\ntask default: "bundler:audit"\n}
     end
 
+    def setup_brakeman
+      copy_file "brakeman.rake", "lib/tasks/brakeman.rake"
+      append_file "Rakefile", %{\ntask default: "brakeman:check"\n}
+    end
+
     def setup_spring
       bundle_command "exec spring binstub --all"
     end
