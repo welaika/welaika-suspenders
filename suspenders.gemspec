@@ -25,7 +25,7 @@ weLaika's fork of the famous thoughbot suspenders gem.
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.version = Suspenders::VERSION
 
-  s.add_dependency 'bitters', '~> 1.0.0'
+  s.add_dependency 'bitters', '~> 1.1.0'
   s.add_dependency 'bundler', '~> 1.3'
   s.add_dependency 'rails', Suspenders::RAILS_VERSION
 
