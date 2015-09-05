@@ -1,9 +1,10 @@
 AllCops:
   RunRailsCops: true
   Exclude:
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'bin/*'
+    - "db/**/*"
+    - "config/**/*"
+    - "bin/*"
+    - "spec/i18n_spec.rb"
 
 Metrics/LineLength:
   Max: 100
@@ -20,4 +21,4 @@ Metrics/AbcSize:
 
 Lint/Debugger:
   Exclude:
-    - 'spec/support/capybara.rb'
+    - "spec/support/capybara.rb"
