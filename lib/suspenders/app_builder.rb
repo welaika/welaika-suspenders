@@ -72,7 +72,7 @@ module Suspenders
     end
 
     def set_up_capybara_for_rspec
-      template 'capybara_rspec.rb.erb', 'spec/support/capybara.rb', port_number: port
+      template 'capybara_rspec.rb.erb', 'spec/support/capybara.rb'
     end
 
     def add_helpers_for_rspec

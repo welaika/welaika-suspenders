@@ -1,5 +1,5 @@
 Capybara.javascript_driver = :webkit
-Capybara.asset_host = "http://localhost:<%= config[:port_number] %>"
+Capybara.asset_host = "http://localhost:3000"
 
 module CapybaraHelper
   def page!
@@ -9,7 +9,7 @@ module CapybaraHelper
   def screenshot!
     save_and_open_screenshot
   end
-  
+
   def blur!
     page.find('body').click
   end
