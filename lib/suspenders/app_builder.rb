@@ -41,7 +41,7 @@ module Suspenders
     end
 
     def provide_setup_script
-      template "bin_setup.erb", "bin/setup", port_number: port, force: true
+      template "bin_setup.erb", "bin/setup", force: true
       run "chmod a+x bin/setup"
     end
 
@@ -108,7 +108,7 @@ module Suspenders
       config = <<-RUBY
 
   # Ensure requests are only served from one, canonical host name
-  config.middleware.use Rack::CanonicalHost, ENV.fetch("HOST")
+  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
       RUBY
 
       inject_into_file(
@@ -224,6 +224,13 @@ end
       copy_file 'database_cleaner_rspec.rb', 'spec/support/database_cleaner.rb'
     end
 
+    def provide_shoulda_matchers_config
+      copy_file(
+        "shoulda_matchers_config_rspec.rb",
+        "spec/support/shoulda_matchers_config.rb"
+      )
+    end
+
     def configure_spec_support_features
       empty_directory_with_keep_file 'spec/features'
       empty_directory_with_keep_file 'spec/support/features'
@@ -292,10 +299,10 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
     end
 
     def configure_action_mailer
-      action_mailer_host "development", %{"localhost:#{port}"}
+      action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
-      action_mailer_host "staging", %{ENV.fetch("HOST")}
-      action_mailer_host "production", %{ENV.fetch("HOST")}
+      action_mailer_host "staging", %{ENV.fetch("APPLICATION_HOST")}
+      action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
     end
 
     def configure_available_locales
@@ -456,6 +463,20 @@ you can deploy to staging and production with:
       run "chmod a+x bin/deploy"
     end
 
+    def configure_automatic_deployment
+      staging_remote_name = heroku_app_name_for("staging")
+      deploy_command = <<-YML.strip_heredoc
+      deployment:
+        staging:
+          branch: master
+          commands:
+            - git remote add staging git@heroku.com:#{staging_remote_name}.git
+            - bin/deploy staging
+      YML
+
+      append_file "circle.yml", deploy_command
+    end
+
     def create_github_repo(repo_name)
       path_addition = override_path_for_tests
       run "#{path_addition} hub create #{repo_name}"
@@ -576,10 +597,6 @@ task default: "bundler:audit"
 
     def generate_secret
       SecureRandom.hex(64)
-    end
-
-    def port
-      @@port ||= [3000, 4000, 5000, 7000, 8000, 9000].sample
     end
 
     def serve_static_files_line
