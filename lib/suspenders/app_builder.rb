@@ -88,10 +88,6 @@ module Suspenders
       copy_file 'faker_rspec.rb', 'spec/support/faker.rb'
     end
 
-    def configure_newrelic
-      template 'newrelic.yml.erb', 'config/newrelic.yml'
-    end
-
     def configure_smtp
       copy_file 'smtp.rb', 'config/smtp.rb'
 

@@ -28,7 +28,7 @@ You can optionally specify alternate Heroku flags:
 
     welaika-suspenders projectname \
       --heroku true \
-      --heroku-flags "--region eu --addons newrelic,sendgrid,ssl"
+      --heroku-flags "--region eu --addons sendgrid,ssl"
 
 See all possible Heroku flags:
 
@@ -86,3 +86,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add [rubocop](https://github.com/bbatsov/rubocop) and a template of `.rubocop.yml`
 - change rake default task: now includes rubocop and brakeman too
 - prefer a single file for each `factory_girl` factories
+- remove new-relic
