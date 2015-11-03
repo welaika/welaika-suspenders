@@ -40,6 +40,14 @@ module Suspenders
       inject_into_class "config/application.rb", "Application", config
     end
 
+    def configure_quiet_assets
+      config = <<-RUBY
+    config.quiet_assets = true
+      RUBY
+
+      inject_into_class "config/application.rb", "Application", config
+    end
+
     def provide_setup_script
       template "bin_setup.erb", "bin/setup", force: true
       run "chmod a+x bin/setup"
@@ -69,10 +77,6 @@ module Suspenders
 
     def set_up_factory_girl_for_rspec
       copy_file 'factory_girl_rspec.rb', 'spec/support/factory_girl.rb'
-    end
-
-    def set_up_capybara_for_rspec
-      template 'capybara_rspec.rb.erb', 'spec/support/capybara.rb'
     end
 
     def add_helpers_for_rspec
@@ -227,7 +231,7 @@ end
     def provide_shoulda_matchers_config
       copy_file(
         "shoulda_matchers_config_rspec.rb",
-        "spec/support/shoulda_matchers_config.rb"
+        "spec/support/shoulda_matchers.rb"
       )
     end
 
@@ -269,10 +273,16 @@ end
       copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
     end
 
+    def configure_capybara_webkit
+      copy_file "capybara_webkit.rb", "spec/support/capybara_webkit.rb"
+    end
+
     def configure_locales
       remove_file "config/locales/en.yml"
       template "config_locales_it.yml.erb", "config/locales/it.yml"
+    end
 
+    def configure_time_formats
       replace_in_file "config/application.rb",
         "# config.time_zone = 'Central Time (US & Canada)'",
         "config.time_zone = 'Rome'"
@@ -301,7 +311,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
-      action_mailer_host "staging", %{ENV.fetch("APPLICATION_HOST")}
       action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
     end
 

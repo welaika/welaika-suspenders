@@ -28,6 +28,7 @@ weLaika's fork of the famous thoughbot suspenders gem.
   s.add_dependency 'bitters', '~> 1.1.0'
   s.add_dependency 'bundler', '~> 1.3'
   s.add_dependency 'rails', Suspenders::RAILS_VERSION
+  s.add_dependency 'nokogiri', '1.6.0' # temp fix for iconv.h problem
 
   s.add_development_dependency 'rspec', '~> 3.2'
   s.add_development_dependency 'pry-byebug'

@@ -49,6 +49,10 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
 
+  it "configures capybara-webkit" do
+    expect(File).to exist("#{project_path}/spec/support/capybara_webkit.rb")
+  end
+
   it "adds support file for i18n" do
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
@@ -88,6 +92,14 @@ RSpec.describe "Suspend a new project with default configuration" do
 
     expect(result).to match(
       /^ +config.action_controller.action_on_unpermitted_parameters = :raise$/
+    )
+  end
+
+  it "adds explicit quiet_assets configuration" do
+    result = IO.read("#{project_path}/config/application.rb")
+
+    expect(result).to match(
+      /^ +config.quiet_assets = true$/
     )
   end
 
@@ -186,9 +198,5 @@ RSpec.describe "Suspend a new project with default configuration" do
       expect(file).not_to match(/.*#.*/)
       expect(file).not_to match(/^$\n/)
     end
-  end
-
-  def analytics_partial
-    IO.read("#{project_path}/app/views/application/_analytics.html.erb")
   end
 end

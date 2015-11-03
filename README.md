@@ -69,7 +69,6 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - create a .ruby-gemset file with app name
 - create common folders like `app/queries`, `app/services`, etc.
 - use `application.css.sass` instead of `application.css.scss`
-- add `quiet_assets` gem
 - add `brakeman` gem
 - change `i18n_tasks` configuration: set `it` as base locale
 - set `Rome` as `time_zone`
@@ -86,3 +85,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add [draper](https://github.com/drapergem/draper) gem and rename `presenters` folder to `decorators`
 - add [rubocop](https://github.com/bbatsov/rubocop) and a template of `.rubocop.yml`
 - change rake default task: now includes rubocop and brakeman too
+- prefer a single file for each `factory_girl` factories

@@ -58,6 +58,7 @@ module Suspenders
     def customize_gemfile
       build :replace_gemfile
       build :create_ruby_gemset_file
+      build :configure_simple_form
       build :set_ruby_to_version_being_used
 
       if options[:heroku]
@@ -87,6 +88,7 @@ module Suspenders
       build :provide_dev_prime_task
       build :configure_generators
       build :configure_i18n_for_missing_translations
+      build :configure_quiet_assets
       build :setup_rubocop
       build :setup_brakeman
       build :setup_bundler_audit
@@ -95,8 +97,8 @@ module Suspenders
     def setup_test_environment
       say 'Setting up the test environment'
       build :set_up_factory_girl_for_rspec
-      build :set_up_capybara_for_rspec
       build :add_helpers_for_rspec
+      build :generate_factories_file
       build :generate_rspec
       build :configure_rspec
       build :configure_background_jobs_for_rspec
@@ -108,6 +110,7 @@ module Suspenders
       build :configure_i18n_tasks
       build :configure_action_mailer_in_specs
       build :set_up_faker
+      build :configure_capybara_webkit
     end
 
     def setup_production_environment
@@ -145,7 +148,6 @@ module Suspenders
       build :configure_active_job
       build :configure_rack_timeout
       build :configure_time_formats
-      build :configure_simple_form
       build :configure_slim
       build :disable_xml_params
       build :configure_available_locales

@@ -21,4 +21,4 @@ Metrics/AbcSize:
 
 Lint/Debugger:
   Exclude:
-    - "spec/support/capybara.rb"
+    - "spec/support/capybara_webkit.rb"

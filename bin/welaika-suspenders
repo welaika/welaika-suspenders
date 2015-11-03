@@ -6,9 +6,9 @@ $LOAD_PATH << source_path
 
 require 'suspenders'
 
-if ['create', '--create'].include? ARGV[0]
-  ARGV.shift
-  puts "[WARNING] the suspenders create argument is deprecated. Just use `suspenders #{ARGV.join}` instead"
+if ['-v', '--version'].include? ARGV[0]
+  puts Suspenders::VERSION
+  exit 0
 end
 
 templates_root = File.expand_path(File.join("..", "templates"), File.dirname(__FILE__))
