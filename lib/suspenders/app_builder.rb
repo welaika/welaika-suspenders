@@ -243,10 +243,6 @@ end
       copy_file "spec_helper.rb", "spec/spec_helper.rb"
     end
 
-    def configure_ci
-      template "circle.yml.erb", "circle.yml"
-    end
-
     def configure_i18n_for_test_environment
       copy_file "i18n.rb", "spec/support/i18n.rb"
     end
@@ -466,20 +462,6 @@ you can deploy to staging and production with:
 
       append_file "README.md", instructions
       run "chmod a+x bin/deploy"
-    end
-
-    def configure_automatic_deployment
-      staging_remote_name = heroku_app_name_for("staging")
-      deploy_command = <<-YML.strip_heredoc
-      deployment:
-        staging:
-          branch: master
-          commands:
-            - git remote add staging git@heroku.com:#{staging_remote_name}.git
-            - bin/deploy staging
-      YML
-
-      append_file "circle.yml", deploy_command
     end
 
     def create_github_repo(repo_name)
