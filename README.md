@@ -87,3 +87,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - change rake default task: now includes rubocop and brakeman too
 - prefer a single file for each `factory_girl` factories
 - remove new-relic
+- add [email-validator](https://github.com/balexand/email_validator) gem
