@@ -61,7 +61,7 @@ module Suspenders
       build :set_ruby_to_version_being_used
 
       if options[:heroku]
-        build :setup_heroku_specific_gems
+        build :set_up_heroku_specific_gems
       end
 
       bundle_command 'install'
@@ -80,9 +80,11 @@ module Suspenders
 
     def setup_development_environment
       say 'Setting up the development environment'
+      build :raise_on_missing_assets_in_test
       build :raise_on_delivery_errors
       build :configure_letter_opener
-      build :configure_bullet
+      build :set_test_delivery_method
+      build :add_bullet_gem_configuration
       build :raise_on_unpermitted_parameters
       build :provide_setup_script
       build :provide_dev_prime_task
@@ -144,7 +146,6 @@ module Suspenders
       build :configure_action_mailer
       build :configure_locales
       build :configure_active_job
-      build :configure_rack_timeout
       build :configure_time_formats
       build :configure_slim
       build :disable_xml_params
@@ -152,7 +153,7 @@ module Suspenders
       build :fix_i18n_deprecation_warning
       build :setup_default_rake_task
       build :configure_puma
-      build :setup_foreman
+      build :set_up_forego
     end
 
     def setup_stylesheets

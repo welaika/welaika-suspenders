@@ -37,8 +37,6 @@ See all possible Heroku flags:
 This will create a rails app in `projectname`. This script creates a
 new git repository. It is not meant to be used against an existing repo.
 
-Then run:
-
     cd projectname && bin/setup
 
 If you want to add an empty bare repository as origin, run
@@ -64,7 +62,6 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add [slim-rails](https://github.com/slim-template/slim-rails) gem
 - add some html meta tags
 - use EU region as default for Heroku
-- use pry-byebug instead of byebug
 - use CDATA wrapper for javascript
 - create a .ruby-gemset file with app name
 - create common folders like `app/queries`, `app/services`, etc.
@@ -81,7 +78,6 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add helpers for capybara (`page!`, `screenshot!`)
 - drop support for IE 9 in AutoPrefixer
 - removed [hound](https://houndci.com) configuration
-- add [bullet](https://github.com/flyerhzm/bullet)
 - add [draper](https://github.com/drapergem/draper) gem and rename `presenters` folder to `decorators`
 - add [rubocop](https://github.com/bbatsov/rubocop) and a template of `.rubocop.yml`
 - change rake default task: now includes rubocop and brakeman too

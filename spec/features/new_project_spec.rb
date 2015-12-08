@@ -36,7 +36,9 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "copies dotfiles" do
-    expect(File).to exist("#{project_path}/.ctags")
+    %w[.ctags .env].each do |dotfile|
+      expect(File).to exist("#{project_path}/#{dotfile}")
+    end
   end
 
   it "loads secret_key_base from env" do
@@ -141,6 +143,12 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(prod_env_file).not_to match(/"HOST"/)
   end
 
+  it "configures language in html element" do
+    layout_path = "/app/views/layouts/application.html.slim"
+    layout_file = IO.read("#{project_path}#{layout_path}")
+    expect(layout_file).to match(/html lang="it"/)
+  end
+
   it "configs active job queue adapter" do
     application_config = IO.read("#{project_path}/config/application.rb")
     test_config = IO.read("#{project_path}/config/environments/test.rb")
@@ -153,13 +161,28 @@ RSpec.describe "Suspend a new project with default configuration" do
     )
   end
 
+  it "configs bullet gem in development" do
+    test_config = IO.read("#{project_path}/config/environments/development.rb")
+
+    expect(test_config).to match /^ +Bullet.enable = true$/
+    expect(test_config).to match /^ +Bullet.bullet_logger = true$/
+    expect(test_config).to match /^ +Bullet.rails_logger = true$/
+  end
+
+  it "configs missing assets to raise in test" do
+    test_config = IO.read("#{project_path}/config/environments/test.rb")
+
+    expect(test_config).to match(
+      /^ +config.assets.raise_runtime_errors = true$/,
+    )
+  end
+
   it "adds spring to binstubs" do
     expect(File).to exist("#{project_path}/bin/spring")
 
-    spring_line = /^ +load File.expand_path\("\.\.\/spring", __FILE__\)$/
     bin_stubs = %w(rake rails rspec)
     bin_stubs.each do |bin_stub|
-      expect(IO.read("#{project_path}/bin/#{bin_stub}")).to match(spring_line)
+      expect(IO.read("#{project_path}/bin/#{bin_stub}")).to match(/spring/)
     end
   end
 
