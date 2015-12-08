@@ -25,11 +25,9 @@ weLaika's fork of the famous thoughbot suspenders gem.
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.version = Suspenders::VERSION
 
-  s.add_dependency 'bitters', '~> 1.1.0'
-  s.add_dependency 'bundler', '~> 1.3'
+  s.add_dependency 'bundler', '>= 1.8.4'
   s.add_dependency 'rails', Suspenders::RAILS_VERSION
-  s.add_dependency 'nokogiri', '1.6.0' # temp fix for iconv.h problem
 
-  s.add_development_dependency 'rspec', '~> 3.2'
+  s.add_development_dependency 'rspec', '~> 3.4'
   s.add_development_dependency 'pry-byebug'
 end

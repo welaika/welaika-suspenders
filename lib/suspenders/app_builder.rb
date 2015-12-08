@@ -353,18 +353,8 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 
     def setup_stylesheets
       remove_file 'app/assets/stylesheets/application.css'
-      copy_file 'application.css.sass',
-        'app/assets/stylesheets/application.css.sass'
-    end
-
-    def install_refills
-      run "rails generate refills:import flashes"
-      run "rm app/views/refills/_flashes.html.erb"
-      run "rmdir app/views/refills"
-    end
-
-    def install_bitters
-      run "bitters install --path app/assets/stylesheets"
+      copy_file 'application.sass',
+        'app/assets/stylesheets/application.sass'
     end
 
     def gitignore_files

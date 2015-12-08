@@ -65,7 +65,7 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - use CDATA wrapper for javascript
 - create a .ruby-gemset file with app name
 - create common folders like `app/queries`, `app/services`, etc.
-- use `application.css.sass` instead of `application.css.scss`
+- use `application.sass` instead of `application.scss`
 - add `brakeman` gem
 - change `i18n_tasks` configuration: set `it` as base locale
 - set `Rome` as `time_zone`
@@ -85,3 +85,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - remove new-relic
 - add [email-validator](https://github.com/balexand/email_validator) gem
 - remove circle-ci
+- remove bitters and refills
