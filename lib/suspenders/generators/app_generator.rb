@@ -238,7 +238,7 @@ module Suspenders
 
     def outro
       say "Congratulations!"
-      say "Remember to run 'bin/setup' and configure errbit"
+      say "Now read the README.md"
     end
 
     protected
