@@ -470,6 +470,7 @@ you can deploy to staging and production with:
     def create_binstubs
       bundle_command "binstubs brakeman"
       bundle_command "binstubs rubocop"
+      bundle_command "binstubs i18n-tasks"
     end
 
     def copy_miscellaneous_files
