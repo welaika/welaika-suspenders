@@ -146,7 +146,6 @@ module Suspenders
       build :configure_action_mailer
       build :configure_locales
       build :configure_active_job
-      build :configure_time_formats
       build :configure_slim
       build :disable_xml_params
       build :configure_available_locales
