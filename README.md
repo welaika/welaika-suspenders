@@ -54,7 +54,6 @@ We merge commits from thoughbot's [suspenders](https://github.com/thoughtbot/sus
 List of changes we made since [this is commit](https://github.com/thoughtbot/suspenders/tree/d24d6eab4cc254f8bebfd73fd2b26fbbd2647e86):
 - remove `host` key in database.yml
 - add [priscilla](https://github.com/Arkham/priscilla) gem
-- add [pry-bloodline](https://github.com/Arkham/pry-bloodline) gem
 - add [rails-i18n](https://github.com/svenfuchs/rails-i18n) gem and use italian, english as available locales
 - add [letter_opener](https://github.com/ryanb/letter_opener) gem
 - add [faker](https://github.com/stympy/faker) gem
