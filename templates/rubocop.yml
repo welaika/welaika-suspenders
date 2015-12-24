@@ -4,7 +4,6 @@ AllCops:
     - "db/**/*"
     - "config/**/*"
     - "bin/*"
-    - "spec/i18n_spec.rb"
 
 Metrics/LineLength:
   Max: 100

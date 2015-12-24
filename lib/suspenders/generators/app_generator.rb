@@ -106,7 +106,6 @@ module Suspenders
       build :provide_shoulda_matchers_config
       build :configure_spec_support_features
       build :configure_i18n_for_test_environment
-      build :configure_i18n_tasks
       build :configure_action_mailer_in_specs
       build :set_up_faker
       build :configure_capybara_webkit
