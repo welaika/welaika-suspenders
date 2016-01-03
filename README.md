@@ -76,7 +76,7 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - configure asset host for capybara
 - add helpers for capybara (`page!`, `screenshot!`)
 - drop support for IE 9 in AutoPrefixer
-- removed [hound](https://houndci.com) configuration
+- remove [hound](https://houndci.com) configuration
 - add [draper](https://github.com/drapergem/draper) gem and rename `presenters` folder to `decorators`
 - add [rubocop](https://github.com/bbatsov/rubocop) and a template of `.rubocop.yml`
 - change rake default task: now includes rubocop and brakeman too
@@ -86,3 +86,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - remove circle-ci
 - remove bitters and refills
 - lint factory girl's factories
+- remove automatic deployment

@@ -32,7 +32,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   it 'creates .ruby-gemset from app name' do
     ruby_gemset_file = IO.read("#{project_path}/.ruby-gemset")
 
-    expect(ruby_gemset_file).to eq "#{SuspendersTestHelpers::APP_NAME}\n"
+    expect(ruby_gemset_file).to eq("#{app_name}\n")
   end
 
   it "copies dotfiles" do
@@ -45,6 +45,16 @@ RSpec.describe "Suspend a new project with default configuration" do
     secrets_file = IO.read("#{project_path}/config/secrets.yml")
 
     expect(secrets_file).to match(/secret_key_base: <%= ENV\["SECRET_KEY_BASE"\] %>/)
+  end
+
+  it "adds bin/setup file" do
+    expect(File).to exist("#{project_path}/bin/setup")
+  end
+
+  it "makes bin/setup executable" do
+    bin_setup_path = "#{project_path}/bin/setup"
+
+    expect(File.stat(bin_setup_path)).to be_executable
   end
 
   it "adds support file for action mailer" do
@@ -107,9 +117,8 @@ RSpec.describe "Suspend a new project with default configuration" do
     end
   end
 
-  it "evaluates en.yml.erb" do
+  it "evaluates it.yml.erb" do
     locales_it_file = IO.read("#{project_path}/config/locales/it.yml")
-    app_name = SuspendersTestHelpers::APP_NAME
     expect(locales_it_file).to match(/application: #{app_name.humanize}/)
   end
 
@@ -205,5 +214,9 @@ RSpec.describe "Suspend a new project with default configuration" do
       expect(file).not_to match(/.*#.*/)
       expect(file).not_to match(/^$\n/)
     end
+  end
+
+  def app_name
+    SuspendersTestHelpers::APP_NAME
   end
 end
