@@ -84,7 +84,6 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "configs locale and timezone" do
     result = IO.read("#{project_path}/config/application.rb")
 
-    expect(result).to match(/^ +config.i18n.enforce_available_locales = true$/)
     expect(result).to match(/^ +config.i18n.available_locales = \[:en, :it\]$/)
     expect(result).to match(/^ +config.i18n.default_locale = :it$/)
 
