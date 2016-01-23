@@ -87,3 +87,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - remove bitters and refills
 - lint factory girl's factories
 - remove automatic deployment
+- use airbrake instead of honeybadger

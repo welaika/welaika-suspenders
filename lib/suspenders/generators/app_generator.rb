@@ -146,7 +146,6 @@ module Suspenders
       build :configure_slim
       build :disable_xml_params
       build :configure_available_locales
-      build :fix_i18n_deprecation_warning
       build :setup_default_rake_task
       build :configure_puma
       build :set_up_forego
@@ -227,8 +226,13 @@ module Suspenders
     end
 
     def outro
+<<<<<<< HEAD
       say "Congratulations!"
       say "Now read the README.md"
+=======
+      say 'Congratulations! You just pulled our suspenders.'
+      say honeybadger_outro
+>>>>>>> upstream/master
     end
 
     protected
@@ -239,6 +243,18 @@ module Suspenders
 
     def using_active_record?
       !options[:skip_active_record]
+    end
+
+    private
+
+    def honeybadger_outro
+      "Run 'bundle exec honeybadger heroku install' with your API key#{honeybadger_message_suffix}."
+    end
+
+    def honeybadger_message_suffix
+      if options[:heroku]
+        " unless you're using the Heroku Honeybadger add-on"
+      end
     end
   end
 end
