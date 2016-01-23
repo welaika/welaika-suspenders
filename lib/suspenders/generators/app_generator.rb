@@ -226,13 +226,8 @@ module Suspenders
     end
 
     def outro
-<<<<<<< HEAD
-      say "Congratulations!"
-      say "Now read the README.md"
-=======
-      say 'Congratulations! You just pulled our suspenders.'
-      say honeybadger_outro
->>>>>>> upstream/master
+      say "Congratulations! You just pulled our suspenders."
+      say "Read README.md and configure Errbit."
     end
 
     protected
@@ -243,18 +238,6 @@ module Suspenders
 
     def using_active_record?
       !options[:skip_active_record]
-    end
-
-    private
-
-    def honeybadger_outro
-      "Run 'bundle exec honeybadger heroku install' with your API key#{honeybadger_message_suffix}."
-    end
-
-    def honeybadger_message_suffix
-      if options[:heroku]
-        " unless you're using the Heroku Honeybadger add-on"
-      end
     end
   end
 end
