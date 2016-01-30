@@ -20,6 +20,14 @@ module Suspenders
       template 'README.md.erb', 'README.md'
     end
 
+    def gitignore
+      copy_file "suspenders_gitignore", ".gitignore"
+    end
+
+    def gemfile
+      template "Gemfile.erb", "Gemfile"
+    end
+
     def raise_on_missing_assets_in_test
       inject_into_file(
         "config/environments/test.rb",
@@ -229,11 +237,6 @@ end
       bundle_command 'exec rake db:create db:migrate'
     end
 
-    def replace_gemfile
-      remove_file 'Gemfile'
-      template 'Gemfile.erb', 'Gemfile'
-    end
-
     def set_ruby_to_version_being_used
       create_file '.ruby-version', "#{Suspenders::RUBY_VERSION}\n"
     end
@@ -354,9 +357,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         'app/assets/stylesheets/application.sass'
     end
 
-    def gitignore_files
-      remove_file '.gitignore'
-      copy_file 'suspenders_gitignore', '.gitignore'
+    def setup_default_directories
       [
         'app/forms',
         'app/decorators',
@@ -375,8 +376,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         'spec/support/mixins',
         'spec/support/shared_examples'
       ].each do |dir|
-        run "mkdir #{dir}"
-        run "touch #{dir}/.keep"
+        empty_directory_with_keep_file dir
       end
     end
 

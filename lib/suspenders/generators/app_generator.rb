@@ -158,8 +158,8 @@ module Suspenders
 
     def setup_git
       if !options[:skip_git]
-        say 'Initializing git'
-        invoke :setup_gitignore
+        say "Initializing git"
+        invoke :setup_default_directories
         invoke :init_git
       end
     end
@@ -189,8 +189,8 @@ module Suspenders
       build :copy_dotfiles
     end
 
-    def setup_gitignore
-      build :gitignore_files
+    def setup_default_directories
+      build :setup_default_directories
     end
 
     def setup_spring
