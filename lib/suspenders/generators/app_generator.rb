@@ -148,6 +148,7 @@ module Suspenders
       build :setup_default_rake_task
       build :configure_puma
       build :set_up_forego
+      build :setup_rack_mini_profiler
     end
 
     def setup_stylesheets
