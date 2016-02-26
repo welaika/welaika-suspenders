@@ -2,10 +2,16 @@
   "name":"<%= app_name.dasherize %>",
   "scripts":{},
   "env":{
-    "AIRBRAKE_API_KEY":{
+    "APPLICATION_HOST":{
       "required":true
     },
     "EMAIL_RECIPIENTS":{
+      "required":true
+    },
+    "HEROKU_APP_NAME": {
+      "required":true
+    },
+    "HEROKU_PARENT_APP_NAME": {
       "required":true
     },
     "RACK_ENV":{
