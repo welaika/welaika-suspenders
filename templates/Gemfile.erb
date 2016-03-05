@@ -5,7 +5,6 @@ ruby "<%= Suspenders::RUBY_VERSION %>"
 gem "airbrake"
 gem "autoprefixer-rails"
 gem "bourbon", "~> 4.2.0"
-gem "coffee-rails", "~> 4.1.0"
 gem "delayed_job_active_record"
 gem "draper"
 gem "email_validator"
@@ -23,6 +22,8 @@ gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "slim-rails"
+gem "sprockets", ">= 3.0.0"
+gem "sprockets-es6"
 gem "title"
 gem "uglifier"
 
@@ -37,7 +38,7 @@ group :development, :test do
   gem "awesome_print"
   gem "brakeman", require: false
   gem "bullet"
-  gem "bundler-audit", require: false
+  gem "bundler-audit", ">= 0.5.0", require: false
   gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "faker"

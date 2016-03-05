@@ -228,6 +228,13 @@ end
       copy_file '_javascript.html.slim', 'app/views/application/_javascript.html.slim'
     end
 
+    def create_shared_css_overrides
+      copy_file(
+        "_css_overrides.html.erb",
+        "app/views/application/_css_overrides.html.erb",
+      )
+    end
+
     def create_application_layout
       remove_file 'app/views/layouts/application.html.erb'
       template 'suspenders_layout.html.slim',

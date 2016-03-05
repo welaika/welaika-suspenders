@@ -29,5 +29,9 @@ weLaika's fork of the famous thoughbot suspenders gem.
   s.add_dependency 'rails', Suspenders::RAILS_VERSION
 
   s.add_development_dependency 'rspec', '~> 3.4'
+  s.add_development_dependency 'simple_form', '~> 3.2'
+  s.add_development_dependency 'title', '~> 0.0'
+  s.add_development_dependency 'quiet_assets', '~> 1.1'
+  s.add_development_dependency 'capybara-webkit', '~> 1.8'
   s.add_development_dependency 'pry-byebug'
 end
