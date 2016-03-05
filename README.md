@@ -87,3 +87,4 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - lint factory girl's factories
 - remove automatic deployment
 - use airbrake instead of honeybadger
+- use coffeescript instead of es6
