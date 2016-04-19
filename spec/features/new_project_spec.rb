@@ -5,6 +5,7 @@ RSpec.describe "Suspend a new project with default configuration" do
     drop_dummy_database
     remove_project_directory
     run_suspenders
+    setup_app_dependencies
   end
 
   it "uses custom Gemfile" do
@@ -26,14 +27,6 @@ RSpec.describe "Suspend a new project with default configuration" do
         expect(`rake`).to include('0 failures')
       end
     end
-  end
-
-  it "inherits staging config from production" do
-    staging_file = IO.read("#{project_path}/config/environments/staging.rb")
-    config_stub = "Rails.application.configure do"
-
-    expect(staging_file).to match(/^require_relative "production"/)
-    expect(staging_file).to match(/#{config_stub}/), staging_file
   end
 
   it "creates .ruby-version from Suspenders .ruby-version" do
@@ -171,6 +164,12 @@ RSpec.describe "Suspend a new project with default configuration" do
     prod_env_file = IO.read("#{project_path}/config/environments/production.rb")
     expect(prod_env_file).to match(/"APPLICATION_HOST"/)
     expect(prod_env_file).not_to match(/"HOST"/)
+  end
+
+  it "configures email interceptor in smtp config" do
+    smtp_file = IO.read("#{project_path}/config/smtp.rb")
+    expect(smtp_file).
+      to match(/RecipientInterceptor.new\(ENV\["EMAIL_RECIPIENTS"\]\)/)
   end
 
   it "configures language in html element" do
