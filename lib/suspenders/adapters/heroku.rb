@@ -16,14 +16,6 @@ module Suspenders
         app_builder.append_file "bin/setup", remotes
       end
 
-      def set_up_heroku_specific_gems
-        app_builder.inject_into_file(
-          "Gemfile",
-          %{\n\s\sgem "rails_stdout_logging"},
-          after: /group :staging, :production do/,
-        )
-      end
-
       def create_staging_heroku_app(flags)
         app_name = heroku_app_name_for("staging")
 
@@ -45,7 +37,7 @@ module Suspenders
         end
       end
 
-      def provide_review_apps_setup_script
+      def create_review_apps_setup_script
         app_builder.template(
           "bin_setup_review_app.erb",
           "bin/setup_review_app",
@@ -54,7 +46,7 @@ module Suspenders
         app_builder.run "chmod a+x bin/setup_review_app"
       end
 
-      def create_heroku_pipelines_config_file
+      def create_heroku_application_manifest_file
         app_builder.template "app.json.erb", "app.json"
       end
 
@@ -65,7 +57,6 @@ module Suspenders
           exit 1
         end
 
-        heroku_app_name = app_builder.app_name.dasherize
         run_toolbelt_command(
           "pipelines:create #{heroku_app_name} \
             -a #{heroku_app_name}-staging --stage staging",
@@ -88,6 +79,15 @@ module Suspenders
         end
       end
 
+      def set_heroku_application_host
+        %w(staging production).each do |environment|
+          run_toolbelt_command(
+            "config:add APPLICATION_HOST=#{heroku_app_name}-#{environment}.herokuapp.com",
+            environment,
+          )
+        end
+      end
+
       private
 
       attr_reader :app_builder
@@ -105,8 +105,12 @@ fi
         SHELL
       end
 
+      def heroku_app_name
+        app_builder.app_name.dasherize
+      end
+
       def heroku_app_name_for(environment)
-        "#{app_builder.app_name.dasherize}-#{environment}"
+        "#{heroku_app_name}-#{environment}"
       end
 
       def generate_secret

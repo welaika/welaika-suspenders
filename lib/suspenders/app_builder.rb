@@ -6,15 +6,15 @@ module Suspenders
     extend Forwardable
 
     def_delegators :heroku_adapter,
-                   :create_heroku_pipelines_config_file,
+                   :create_heroku_application_manifest_file,
                    :create_heroku_pipeline,
                    :create_production_heroku_app,
                    :create_staging_heroku_app,
-                   :provide_review_apps_setup_script,
+                   :create_review_apps_setup_script,
                    :set_heroku_rails_secrets,
                    :set_heroku_remotes,
-                   :set_heroku_serve_static_files,
-                   :set_up_heroku_specific_gems
+                   :set_heroku_application_host,
+                   :set_heroku_serve_static_files
 
     def readme
       template 'README.md.erb', 'README.md'
@@ -36,11 +36,7 @@ module Suspenders
     end
 
     def raise_on_missing_assets_in_test
-      inject_into_file(
-        "config/environments/test.rb",
-        "\n  config.assets.raise_runtime_errors = true",
-        after: "Rails.application.configure do",
-      )
+      configure_environment "test", "config.assets.raise_runtime_errors = true"
     end
 
     def raise_on_delivery_errors
@@ -147,34 +143,18 @@ module Suspenders
 
     def enable_rack_canonical_host
       config = <<-RUBY
-
-  if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
+if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
     ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
   end
 
-  # Ensure requests are only served from one, canonical host name
   config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
       RUBY
 
-      inject_into_file(
-        "config/environments/production.rb",
-        config,
-        after: "Rails.application.configure do",
-      )
+      configure_environment "production", config
     end
 
     def enable_rack_deflater
-      config = <<-RUBY
-
-  # Enable deflate / gzip compression of controller-generated responses
-  config.middleware.use Rack::Deflater
-      RUBY
-
-      inject_into_file(
-        "config/environments/production.rb",
-        config,
-        after: serve_static_files_line
-      )
+      configure_environment "production", "config.middleware.use Rack::Deflater"
     end
 
     def setup_asset_host
@@ -186,10 +166,9 @@ module Suspenders
         "config.assets.version = '1.0'",
         'config.assets.version = (ENV["ASSETS_VERSION"] || "1.0")'
 
-      inject_into_file(
-        "config/environments/production.rb",
-        '  config.static_cache_control = "public, max-age=#{1.year.to_i}"',
-        after: serve_static_files_line
+      configure_environment(
+        "production",
+        'config.static_cache_control = "public, max-age=31557600"',
       )
     end
 
@@ -235,6 +214,16 @@ module Suspenders
 
     def create_database
       bundle_command 'exec rake db:create db:migrate'
+    end
+
+    def replace_gemfile(path)
+      template 'Gemfile.erb', 'Gemfile', force: true do |content|
+        if path
+          content.gsub(%r{gem .suspenders.}) { |s| %{#{s}, path: "#{path}"} }
+        else
+          content
+        end
+      end
     end
 
     def set_ruby_to_version_being_used
@@ -300,6 +289,12 @@ module Suspenders
       replace_in_file "config/application.rb",
         "# config.time_zone = 'Central Time (US & Canada)'",
         "config.time_zone = 'Rome'"
+
+      available_locales_config = <<-RUBY
+    config.i18n.available_locales = [:en, :it]
+      RUBY
+
+      inject_into_class 'config/application.rb', 'Application', available_locales_config
     end
 
     def configure_rack_timeout
@@ -322,14 +317,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
       action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
-    end
-
-    def configure_available_locales
-      config = <<-RUBY
-    config.i18n.available_locales = [:en, :it]
-      RUBY
-
-      inject_into_class 'config/application.rb', 'Application', config
     end
 
     def configure_active_job
@@ -393,7 +380,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       create_production_heroku_app(flags)
     end
 
-    def provide_deploy_script
+    def create_deploy_script
       copy_file "bin_deploy", "bin/deploy"
 
       instructions = <<-MARKDOWN
@@ -484,10 +471,6 @@ you can deploy to staging and production with:
         "Rails.application.routes.draw do\nend"
     end
 
-    def disable_xml_params
-      copy_file 'disable_xml_params.rb', 'config/initializers/disable_xml_params.rb'
-    end
-
     def setup_default_rake_task
       append_file 'Rakefile' do
         <<-EOS
@@ -518,10 +501,6 @@ task default: "bundler:audit"
 
     def heroku_adapter
       @heroku_adapter ||= Adapters::Heroku.new(self)
-    end
-
-    def serve_static_files_line
-      "config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?\n"
     end
   end
 end

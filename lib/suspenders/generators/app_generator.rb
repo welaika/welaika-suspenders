@@ -3,6 +3,8 @@ require 'rails/generators/rails/app/app_generator'
 
 module Suspenders
   class AppGenerator < Rails::Generators::AppGenerator
+    hide!
+
     class_option :database, type: :string, aliases: "-d", default: "postgresql",
       desc: "Configure for selected database (options: #{DATABASES.join("/")})"
 
@@ -23,6 +25,15 @@ module Suspenders
 
     class_option :skip_bundle, type: :boolean, aliases: "-B", default: true,
       desc: "Don't run bundle install"
+
+    class_option :version, type: :boolean, aliases: "-v", group: :suspenders,
+      desc: "Show Suspenders version number and quit"
+
+    class_option :help, type: :boolean, aliases: '-h', group: :suspenders,
+      desc: "Show this help message and quit"
+
+    class_option :path, type: :string, default: nil,
+      desc: "Path to the gem"
 
     def finish_template
       invoke :suspenders_customization
@@ -45,21 +56,19 @@ module Suspenders
       invoke :setup_dotfiles
       invoke :setup_git
       invoke :setup_database
+      invoke :create_local_heroku_setup
       invoke :create_heroku_apps
       invoke :create_github_repo
       invoke :setup_spring
       invoke :create_binstubs
+      invoke :generate_default
       invoke :outro
     end
 
     def customize_gemfile
       build :create_ruby_gemset_file
+      build :replace_gemfile, options[:path]
       build :set_ruby_to_version_being_used
-
-      if options[:heroku]
-        build :set_up_heroku_specific_gems
-      end
-
       bundle_command 'install'
       build :configure_simple_form
     end
@@ -79,7 +88,6 @@ module Suspenders
       build :raise_on_missing_assets_in_test
       build :raise_on_delivery_errors
       build :configure_letter_opener
-      build :set_test_delivery_method
       build :add_bullet_gem_configuration
       build :raise_on_unpermitted_parameters
       build :provide_setup_script
@@ -138,8 +146,7 @@ module Suspenders
       build :configure_locales
       build :configure_active_job
       build :configure_slim
-      build :disable_xml_params
-      build :configure_available_locales
+      build :configure_time_formats
       build :setup_default_rake_task
       build :configure_puma
       build :set_up_forego
@@ -159,17 +166,23 @@ module Suspenders
       end
     end
 
+    def create_local_heroku_setup
+      say "Creating local Heroku setup"
+      build :create_review_apps_setup_script
+      build :create_deploy_script
+      build :create_heroku_application_manifest_file
+    end
+
     def create_heroku_apps
       if options[:heroku]
         say "Creating Heroku apps"
         build :create_heroku_apps, options[:heroku_flags]
-        build :provide_review_apps_setup_script
         build :set_heroku_serve_static_files
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
-        build :create_heroku_pipelines_config_file
+        build :set_heroku_application_host
         build :create_heroku_pipeline
-        build :provide_deploy_script
+        build :configure_automatic_deployment
       end
     end
 
@@ -220,9 +233,21 @@ module Suspenders
       build :remove_routes_comment_lines
     end
 
+    def generate_default
+      run("spring stop")
+
+      generate("suspenders:static")
+
+      bundle_command "install"
+    end
+
     def outro
       say "Congratulations! You just pulled our suspenders."
       say "Read README.md and configure Errbit."
+    end
+
+    def self.banner
+      "suspenders #{arguments.map(&:usage).join(' ')} [options]"
     end
 
     protected

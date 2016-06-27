@@ -16,16 +16,6 @@ module Suspenders
           with(setup_file, /heroku join --app #{app_name.dasherize}-staging/)
       end
 
-      it "sets up the heroku specific gems" do
-        app_builder = double(app_name: app_name)
-        allow(app_builder).to receive(:inject_into_file)
-
-        Heroku.new(app_builder).set_up_heroku_specific_gems
-
-        expect(app_builder).to have_received(:inject_into_file).
-          with("Gemfile", /rails_stdout_logging/, anything)
-      end
-
       it "sets the heroku rails secrets" do
         app_builder = double(app_name: app_name)
         allow(app_builder).to receive(:run)
@@ -37,6 +27,21 @@ module Suspenders
         )
         expect(app_builder).to(
           have_configured_var("production", "SECRET_KEY_BASE"),
+        )
+      end
+
+      it "sets the application host" do
+        app_builder = double(app_name: app_name)
+        allow(app_builder).to receive(:run)
+
+        Heroku.new(app_builder).set_heroku_application_host
+
+        expect(app_builder).to(
+          have_configured_var("staging", "APPLICATION_HOST"),
+        )
+
+        expect(app_builder).to(
+          have_configured_var("production", "APPLICATION_HOST"),
         )
       end
 

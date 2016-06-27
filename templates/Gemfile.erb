@@ -10,7 +10,6 @@ gem "delayed_job_active_record"
 gem "draper"
 gem "email_validator"
 gem "flutie"
-gem "high_voltage"
 gem "jquery-rails"
 gem "neat", "~> 1.7.0"
 gem "normalize-rails", "~> 3.0.0"
@@ -22,12 +21,15 @@ gem "rails-i18n"
 gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
+gem "skylight"
 gem "slim-rails"
+gem "welaika-suspenders"
 gem "title"
 gem "uglifier"
 
 group :development do
   gem "letter_opener"
+  gem "quiet_assets"
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"
@@ -44,7 +46,6 @@ group :development, :test do
   gem "priscilla"
   gem "pry-byebug"
   gem "pry-rails"
-  gem "quiet_assets"
   gem "rspec-rails", "~> 3.4.0"
   gem "rubocop", require: false
 end
@@ -67,4 +68,5 @@ end
 
 group :staging, :production do
   gem "rack-timeout"
+  gem "rails_stdout_logging"
 end
