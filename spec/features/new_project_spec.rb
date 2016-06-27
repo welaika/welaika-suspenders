@@ -292,4 +292,19 @@ RSpec.describe "Suspend a new project with default configuration" do
     gemfile = IO.read("#{project_path}/Gemfile")
     expect(gemfile).to match(/high_voltage/)
   end
+
+  it "adds bourbon" do
+    gemfile = read_project_file("Gemfile")
+
+    expect(gemfile).to match(/bourbon/)
+  end
+
+  it "configures bourbon" do
+    app_css = read_project_file(%w(app assets stylesheets application.sass))
+    expect(app_css).to match(/normalize-rails.*bourbon.*base.*refills/m)
+  end
+
+  def read_project_file(path)
+    IO.read(File.join(project_path, *path))
+  end
 end
