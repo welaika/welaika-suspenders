@@ -301,7 +301,7 @@ RSpec.describe "Suspend a new project with default configuration" do
 
   it "configures bourbon" do
     app_css = read_project_file(%w(app assets stylesheets application.sass))
-    expect(app_css).to match(/normalize-rails.*bourbon.*base.*refills/m)
+    expect(app_css).to match(/normalize-rails.*bourbon/m)
   end
 
   def read_project_file(path)

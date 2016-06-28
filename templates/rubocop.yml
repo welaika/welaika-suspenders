@@ -8,12 +8,15 @@ AllCops:
     - "config/**/*"
     - "bin/*"
 
+Lint/Debugger:
+  Exclude:
+    - "spec/support/capybara_webkit.rb"
+
+Metrics/AbcSize:
+  Max: 18
+
 Metrics/LineLength:
   Max: 100
-
-Style/StringLiterals:
-  Enabled: false
-  EnforcedStyle: double_quotes
 
 Style/Documentation:
   Enabled: false
@@ -21,9 +24,10 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Metrics/AbcSize:
-  Max: 18
+Style/StringLiterals:
+  Enabled: false
+  EnforcedStyle: double_quotes
 
-Lint/Debugger:
+Style/TrailingBlankLines:
   Exclude:
-    - "spec/support/capybara_webkit.rb"
+    - "Gemfile"
