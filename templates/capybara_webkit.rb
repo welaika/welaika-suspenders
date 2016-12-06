@@ -9,10 +9,6 @@ module CapybaraHelper
   def screenshot!
     save_and_open_screenshot
   end
-
-  def blur!
-    page.find('body').click
-  end
 end
 
 Capybara::Webkit.configure do |config|
