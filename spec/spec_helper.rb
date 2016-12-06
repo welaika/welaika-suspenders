@@ -1,5 +1,4 @@
-require "bundler/setup"
-require "pry-byebug"
+require 'bundler/setup'
 
 Bundler.require(:default, :test)
 
@@ -18,7 +17,4 @@ RSpec.configure do |config|
   config.before(:each) do
     FakeGithub.clear!
   end
-
-  config.example_status_persistence_file_path = "tmp/rspec_examples.txt"
-  config.order = :random
 end
