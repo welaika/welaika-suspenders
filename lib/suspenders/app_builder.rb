@@ -13,8 +13,7 @@ module Suspenders
                    :create_review_apps_setup_script,
                    :set_heroku_rails_secrets,
                    :set_heroku_remotes,
-                   :set_heroku_application_host,
-                   :set_heroku_serve_static_files
+                   :set_heroku_application_host
 
     def readme
       template 'README.md.erb', 'README.md'
@@ -44,7 +43,15 @@ module Suspenders
         'raise_delivery_errors = false', 'raise_delivery_errors = true'
     end
 
-    def configure_letter_opener
+    def remove_turbolinks
+      replace_in_file(
+        "app/assets/javascripts/application.js",
+        "//= require turbolinks",
+        ""
+      )
+    end
+
+    def set_test_delivery_method
       inject_into_file(
         "config/environments/development.rb",
         "\n  config.action_mailer.delivery_method = :letter_opener",
@@ -79,7 +86,7 @@ module Suspenders
 
     def configure_quiet_assets
       config = <<-RUBY
-    config.quiet_assets = true
+    config.assets.quiet = true
       RUBY
 
       inject_into_class "config/application.rb", "Application", config
@@ -171,10 +178,13 @@ module Suspenders
         "config.assets.version = '1.0'",
         'config.assets.version = (ENV["ASSETS_VERSION"] || "1.0")'
 
-      configure_environment(
-        "production",
-        'config.static_cache_control = "public, max-age=31557600"',
-      )
+      config = <<-EOD
+config.public_file_server.headers = {
+    "Cache-Control" => "public, max-age=31557600",
+  }
+      EOD
+
+      configure_environment("production", config)
     end
 
     def setup_secret_token
@@ -335,8 +345,8 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       generate 'rspec:install'
     end
 
-    def configure_puma
-      copy_file "puma.rb", "config/puma.rb"
+    def replace_default_puma_configuration
+      copy_file "puma.rb", "config/puma.rb", force: true
     end
 
     def set_up_forego

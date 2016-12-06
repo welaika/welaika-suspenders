@@ -21,13 +21,14 @@ gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "skylight"
 gem "slim-rails"
-gem "welaika-suspenders", ">= <%= Suspenders::VERSION %>"
+gem "sprockets", ">= 3.0.0"
 gem "title"
 gem "uglifier"
+gem "welaika-suspenders"
 
 group :development do
   gem "letter_opener"
-  gem "quiet_assets"
+  gem "listen"
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"
@@ -44,7 +45,7 @@ group :development, :test do
   gem "priscilla"
   gem "pry-byebug"
   gem "pry-rails"
-  gem "rspec-rails", "~> 3.4.0"
+  gem "rspec-rails", "~> 3.5.0.beta4"
   gem "rubocop", require: false
 end
 

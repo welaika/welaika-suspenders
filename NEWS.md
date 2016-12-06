@@ -1,4 +1,24 @@
-master
+1.43.0 (November 8, 2016)
+
+* Update Bourbon to 5.0.0.beta.7
+* Update Neat to 2.0.0.beta.1
+* Update Bitters to 1.5.0
+* Drop sprockets-es6
+* Bugfix: doesn’t generate unused `test/` directory
+
+1.42.0 (July 23, 2016)
+
+* [#784] Require refills once
+* [#790] Ensure stylesheet_base generator runs with a clean bundle
+* [#791] Use Rails' 5 syntax for `public_file_server.headers`
+* [#792] Remove turbolinks from application.js file
+
+1.41.0 (July 1, 2016)
+
+* Update to Rails 5
+* Drop quiet_assets
+* Drop unneeded `suspenders` aliases: `--skip-test-unit`, `--skip-turbolinks`,
+  `--skip-bundle`. Drops `-G` that clashes with Rails’ `--skip-git` alias.
 
 1.40.0 (June 25, 2016)
 

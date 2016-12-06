@@ -14,17 +14,8 @@ module Suspenders
     class_option :heroku_flags, type: :string, default: "--region eu",
       desc: "Set extra Heroku flags"
 
-    class_option :github, type: :string, aliases: "-G", default: nil,
+    class_option :github, type: :string, default: nil,
       desc: "Create Github repository and add remote origin pointed to repo"
-
-    class_option :skip_test_unit, type: :boolean, aliases: "-T", default: true,
-      desc: "Skip Test::Unit files"
-
-    class_option :skip_turbolinks, type: :boolean, default: true,
-      desc: "Skip turbolinks gem"
-
-    class_option :skip_bundle, type: :boolean, aliases: "-B", default: true,
-      desc: "Don't run bundle install"
 
     class_option :version, type: :boolean, aliases: "-v", group: :suspenders,
       desc: "Show Suspenders version number and quit"
@@ -34,6 +25,9 @@ module Suspenders
 
     class_option :path, type: :string, default: nil,
       desc: "Path to the gem"
+
+    class_option :skip_test, type: :boolean, default: true,
+      desc: "Skip Test Unit"
 
     def finish_template
       invoke :suspenders_customization
@@ -48,7 +42,6 @@ module Suspenders
       invoke :setup_secret_token
       invoke :create_suspenders_views
       invoke :configure_app
-      invoke :setup_stylesheets
       invoke :copy_miscellaneous_files
       invoke :customize_error_pages
       invoke :remove_config_comment_lines
@@ -87,7 +80,8 @@ module Suspenders
       say 'Setting up the development environment'
       build :raise_on_missing_assets_in_test
       build :raise_on_delivery_errors
-      build :configure_letter_opener
+      build :remove_turbolinks
+      build :set_test_delivery_method
       build :add_bullet_gem_configuration
       build :raise_on_unpermitted_parameters
       build :provide_setup_script
@@ -148,14 +142,9 @@ module Suspenders
       build :configure_slim
       build :configure_time_formats
       build :setup_default_rake_task
-      build :configure_puma
+      build :replace_default_puma_configuration
       build :set_up_forego
       build :setup_rack_mini_profiler
-    end
-
-    def setup_stylesheets
-      say 'Set up stylesheets'
-      build :setup_stylesheets
     end
 
     def setup_git
@@ -177,7 +166,6 @@ module Suspenders
       if options[:heroku]
         say "Creating Heroku apps"
         build :create_heroku_apps, options[:heroku_flags]
-        build :set_heroku_serve_static_files
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
         build :set_heroku_application_host
@@ -235,11 +223,8 @@ module Suspenders
 
     def generate_default
       run("spring stop")
-
       generate("suspenders:static")
       generate("suspenders:stylesheet_base")
-
-      bundle_command "install"
     end
 
     def outro
