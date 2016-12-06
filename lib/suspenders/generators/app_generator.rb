@@ -51,7 +51,6 @@ module Suspenders
       invoke :setup_database
       invoke :create_local_heroku_setup
       invoke :create_heroku_apps
-      invoke :create_github_repo
       invoke :setup_spring
       invoke :create_binstubs
       invoke :generate_default
@@ -170,13 +169,6 @@ module Suspenders
         build :set_heroku_application_host
         build :create_heroku_pipeline
         build :configure_automatic_deployment
-      end
-    end
-
-    def create_github_repo
-      if !options[:skip_git] && options[:github]
-        say 'Creating Github repo'
-        build :create_github_repo, options[:github]
       end
     end
 
