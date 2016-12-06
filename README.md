@@ -9,11 +9,6 @@ First install the suspenders gem:
 
     gem install welaika-suspenders
 
-If you are using RVM, please before create a new gemset named like `projectname`:
-
-    rvm gemset create projectname
-    rvm gemset use projectname
-
 If you want to use heroku, please install the [heroku toolbelt](https://toolbelt.heroku.com/) and run
 
     heroku login
@@ -62,7 +57,6 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add some html meta tags
 - use EU region as default for Heroku
 - use CDATA wrapper for javascript
-- create a .ruby-gemset file with app name
 - create common folders like `app/queries`, `app/services`, etc.
 - use `application.sass` instead of `application.scss`
 - add `brakeman` gem

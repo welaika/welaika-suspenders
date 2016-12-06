@@ -59,7 +59,6 @@ module Suspenders
     end
 
     def customize_gemfile
-      build :create_ruby_gemset_file
       build :replace_gemfile, options[:path]
       build :set_ruby_to_version_being_used
       bundle_command 'install'

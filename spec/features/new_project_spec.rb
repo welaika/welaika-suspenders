@@ -35,12 +35,6 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(ruby_version_file).to eq "#{RUBY_VERSION}\n"
   end
 
-  it 'creates .ruby-gemset from app name' do
-    ruby_gemset_file = IO.read("#{project_path}/.ruby-gemset")
-
-    expect(ruby_gemset_file).to eq("#{app_name}\n")
-  end
-
   it "copies dotfiles" do
     %w[.ctags .env].each do |dotfile|
       expect(File).to exist("#{project_path}/#{dotfile}")

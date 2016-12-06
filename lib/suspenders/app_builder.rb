@@ -245,10 +245,6 @@ config.public_file_server.headers = {
       create_file '.ruby-version', "#{Suspenders::RUBY_VERSION}\n"
     end
 
-    def create_ruby_gemset_file
-      create_file '.ruby-gemset', "#{app_name}\n"
-    end
-
     def enable_database_cleaner
       copy_file 'database_cleaner_rspec.rb', 'spec/support/database_cleaner.rb'
     end
