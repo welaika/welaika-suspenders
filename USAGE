@@ -2,12 +2,15 @@ Description:
     Suspenders is a Rails template with thoughtbot standard
     defaults, ready to deploy to Heroku.
 
+    This is a forked version by weLaika.
+
     For full details on the changes we've made compared to
     a vanilla Rails app, check our GitHub project:
         https://github.com/thoughtbot/suspenders
+        https://github.com/welaika/welaika-suspenders
 
 Example:
-    suspenders ~/Code/weblog
+    welaika-suspenders ~/Code/weblog
 
     This generates a Rails installation in ~/Code/weblog configured
     with our preferred defaults.
