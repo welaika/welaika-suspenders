@@ -14,9 +14,6 @@ module Suspenders
     class_option :heroku_flags, type: :string, default: "--region eu",
       desc: "Set extra Heroku flags"
 
-    class_option :github, type: :string, default: nil,
-      desc: "Create Github repository and add remote origin pointed to repo"
-
     class_option :version, type: :boolean, aliases: "-v", group: :suspenders,
       desc: "Show Suspenders version number and quit"
 

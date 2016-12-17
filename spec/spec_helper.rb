@@ -13,8 +13,4 @@ RSpec.configure do |config|
     add_fakes_to_path
     create_tmp_directory
   end
-
-  config.before(:each) do
-    FakeGithub.clear!
-  end
 end
