@@ -6,11 +6,6 @@ module Suspenders
       File.join("..", "..", "..", "templates"),
       File.dirname(__FILE__))
 
-    def add_stylesheet_gems
-      gem "bourbon", "~> 5.0.0.beta.7"
-      Bundler.with_clean_env { run "bundle install" }
-    end
-
     def add_css_config
       copy_file(
         "application.sass",
