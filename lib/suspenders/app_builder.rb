@@ -289,23 +289,17 @@ config.public_file_server.headers = {
       copy_file "capybara_webkit.rb", "spec/support/capybara_webkit.rb"
     end
 
-    def configure_locales
+    def configure_locales_and_time_zone
       remove_file "config/locales/en.yml"
       template "config_locales_it.yml.erb", "config/locales/it.yml"
 
-      replace_in_file "config/application.rb",
-        "# config.i18n.default_locale = :de",
-        "config.i18n.default_locale = :it"
-
-      replace_in_file "config/application.rb",
-        "# config.time_zone = 'Central Time (US & Canada)'",
-        "config.time_zone = 'Rome'"
-
-      available_locales_config = <<-RUBY
+      config = <<-RUBY
     config.i18n.available_locales = [:en, :it]
+    config.i18n.default_locale = :it
+    config.time_zone = 'Rome'
       RUBY
 
-      inject_into_class 'config/application.rb', 'Application', available_locales_config
+      inject_into_class 'config/application.rb', 'Application', config
     end
 
     def configure_rack_timeout
