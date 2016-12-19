@@ -107,10 +107,11 @@ module Suspenders
     config.generators do |generate|
       generate.helper false
       generate.javascript_engine false
-      generate.request_specs false
-      generate.routing_specs false
       generate.stylesheets false
       generate.test_framework :rspec
+
+      generate.controller_specs false
+      generate.routing_specs false
       generate.view_specs false
     end
 
@@ -345,19 +346,19 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 
     def setup_default_directories
       [
-        'app/forms',
         'app/decorators',
+        'app/forms',
         'app/queries',
         'app/services',
         'app/views/pages',
-        'spec/controllers',
+        'spec/decorators',
+        'spec/fixtures',
         'spec/forms',
         'spec/helpers',
         'spec/lib',
-        'spec/decorators',
         'spec/queries',
+        'spec/requests',
         'spec/services',
-        'spec/fixtures',
         'spec/support/matchers',
         'spec/support/mixins',
         'spec/support/shared_examples'
