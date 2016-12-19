@@ -105,13 +105,12 @@ module Suspenders
       config = <<-RUBY
 
     config.generators do |generate|
+      generate.controller_specs false
       generate.helper false
       generate.javascripts false
+      generate.routing_specs false
       generate.stylesheets false
       generate.test_framework :rspec
-
-      generate.controller_specs false
-      generate.routing_specs false
       generate.view_specs false
     end
 
