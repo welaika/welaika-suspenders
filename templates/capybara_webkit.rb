@@ -12,9 +12,7 @@ module CapybaraHelper
 end
 
 Capybara::Webkit.configure do |config|
-  config.allow_url(
-    %w(fonts.googleapis.com)
-  )
+  config.allow_url(%w[fonts.googleapis.com])
 end
 
 RSpec.configure do |config|

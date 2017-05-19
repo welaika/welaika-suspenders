@@ -5,7 +5,7 @@ abort("DATABASE_URL environment variable is set") if ENV["DATABASE_URL"]
 
 require "rspec/rails"
 
-Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |file| require file }
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |file| require file }
 
 RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
