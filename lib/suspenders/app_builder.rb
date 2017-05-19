@@ -399,10 +399,6 @@ you can deploy to staging and production with:
       run "chmod a+x bin/deploy"
     end
 
-    def setup_bundler_audit
-      copy_file "bundler_audit.rake", "lib/tasks/bundler_audit.rake"
-    end
-
     def setup_brakeman
       copy_file "brakeman.rake", "lib/tasks/brakeman.rake"
     end
