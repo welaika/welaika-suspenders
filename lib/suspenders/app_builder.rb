@@ -410,7 +410,6 @@ you can deploy to staging and production with:
 
     def setup_bundler_audit
       copy_file "bundler_audit.rake", "lib/tasks/bundler_audit.rake"
-      append_file "Rakefile", %{\ntask default: "bundle:audit"\n}
     end
 
     def setup_spring
@@ -484,7 +483,7 @@ end
 task default: :rubocop
 task default: :spec
 task default: "brakeman:check"
-task default: "bundler:audit"
+task default: "bundle:audit"
         EOS
       end
     end
