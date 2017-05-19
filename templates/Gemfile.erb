@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 ruby "<%= Suspenders::RUBY_VERSION %>"
 
+gem "bundler", ">= 1.8.4"
+
 gem "airbrake"
 gem "autoprefixer-rails"
 gem "coffee-rails", "~> 4.2"
@@ -14,7 +16,6 @@ gem "puma", "~> 3.0"
 gem "rack-canonical-host"
 gem "rails", "<%= Suspenders::RAILS_VERSION %>"
 gem "rails-i18n"
-gem "rails-assets-normalize-css", source: "https://rails-assets.org"
 gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
@@ -23,6 +24,10 @@ gem "slim-rails"
 gem "title"
 gem "uglifier", ">= 1.3.0"
 gem "welaika-suspenders"
+
+source "https://rails-assets.org" do
+  gem "rails-assets-normalize-css"
+end
 
 group :development do
   gem "letter_opener"
