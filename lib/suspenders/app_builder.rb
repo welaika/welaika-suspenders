@@ -12,6 +12,7 @@ module Suspenders
                    :create_staging_heroku_app,
                    :create_review_apps_setup_script,
                    :set_heroku_rails_secrets,
+                   :set_heroku_backup_schedule,
                    :set_heroku_remotes,
                    :set_heroku_application_host
 
@@ -108,6 +109,7 @@ module Suspenders
       generate.controller_specs false
       generate.helper false
       generate.javascripts false
+      generate.request_specs false
       generate.routing_specs false
       generate.stylesheets false
       generate.test_framework :rspec
@@ -389,8 +391,8 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 If you have previously run the `./bin/setup` script,
 you can deploy to staging and production with:
 
-    $ ./bin/deploy staging
-    $ ./bin/deploy production
+    % ./bin/deploy staging
+    % ./bin/deploy production
       MARKDOWN
 
       append_file "README.md", instructions
@@ -408,6 +410,11 @@ you can deploy to staging and production with:
     def setup_rubocop
       copy_file "rubocop.rake", "lib/tasks/rubocop.rake"
       copy_file "rubocop.yml", ".rubocop.yml"
+    end
+
+    def setup_bundler_audit
+      copy_file "bundler_audit.rake", "lib/tasks/bundler_audit.rake"
+      append_file "Rakefile", %{\ntask default: "bundle:audit"\n}
     end
 
     def setup_spring

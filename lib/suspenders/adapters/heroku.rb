@@ -37,6 +37,15 @@ module Suspenders
         end
       end
 
+      def set_heroku_backup_schedule
+        %w(staging production).each do |environment|
+          run_toolbelt_command(
+            "pg:backups:schedule DATABASE_URL --at '10:00 UTC'",
+            environment,
+          )
+        end
+      end
+
       def create_review_apps_setup_script
         app_builder.template(
           "bin_setup_review_app.erb",
@@ -87,7 +96,7 @@ module Suspenders
         heroku_app_name = heroku_app_name_for(environment)
         <<~SHELL
 
-          if heroku join --app #{heroku_app_name} &> /dev/null; then
+          if heroku join --app #{heroku_app_name} > /dev/null 2>&1; then
             git remote add #{environment} git@heroku.com:#{heroku_app_name}.git || true
             printf 'You are a collaborator on the "#{heroku_app_name}" Heroku app\n'
           else

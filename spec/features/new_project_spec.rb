@@ -29,6 +29,14 @@ RSpec.describe "Suspend a new project with default configuration" do
     end
   end
 
+  it "includes the bundle:audit task" do
+    Dir.chdir(project_path) do
+      Bundler.with_clean_env do
+        expect(`rake -T`).to include('rake bundle:audit')
+      end
+    end
+  end
+
   it "creates .ruby-version from Suspenders .ruby-version" do
     ruby_version_file = IO.read("#{project_path}/.ruby-version")
 
@@ -243,12 +251,12 @@ RSpec.describe "Suspend a new project with default configuration" do
     bin_setup_path = "#{project_path}/bin/setup_review_app"
     bin_setup = IO.read(bin_setup_path)
 
-    expect(bin_setup).to include("heroku run rake db:migrate --exit-code "\
-                                 "--app #{app_name.dasherize}-staging-pr-$1")
-    expect(bin_setup).to include("heroku ps:scale worker=1 "\
-                                 "--app #{app_name.dasherize}-staging-pr-$1")
-    expect(bin_setup).to include("heroku restart "\
-                                 "--app #{app_name.dasherize}-staging-pr-$1")
+    expect(bin_setup).to include("PARENT_APP_NAME=#{app_name.dasherize}-staging")
+    expect(bin_setup).to include("APP_NAME=#{app_name.dasherize}-staging-pr-$1")
+    expect(bin_setup).to include("heroku run rake db:migrate --exit-code --app $APP_NAME")
+    expect(bin_setup).to include("heroku ps:scale worker=1 --app $APP_NAME")
+    expect(bin_setup).to include("heroku restart --app $APP_NAME")
+
     expect(File.stat(bin_setup_path)).to be_executable
   end
 
@@ -266,12 +274,6 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(app_json_file).to match(/"name":"#{app_name.dasherize}"/)
   end
 
-  it "sets up heroku specific gems" do
-    gemfile_file = IO.read("#{project_path}/Gemfile")
-
-    expect(gemfile_file).to include %{gem "rails_stdout_logging"}
-  end
-
   def app_name
     SuspendersTestHelpers::APP_NAME
   end
@@ -281,6 +283,25 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(gemfile).to match(/high_voltage/)
   end
 
+<<<<<<< HEAD
+=======
+  it "adds and configures bourbon, neat, and refills" do
+    gemfile = read_project_file("Gemfile")
+
+    expect(gemfile).to match(/bourbon/)
+    expect(gemfile).to match(/neat/)
+    expect(gemfile).to match(/refills/)
+  end
+
+  it "configures bourbon, neat, and refills" do
+    flashes_path = %w(app assets stylesheets refills _flashes.scss)
+    expect(read_project_file(flashes_path)).to match(/\$flashes/m)
+
+    app_css = read_project_file(%w(app assets stylesheets application.scss))
+    expect(app_css).to match(/normalize-css.*bourbon.*neat.*base.*refills/m)
+  end
+
+>>>>>>> upstream/master
   it "doesn't use turbolinks" do
     app_js = read_project_file(%w(app assets javascripts application.js))
     expect(app_js).not_to match(/turbolinks/)

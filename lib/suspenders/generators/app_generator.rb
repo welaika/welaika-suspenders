@@ -44,13 +44,13 @@ module Suspenders
       invoke :remove_config_comment_lines
       invoke :remove_routes_comment_lines
       invoke :setup_dotfiles
-      invoke :setup_git
       invoke :setup_database
       invoke :create_local_heroku_setup
       invoke :create_heroku_apps
       invoke :setup_spring
       invoke :create_binstubs
       invoke :generate_default
+      invoke :setup_git
       invoke :outro
     end
 
@@ -164,6 +164,7 @@ module Suspenders
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
         build :set_heroku_application_host
+        build :set_heroku_backup_schedule
         build :create_heroku_pipeline
         build :configure_automatic_deployment
       end
