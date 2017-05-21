@@ -1,5 +1,10 @@
 source "https://rubygems.org"
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
 ruby "<%= Suspenders::RUBY_VERSION %>"
 
 gem "bundler", ">= 1.8.4"
@@ -35,7 +40,7 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "spring-watcher-listen", "~> 2.0.0"
-  gem "web-console"
+  gem "web-console", ">= 3.3.0"
 end
 
 group :development, :test do
@@ -46,7 +51,6 @@ group :development, :test do
   gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "faker"
-  gem "priscilla"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.5"
