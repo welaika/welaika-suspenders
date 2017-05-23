@@ -2,7 +2,7 @@ Rails:
   Enabled: true
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Exclude:
     - "db/**/*"
     - "config/**/*"
@@ -13,7 +13,7 @@ Lint/Debugger:
     - "spec/support/capybara_webkit.rb"
 
 Metrics/AbcSize:
-  Max: 18
+  Max: 20
 
 Metrics/LineLength:
   Max: 100
@@ -26,7 +26,6 @@ Style/FrozenStringLiteralComment:
 
 Style/StringLiterals:
   Enabled: false
-  EnforcedStyle: double_quotes
 
 Style/TrailingBlankLines:
   Exclude:
