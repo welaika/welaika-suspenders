@@ -134,7 +134,6 @@ module Suspenders
       say 'Configuring app'
       build :configure_action_mailer
       build :configure_locales_and_time_zone
-      build :configure_active_job
       build :configure_slim
       build :configure_time_formats
       build :setup_default_rake_task
