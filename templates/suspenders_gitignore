@@ -6,8 +6,12 @@
 /.env.local
 /coverage/*
 /db/*.sqlite3
+/db/*.sqlite3-journal
 /log/*
 /public/system
 /public/assets
 /tags
 /tmp/*
+/yarn-error.log
+/public/packs
+/node_modules
