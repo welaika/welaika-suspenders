@@ -17,7 +17,7 @@ gem "email_validator"
 gem "flutie"
 gem "jquery-rails"
 gem "pg"
-gem "puma", "~> 3.0"
+gem "puma", "~> 3.7"
 gem "rack-canonical-host"
 gem "rails", "<%= Suspenders::RAILS_VERSION %>"
 gem "rails-i18n"
@@ -36,7 +36,7 @@ end
 
 group :development do
   gem "letter_opener"
-  gem "listen", "~> 3.0.5"
+  gem "listen", ">= 3.0.5", "< 3.2"
   gem "spring"
   gem "spring-commands-rspec"
   gem "spring-watcher-listen", "~> 2.0.0"
