@@ -4,9 +4,11 @@ Rails:
 AllCops:
   TargetRubyVersion: 2.4
   Exclude:
-    - "db/**/*"
-    - "config/**/*"
-    - "bin/*"
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
 
 Lint/Debugger:
   Exclude:
@@ -14,6 +16,12 @@ Lint/Debugger:
 
 Metrics/AbcSize:
   Max: 20
+
+Metrics/BlockLength:
+  Exclude:
+    - 'app/admin/**/*'
+    - 'lib/tasks/dev_seeds.rake'
+    - 'spec/**/*'
 
 Metrics/LineLength:
   Max: 100
