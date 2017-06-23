@@ -1,1 +1,1 @@
-Faker::Config.locale = "it"
+Faker::Config.locale = 'it'

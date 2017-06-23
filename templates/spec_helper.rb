@@ -1,11 +1,11 @@
-require "simplecov"
-require "simplecov-json"
-SimpleCov.start "rails" do
-  add_group "Services", "app/services"
+require 'simplecov'
+require 'simplecov-json'
+SimpleCov.start 'rails' do
+  add_group 'Services', 'app/services'
 end
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 
-require "webmock/rspec"
+require 'webmock/rspec'
 
 # http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -18,7 +18,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.example_status_persistence_file_path = "tmp/rspec_examples.txt"
+  config.example_status_persistence_file_path = 'tmp/rspec_examples.txt'
   config.order = :random
 
   config.default_formatter = 'doc' if config.files_to_run.one?

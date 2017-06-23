@@ -1,3 +1,6 @@
+require: rubocop-rspec
+inherit_from: .rubocop_todo.yml
+
 Rails:
   Enabled: true
 
@@ -20,7 +23,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Exclude:
     - 'app/admin/**/*'
-    - 'lib/tasks/dev_seeds.rake'
+    - 'lib/tasks/*.rake'
     - 'spec/**/*'
 
 Metrics/LineLength:

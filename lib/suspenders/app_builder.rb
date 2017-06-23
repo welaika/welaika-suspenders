@@ -391,6 +391,7 @@ you can deploy to staging and production with:
     def setup_rubocop
       copy_file "rubocop.rake", "lib/tasks/rubocop.rake"
       copy_file "rubocop.yml", ".rubocop.yml"
+      copy_file "rubocop_todo.yml", ".rubocop_todo.yml"
     end
 
     def setup_bundler_audit
@@ -467,8 +468,8 @@ end
 
 task default: :rubocop
 task default: :spec
-task default: "brakeman:check"
-task default: "bundle:audit"
+task default: 'brakeman:check'
+task default: 'bundle:audit'
         EOS
       end
     end

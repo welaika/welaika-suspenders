@@ -1,5 +1,5 @@
 Capybara.javascript_driver = :webkit
-Capybara.asset_host = "http://localhost:3000"
+Capybara.asset_host = 'http://localhost:3000'
 
 module CapybaraHelper
   def page!
