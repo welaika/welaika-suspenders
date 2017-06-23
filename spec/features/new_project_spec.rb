@@ -165,7 +165,7 @@ RSpec.describe "Suspend a new project with default configuration" do
 
   it "configs simplecov" do
     spec_helper_file = IO.read("#{project_path}/spec/spec_helper.rb")
-    expect(spec_helper_file).to match(/^require "simplecov"$/)
+    expect(spec_helper_file).to match(/^require 'simplecov'$/)
     expect(spec_helper_file).to match(/^SimpleCov.start "rails" do$/)
   end
 
