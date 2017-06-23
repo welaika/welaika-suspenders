@@ -312,6 +312,10 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       bundle_command "exec rails generate simple_form:install"
     end
 
+    def configure_draper
+      bundle_command "exec rails generate draper:install"
+    end
+
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}

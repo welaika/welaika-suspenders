@@ -70,6 +70,7 @@ module Suspenders
       build :set_ruby_to_version_being_used
       bundle_command 'install'
       build :configure_simple_form
+      build :configure_draper
     end
 
     def setup_database
