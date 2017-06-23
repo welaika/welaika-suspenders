@@ -320,6 +320,10 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       copy_file "sample_service.rb", "app/services/sample_service.rb"
     end
 
+    def configure_errbit
+      copy_file "errbit.rb", "config/initializers/errbit.rb"
+    end
+
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
