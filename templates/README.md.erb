@@ -7,7 +7,7 @@ with the necessary dependencies to run and test this app:
 
     % ./bin/setup
 
-It assumes you have a machine equipped with Ruby, Postgres or MySQL, Node, Qt and ImageMagick.
+It assumes you have a machine equipped with Ruby, Postgres or MySQL, Node, Yarn and ImageMagick.
 
 To install Ruby, read the [rbenv guide](https://github.com/rbenv/rbenv#installation)
 or the [rvm guide](https://rvm.io/rvm/install).
@@ -15,22 +15,29 @@ or the [rvm guide](https://rvm.io/rvm/install).
 To install Postgres:
 
     $ brew install postgresql
-    
+
 To install MySQL:
-    
+
     $ brew tap homebrew/versions
     $ brew install mysql55
     $ brew link --force mysql55
-    
+
 To install Node:
 
     $ brew install node
-    
-To install Qt:
 
-    $ brew install qt5
-    $ brew link --force qt5
-    
+To update Node:
+
+    $ npm install npm@latest -g
+
+To install Yarn:
+
+    $ brew install yarn
+
+To install Chromedriver (for integration test):
+
+    $ brew install chromedriver
+
 To install ImageMagick:
 
     $ brew install imagemagick

@@ -124,7 +124,7 @@ module Suspenders
       build :configure_i18n_for_test_environment
       build :configure_action_mailer_in_specs
       build :set_up_faker
-      build :configure_capybara_webkit
+      build :configure_capybara
     end
 
     def setup_production_environment

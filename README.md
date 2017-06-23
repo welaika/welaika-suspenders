@@ -5,7 +5,14 @@ Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a
 
 ## Installation
 
-First install the suspenders gem:
+First ensure you have PostgreSQL, npm and yarn.
+
+    $ brew install postgresql
+    $ brew install node
+    $ npm install npm@latest -g # To update npm if you have already installed it
+    $ brew install yarn
+
+then install the suspenders gem:
 
     gem install welaika-suspenders
 

@@ -16,7 +16,7 @@ Layout/TrailingBlankLines:
 
 Lint/Debugger:
   Exclude:
-    - "spec/support/capybara_webkit.rb"
+    - "spec/support/capybara.rb"
 
 Metrics/AbcSize:
   Max: 20

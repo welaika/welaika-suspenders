@@ -74,8 +74,8 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
 
-  it "configures capybara-webkit" do
-    expect(File).to exist("#{project_path}/spec/support/capybara_webkit.rb")
+  it "configures capybara" do
+    expect(File).to exist("#{project_path}/spec/support/capybara.rb")
   end
 
   it "adds support file for i18n" do
