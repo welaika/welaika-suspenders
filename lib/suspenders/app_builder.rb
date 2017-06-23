@@ -388,6 +388,11 @@ you can deploy to staging and production with:
       copy_file "brakeman.rake", "lib/tasks/brakeman.rake"
     end
 
+    def setup_slim_lint
+      copy_file "slim-lint.rake", "lib/tasks/slim-lint.rake"
+      copy_file "slim-lint.yml", ".slim-lint.yml"
+    end
+
     def setup_rubocop
       copy_file "rubocop.rake", "lib/tasks/rubocop.rake"
       copy_file "rubocop.yml", ".rubocop.yml"
@@ -405,6 +410,7 @@ you can deploy to staging and production with:
     def create_binstubs
       bundle_command "binstubs brakeman"
       bundle_command "binstubs rubocop"
+      bundle_command "binstubs slim_lint"
     end
 
     def copy_miscellaneous_files
@@ -467,9 +473,10 @@ if defined? RSpec
 end
 
 task default: :rubocop
-task default: :spec
+task default: :slim_lint
 task default: 'brakeman:check'
 task default: 'bundle:audit'
+task default: :spec
         EOS
       end
     end

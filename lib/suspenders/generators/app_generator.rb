@@ -95,6 +95,7 @@ module Suspenders
       build :configure_i18n_for_missing_translations
       build :configure_quiet_assets
       build :setup_rubocop
+      build :setup_slim_lint
       build :setup_brakeman
       build :setup_bundler_audit
     end

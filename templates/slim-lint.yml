@@ -1,0 +1,6 @@
+exclude:
+  - 'lib/templates/slim/scaffold/_form.html.slim'
+
+linters:
+  LineLength:
+    max: 130
