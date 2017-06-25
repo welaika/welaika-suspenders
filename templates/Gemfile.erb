@@ -29,6 +29,9 @@ gem "skylight"
 gem "slim-rails"
 gem "title"
 gem "uglifier", ">= 1.3.0"
+<% if options[:webpack] %>
+gem "webpacker"
+<% end %>
 gem "welaika-suspenders"
 
 group :development do

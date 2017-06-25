@@ -5,8 +5,6 @@ module Suspenders
   class AppGenerator < Rails::Generators::AppGenerator
     hide!
 
-    WEBPACKS = %w( react vue angular )
-
     class_option :database, type: :string, aliases: "-d", default: "postgresql",
       desc: "Configure for selected database (options: #{DATABASES.join("/")})"
 
@@ -33,9 +31,6 @@ module Suspenders
 
     class_option :skip_turbolinks, type: :boolean, default: true,
       desc: "Skip turbolinks gem"
-
-    class_option :webpack, type: :string, default: nil,
-      desc: "Preconfigure for app-like JavaScript with Webpack (options: #{WEBPACKS.join('/')})"
 
     def finish_template
       invoke :suspenders_customization
