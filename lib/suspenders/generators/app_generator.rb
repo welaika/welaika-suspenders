@@ -57,14 +57,8 @@ module Suspenders
       invoke :create_binstubs
       invoke :generate_default
       invoke :setup_git
-      invoke :setup_assets
       invoke :outro
     end
-
-    def setup_assets
-      build :install_normalize_css
-    end
-
 
     def customize_gemfile
       build :replace_gemfile, options[:path]

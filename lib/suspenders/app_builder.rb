@@ -504,12 +504,6 @@ task default: :spec
       end
     end
 
-    def install_normalize_css
-      bundle_command 'exec yarn add normalize.css'
-      append_file 'app/assets/stylesheets/application.sass',
-                  "@import 'normalize.css/normalize.css'"
-    end
-
     private
 
     def raise_on_missing_translations_in(environment)
