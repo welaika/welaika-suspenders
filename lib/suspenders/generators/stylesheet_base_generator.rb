@@ -17,9 +17,5 @@ module Suspenders
     def remove_prior_config
       remove_file "app/assets/stylesheets/application.css"
     end
-
-    def install_normalize_css
-      run "bin/yarn add normalize.css"
-    end
   end
 end

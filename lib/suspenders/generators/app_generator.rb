@@ -38,6 +38,7 @@ module Suspenders
     end
 
     def suspenders_customization
+      invoke :setup_git
       invoke :customize_gemfile
       invoke :setup_development_environment
       invoke :setup_test_environment
@@ -56,7 +57,6 @@ module Suspenders
       invoke :setup_spring
       invoke :create_binstubs
       invoke :generate_default
-      invoke :setup_git
       invoke :outro
     end
 
