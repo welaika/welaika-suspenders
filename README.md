@@ -30,7 +30,7 @@ You can optionally specify alternate Heroku flags:
 
     welaika-suspenders projectname \
       --heroku true \
-      --heroku-flags "--region eu --addons sendgrid,ssl"
+      --heroku-flags "--region eu --addons heroku-postgresql,sendgrid,logentries,scheduler,newrelic"
 
 See all possible Heroku flags:
 
