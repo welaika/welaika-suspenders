@@ -5,16 +5,19 @@ module Suspenders
     include Suspenders::Actions
     extend Forwardable
 
-    def_delegators :heroku_adapter,
-                   :create_heroku_application_manifest_file,
-                   :create_heroku_pipeline,
-                   :create_production_heroku_app,
-                   :create_staging_heroku_app,
-                   :create_review_apps_setup_script,
-                   :set_heroku_rails_secrets,
-                   :set_heroku_backup_schedule,
-                   :set_heroku_remotes,
-                   :set_heroku_application_host
+    def_delegators(
+      :heroku_adapter,
+      :create_heroku_application_manifest_file,
+      :create_heroku_pipeline,
+      :create_production_heroku_app,
+      :create_review_apps_setup_script,
+      :create_staging_heroku_app,
+      :set_heroku_application_host,
+      :set_heroku_backup_schedule,
+      :set_heroku_honeybadger_env,
+      :set_heroku_rails_secrets,
+      :set_heroku_remotes,
+    )
 
     def readme
       template 'README.md.erb', 'README.md'
@@ -152,11 +155,7 @@ module Suspenders
   config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
       RUBY
 
-      inject_into_file(
-        "config/environments/production.rb",
-        config,
-        after: "Rails.application.configure do",
-      )
+      configure_environment "production", config
     end
 
     def enable_rack_deflater
@@ -222,7 +221,7 @@ config.public_file_server.headers = {
     end
 
     def create_database
-      bundle_command 'exec rake db:create db:migrate'
+      bundle_command "exec rails db:create db:migrate"
     end
 
     def replace_gemfile(path)
@@ -330,8 +329,14 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}
+      action_mailer_asset_host "development", %{"http://localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
+      action_mailer_asset_host "test", %{"http://www.example.com"}
       action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
+      action_mailer_asset_host(
+        "production",
+        %{ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))},
+      )
     end
 
     def configure_active_job
@@ -378,10 +383,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 
     def copy_dotfiles
       directory("dotfiles", ".")
-    end
-
-    def init_git
-      run 'git init'
     end
 
     def create_heroku_apps(flags)

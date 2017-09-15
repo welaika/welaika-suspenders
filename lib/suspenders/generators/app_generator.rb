@@ -26,11 +26,11 @@ module Suspenders
     class_option :skip_test, type: :boolean, default: true,
       desc: "Skip Test Unit"
 
-    class_option :skip_system_test, type: :boolean, default: true,
-      desc: "Skip system test files"
+    class_option :skip_system_test,
+                 type: :boolean, default: true, desc: "Skip system test files"
 
-    class_option :skip_turbolinks, type: :boolean, default: true,
-      desc: "Skip turbolinks gem"
+    class_option :skip_turbolinks,
+                 type: :boolean, default: true, desc: "Skip turbolinks gem"
 
     def finish_template
       invoke :suspenders_customization
@@ -56,7 +56,7 @@ module Suspenders
       invoke :setup_spring
       invoke :create_binstubs
       invoke :generate_default
-      invoke :setup_git
+      invoke :setup_default_directories
       invoke :outro
     end
 
@@ -152,14 +152,6 @@ module Suspenders
       build :setup_rack_mini_profiler
     end
 
-    def setup_git
-      if !options[:skip_git]
-        say "Initializing git"
-        invoke :setup_default_directories
-        invoke :init_git
-      end
-    end
-
     def create_local_heroku_setup
       say "Creating local Heroku setup"
       build :create_review_apps_setup_script
@@ -174,6 +166,7 @@ module Suspenders
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
         build :set_heroku_application_host
+        build :set_heroku_honeybadger_env
         build :set_heroku_backup_schedule
         build :create_heroku_pipeline
         build :configure_automatic_deployment
@@ -198,10 +191,6 @@ module Suspenders
       build :create_binstubs
     end
 
-    def init_git
-      build :init_git
-    end
-
     def copy_miscellaneous_files
       say 'Copying miscellaneous support files'
       build :copy_miscellaneous_files
@@ -222,6 +211,8 @@ module Suspenders
 
     def generate_default
       run("spring stop")
+      generate("suspenders:initialize_active_job")
+      generate("suspenders:enforce_ssl")
       generate("suspenders:static")
       generate("suspenders:stylesheet_base")
     end
