@@ -30,6 +30,10 @@ Metrics/BlockLength:
 Metrics/LineLength:
   Max: 100
 
+Naming/FileName:
+  Exclude:
+    - 'app/views/**/*'
+
 Rails:
   Enabled: true
 
