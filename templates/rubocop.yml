@@ -2,6 +2,7 @@ require: rubocop-rspec
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+  DisplayCopNames: true
   TargetRubyVersion: 2.4
   Exclude:
     - 'bin/*'
@@ -12,11 +13,11 @@ AllCops:
 
 Layout/TrailingBlankLines:
   Exclude:
-    - "Gemfile"
+    - 'Gemfile'
 
 Lint/Debugger:
   Exclude:
-    - "spec/support/capybara.rb"
+    - 'spec/support/capybara.rb'
 
 Metrics/AbcSize:
   Max: 20
@@ -41,7 +42,4 @@ Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/StringLiterals:
   Enabled: false

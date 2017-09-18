@@ -93,7 +93,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "ensures Gemfile contains `rack-mini-profiler`" do
     gemfile = IO.read("#{project_path}/Gemfile")
 
-    expect(gemfile).to include %{gem "rack-mini-profiler", require: false}
+    expect(gemfile).to include %{gem 'rack-mini-profiler', require: false}
   end
 
   it "ensures .sample.env defaults to RACK_MINI_PROFILER=0" do

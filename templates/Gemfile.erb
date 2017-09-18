@@ -1,77 +1,76 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
-ruby "<%= Suspenders::RUBY_VERSION %>"
+ruby '<%= Suspenders::RUBY_VERSION %>'
 
-gem "bundler", ">= 1.8.4"
+gem 'bundler', '>= 1.8.4'
 
-gem "active_interaction", "~> 3.5"
-gem "airbrake"
-gem "autoprefixer-rails"
-gem "coffee-rails", "~> 4.2"
-gem "delayed_job_active_record"
-gem "draper"
-gem "email_validator"
-gem "flutie"
-gem "pg"
-gem "puma", "~> 3.7"
-gem "rack-canonical-host"
-gem "rails", "<%= Suspenders::RAILS_VERSION %>"
-gem "rails-i18n"
-gem "recipient_interceptor"
-gem "sass-rails", "~> 5.0"
-gem "simple_form"
-gem "skylight"
-gem "slim-rails"
-gem "title"
-gem "uglifier", ">= 1.3.0"
+gem 'active_interaction', '~> 3.5'
+gem 'airbrake'
+gem 'autoprefixer-rails'
+gem 'coffee-rails', '~> 4.2'
+gem 'delayed_job_active_record'
+gem 'draper'
+gem 'email_validator'
+gem 'flutie'
+gem 'pg'
+gem 'puma', '~> 3.7'
+gem 'rack-canonical-host'
+gem 'rails', '<%= Suspenders::RAILS_VERSION %>'
+gem 'rails-i18n'
+gem 'recipient_interceptor'
+gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
+gem 'slim-rails'
+gem 'title'
+gem 'uglifier', '>= 1.3.0'
 <% if options[:webpack] %>
-gem "webpacker"
+gem 'webpacker'
 <% end %>
-gem "welaika-suspenders"
+gem 'welaika-suspenders'
 
 group :development do
-  gem "letter_opener"
-  gem "listen", ">= 3.0.5", "< 3.2"
-  gem "rack-mini-profiler", require: false
-  gem "spring"
-  gem "spring-commands-rspec"
-  gem "spring-watcher-listen", "~> 2.0.0"
-  gem "web-console", ">= 3.3.0"
+  gem 'letter_opener'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rack-mini-profiler', require: false
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :development, :test do
-  gem "awesome_print"
-  gem "brakeman", require: false
-  gem "bullet"
-  gem "bundler-audit", ">= 0.5.0", require: false
-  gem "dotenv-rails"
-  gem "factory_girl_rails"
-  gem "faker"
-  gem "pry-byebug"
-  gem "pry-rails"
-  gem "rspec-rails", "~> 3.6"
-  gem "rspec_junit_formatter"
-  gem "rubocop", require: false
-  gem "rubocop-rspec", require: false
-  gem "slim_lint", require: false
+  gem 'awesome_print'
+  gem 'brakeman', require: false
+  gem 'bullet'
+  gem 'bundler-audit', '>= 0.5.0', require: false
+  gem 'dotenv-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.6'
+  gem 'rspec_junit_formatter'
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'slim_lint', require: false
 end
 
 group :test do
-  gem "capybara"
-  gem "database_cleaner"
-  gem "launchy"
-  gem "selenium-webdriver"
-  gem "shoulda-matchers"
-  gem "simplecov", require: false
-  gem "timecop"
-  gem "webmock"
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'timecop'
+  gem 'webmock'
 end
 
 group :production do
-  gem "rack-timeout"
+  gem 'rack-timeout'
 end
