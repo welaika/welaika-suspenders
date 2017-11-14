@@ -6,6 +6,9 @@ dependencies:
     - npm install yarn
   bundler:
     without: [production, staging]
+database:
+  override:
+    - RAILS_ENV=development bin/setup
 test:
   pre:
     - mkdir $CIRCLE_ARTIFACTS/coverage $CIRCLE_ARTIFACTS/quality $CIRCLE_ARTIFACTS/security
