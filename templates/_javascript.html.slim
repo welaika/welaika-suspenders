@@ -3,6 +3,6 @@
 = yield :javascript
 
 - if Rails.env.test?
-  javascript:
-    $.fx.off = true;
-    $.ajaxSetup({ async: false });
+  coffee:
+    $.fx.off = true
+    $.ajaxSetup(async: false)
