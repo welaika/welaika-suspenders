@@ -248,6 +248,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "creates binstubs" do
     expect(File).to exist("#{project_path}/bin/brakeman")
     expect(File).to exist("#{project_path}/bin/rubocop")
+    expect(File).to exist("#{project_path}/bin/rspec")
   end
 
   it "removes comments and extra newlines from config files" do
