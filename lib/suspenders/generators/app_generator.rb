@@ -88,10 +88,6 @@ module Suspenders
       build :configure_generators
       build :configure_i18n_for_missing_translations
       build :configure_quiet_assets
-      build :setup_rubocop
-      build :setup_slim_lint
-      build :setup_brakeman
-      build :setup_bundler_audit
     end
 
     def setup_production_environment
@@ -110,7 +106,6 @@ module Suspenders
       say 'Configuring app'
       build :configure_action_mailer
       build :configure_locales_and_time_zone
-      build :configure_slim
       build :configure_time_formats
       build :setup_default_rake_task
       build :replace_default_puma_configuration

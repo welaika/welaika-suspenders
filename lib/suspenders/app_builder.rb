@@ -217,10 +217,6 @@ config.public_file_server.headers = {
       inject_into_class 'config/application.rb', 'Application', config
     end
 
-    def configure_slim
-      copy_file 'slim.rb', 'config/initializers/slim.rb'
-    end
-
     def configure_draper
       bundle_command "exec rails generate draper:install"
     end
@@ -296,33 +292,8 @@ you can deploy to staging and production with:
       run "chmod a+x bin/deploy"
     end
 
-    def setup_brakeman
-      copy_file "brakeman.rake", "lib/tasks/brakeman.rake"
-    end
-
-    def setup_slim_lint
-      copy_file "slim-lint.rake", "lib/tasks/slim-lint.rake"
-      copy_file "slim-lint.yml", ".slim-lint.yml"
-    end
-
-    def setup_rubocop
-      copy_file "rubocop.rake", "lib/tasks/rubocop.rake"
-      copy_file "rubocop.yml", ".rubocop.yml"
-      copy_file "rubocop_todo.yml", ".rubocop_todo.yml"
-    end
-
-    def setup_bundler_audit
-      copy_file "bundler_audit.rake", "lib/tasks/bundler_audit.rake"
-    end
-
     def setup_spring
       bundle_command "exec spring binstub --all"
-    end
-
-    def create_binstubs
-      bundle_command "binstubs brakeman"
-      bundle_command "binstubs rubocop"
-      bundle_command "binstubs slim_lint"
     end
 
     def copy_miscellaneous_files

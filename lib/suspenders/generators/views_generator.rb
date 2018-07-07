@@ -7,6 +7,15 @@ module Suspenders
       File.dirname(__FILE__),
     )
 
+    def add_slim_gem
+      gem "slim-rails"
+      Bundler.with_clean_env { run "bundle install" }
+    end
+
+    def configure_slim
+      copy_file 'slim.rb', 'config/initializers/slim.rb'
+    end
+
     def create_partials_directory
       empty_directory "app/views/application"
     end
