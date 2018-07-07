@@ -51,6 +51,10 @@ module Suspenders
       copy_file 'fixtures_helper_rspec.rb', 'spec/support/fixtures_helper.rb'
     end
 
+    def add_capybara_helper
+      copy_file 'capybara_helper.rb', 'spec/support/capybara_helper.rb'
+    end
+
     private
 
     def empty_directory_with_keep_file(destination)
