@@ -80,7 +80,6 @@ module Suspenders
       config = <<-RUBY
 
     config.generators do |generate|
-      generate.controller_specs false
       generate.helper false
       generate.javascripts false
       generate.request_specs false
