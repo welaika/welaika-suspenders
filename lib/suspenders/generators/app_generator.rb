@@ -40,10 +40,8 @@ module Suspenders
     def suspenders_customization
       invoke :customize_gemfile
       invoke :setup_development_environment
-      invoke :setup_test_environment
       invoke :setup_production_environment
       invoke :setup_secret_token
-      invoke :create_suspenders_views
       invoke :configure_app
       invoke :copy_miscellaneous_files
       invoke :customize_error_pages
@@ -51,18 +49,19 @@ module Suspenders
       invoke :remove_routes_comment_lines
       invoke :setup_dotfiles
       invoke :setup_database
-      invoke :create_local_heroku_setup
-      invoke :create_heroku_apps
+      invoke :setup_bundler_audit
       invoke :setup_spring
       invoke :create_binstubs
       invoke :generate_default
       invoke :setup_default_directories
+      invoke :create_local_heroku_setup
+      invoke :create_heroku_apps
+      invoke :generate_production_default
       invoke :outro
     end
 
     def customize_gemfile
       build :replace_gemfile, options[:path]
-      build :set_ruby_to_version_being_used
       bundle_command 'install'
       build :configure_simple_form
       build :configure_draper
@@ -82,13 +81,12 @@ module Suspenders
 
     def setup_development_environment
       say 'Setting up the development environment'
+      build :configure_local_mail
       build :raise_on_missing_assets_in_test
       build :raise_on_delivery_errors
       build :set_test_delivery_method
-      build :add_bullet_gem_configuration
       build :raise_on_unpermitted_parameters
       build :provide_setup_script
-      build :provide_dev_prime_task
       build :configure_generators
       build :configure_i18n_for_missing_translations
       build :configure_quiet_assets
@@ -98,27 +96,8 @@ module Suspenders
       build :setup_bundler_audit
     end
 
-    def setup_test_environment
-      say 'Setting up the test environment'
-      build :set_up_factory_bot_for_rspec
-      build :add_helpers_for_rspec
-      build :generate_factories_file
-      build :generate_rspec
-      build :configure_rspec
-      build :configure_background_jobs_for_rspec
-      build :provide_shoulda_matchers_config
-      build :configure_spec_support_features
-      build :configure_ci
-      build :configure_i18n_for_test_environment
-      build :configure_action_mailer_in_specs
-      build :set_up_faker
-      build :configure_capybara
-    end
-
     def setup_production_environment
       say 'Setting up the production environment'
-      build :configure_smtp
-      build :configure_rack_timeout
       build :enable_rack_canonical_host
       build :enable_rack_deflater
       build :setup_asset_host
@@ -129,20 +108,10 @@ module Suspenders
       build :setup_secret_token
     end
 
-    def create_suspenders_views
-      say 'Creating suspenders views'
-      build :create_partials_directory
-      build :create_shared_flashes
-      build :create_shared_javascripts
-      build :create_shared_css_overrides
-      build :create_application_layout
-    end
-
     def configure_app
       say 'Configuring app'
       build :configure_action_mailer
       build :configure_locales_and_time_zone
-      build :configure_active_job
       build :configure_slim
       build :configure_time_formats
       build :setup_default_rake_task
@@ -210,10 +179,26 @@ module Suspenders
 
     def generate_default
       run("spring stop")
-      generate("suspenders:initialize_active_job")
-      generate("suspenders:enforce_ssl")
       generate("suspenders:static")
       generate("suspenders:stylesheet_base")
+      generate("suspenders:testing")
+      generate("suspenders:ci")
+      generate("suspenders:js_driver")
+      unless options[:api]
+        generate("suspenders:forms")
+      end
+      generate("suspenders:db_optimizations")
+      generate("suspenders:factories")
+      generate("suspenders:lint")
+      generate("suspenders:jobs")
+      generate("suspenders:analytics")
+      generate("suspenders:views")
+    end
+
+    def generate_production_default
+      generate("suspenders:production:force_tls")
+      generate("suspenders:production:email")
+      generate("suspenders:production:timeout")
     end
 
     def outro

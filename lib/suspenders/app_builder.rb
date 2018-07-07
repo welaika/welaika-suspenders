@@ -55,23 +55,6 @@ module Suspenders
       )
     end
 
-    def add_bullet_gem_configuration
-      config = <<-RUBY
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.bullet_logger = true
-    Bullet.rails_logger = true
-  end
-
-      RUBY
-
-      inject_into_file(
-        "config/environments/development.rb",
-        config,
-        after: "config.action_mailer.raise_delivery_errors = true\n",
-      )
-    end
-
     def raise_on_unpermitted_parameters
       config = <<-RUBY
     config.action_controller.action_on_unpermitted_parameters = :raise
@@ -91,10 +74,6 @@ module Suspenders
     def provide_setup_script
       template "bin_setup", "bin/setup", force: true
       run "chmod a+x bin/setup"
-    end
-
-    def provide_dev_prime_task
-      copy_file 'dev.rake', 'lib/tasks/dev.rake'
     end
 
     def configure_generators
@@ -145,6 +124,10 @@ module Suspenders
         after: "config.action_mailer.raise_delivery_errors = false"
     end
 
+    def configure_local_mail
+      copy_file "email.rb", "config/initializers/email.rb"
+    end
+
     def enable_rack_canonical_host
       config = <<-RUBY
 
@@ -167,9 +150,11 @@ module Suspenders
         "# config.action_controller.asset_host = 'http://assets.example.com'",
         'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))'
 
-      replace_in_file 'config/initializers/assets.rb',
-        "config.assets.version = '1.0'",
-        'config.assets.version = (ENV["ASSETS_VERSION"] || "1.0")'
+      if File.exist?("config/initializers/assets.rb")
+        replace_in_file 'config/initializers/assets.rb',
+          "config.assets.version = '1.0'",
+          'config.assets.version = (ENV["ASSETS_VERSION"] || "1.0")'
+      end
 
       config = <<-EOD
 config.public_file_server.headers = {
@@ -186,33 +171,6 @@ config.public_file_server.headers = {
 
     def disallow_wrapping_parameters
       remove_file "config/initializers/wrap_parameters.rb"
-    end
-
-    def create_partials_directory
-      empty_directory 'app/views/application'
-    end
-
-    def create_shared_flashes
-      copy_file '_flashes.html.slim', 'app/views/application/_flashes.html.slim'
-      copy_file "flashes_helper.rb", "app/helpers/flashes_helper.rb"
-    end
-
-    def create_shared_javascripts
-      copy_file '_javascript.html.slim', 'app/views/application/_javascript.html.slim'
-    end
-
-    def create_shared_css_overrides
-      copy_file(
-        "_css_overrides.html.erb",
-        "app/views/application/_css_overrides.html.erb",
-      )
-    end
-
-    def create_application_layout
-      remove_file 'app/views/layouts/application.html.erb'
-      template 'suspenders_layout.html.slim',
-        'app/views/layouts/application.html.slim',
-        force: true
     end
 
     def use_postgres_config_template
@@ -234,44 +192,13 @@ config.public_file_server.headers = {
       end
     end
 
-    def set_ruby_to_version_being_used
+    def ruby_version
       create_file '.ruby-version', "#{Suspenders::RUBY_VERSION}\n"
-    end
-
-    def provide_shoulda_matchers_config
-      copy_file(
-        "shoulda_matchers_config_rspec.rb",
-        "spec/support/shoulda_matchers.rb"
-      )
-    end
-
-    def configure_spec_support_features
-      empty_directory_with_keep_file 'spec/features'
-      empty_directory_with_keep_file 'spec/support/features'
-    end
-
-    def configure_rspec
-      remove_file "spec/rails_helper.rb"
-      remove_file "spec/spec_helper.rb"
-      copy_file "rails_helper.rb", "spec/rails_helper.rb"
-      copy_file "spec_helper.rb", "spec/spec_helper.rb"
-    end
-
-    def configure_ci
-      template "circle.yml.erb", "circle.yml"
-    end
-
-    def configure_i18n_for_test_environment
-      copy_file "i18n.rb", "spec/support/i18n.rb"
     end
 
     def configure_i18n_for_missing_translations
       raise_on_missing_translations_in("development")
       raise_on_missing_translations_in("test")
-    end
-
-    def configure_background_jobs_for_rspec
-      run 'rails g delayed_job:active_record'
     end
 
     def configure_action_mailer_in_specs
@@ -333,17 +260,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         "production",
         %{ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))},
       )
-    end
-
-    def configure_active_job
-      configure_application_file(
-        "config.active_job.queue_adapter = :delayed_job"
-      )
-      configure_environment "test", "config.active_job.queue_adapter = :inline"
-    end
-
-    def generate_rspec
-      generate 'rspec:install'
     end
 
     def replace_default_puma_configuration
@@ -447,8 +363,11 @@ you can deploy to staging and production with:
       EOS
 
       %w(500 404 422).each do |page|
-        inject_into_file "public/#{page}.html", meta_tags, after: "<head>\n"
-        replace_in_file "public/#{page}.html", /<!--.+-->\n/, ''
+        path = "public/#{page}.html"
+        if File.exist?(path)
+          inject_into_file path, meta_tags, after: "<head>\n"
+          replace_in_file path, /<!--.+-->\n/, ''
+        end
       end
     end
 

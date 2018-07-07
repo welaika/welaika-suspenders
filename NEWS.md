@@ -1,3 +1,35 @@
+1.47.0 (May 25, 2018)
+
+* Bug fix: normalize.css Sass import is concatenated with other styles now
+* Bug fix: the suspenders gem itself is not needed in production
+* Bug fix: bundle install after adding a gem
+* Breaking: remove Refills
+* Breaking: rename suspenders:enforce_ssl to suspenders:production:force_tls
+* Upgrade: update to Ruby 2.5.1
+* Upgrade: update to Rails 5.2.0
+* New generator: production email
+* New generator: production timeouts
+
+1.46.0 (January 26, 2018)
+
+* Bug fix: Fix for action mailer asset_host
+* Bug fix: Lock pg to ~> 0.18
+* Breaking: Remove Database Cleaner
+* Upgrade: Update to Rails 5.1.4
+* Upgrade: Update to Ruby 2.5.0
+* Upgrade: Update bourbon from 5.0.0.beta.8 to 5.0.0
+* Upgrade: Update FactoryGirl to FactoryBot
+* Generators: Analytics generator
+* Generators: CI generator
+* Generators: DB optimization generator
+* Generators: Factories generator
+* Generators: Forms generator
+* Generators: Javascript driver generator
+* Generators: Jobs generator
+* Generators: Lint generator
+* Generators: Testing driver generator
+* Generators: Views generator
+
 1.45.0 (September 8, 2017)
 
 * Bump Rails to 5.1.3 (#857)

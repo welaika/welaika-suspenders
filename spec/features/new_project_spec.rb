@@ -74,8 +74,8 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
 
-  it "configures capybara" do
-    expect(File).to exist("#{project_path}/spec/support/capybara.rb")
+  it "configures capybara-chromedriver" do
+    expect(File).to exist("#{project_path}/spec/support/chromedriver.rb")
   end
 
   it "adds support file for i18n" do
@@ -192,10 +192,12 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(production_config).not_to match(/"HOST"/)
   end
 
-  it "configures email interceptor in smtp config" do
-    smtp_file = IO.read("#{project_path}/config/smtp.rb")
-    expect(smtp_file).
-      to match(/RecipientInterceptor.new\(ENV\["EMAIL_RECIPIENTS"\]\)/)
+  it "configures email interceptor" do
+    email_file = File.join(project_path, "config", "initializers", "email.rb")
+    email_config = IO.read(email_file)
+
+    expect(email_config).
+      to include(%{RecipientInterceptor.new(ENV["EMAIL_RECIPIENTS"])})
   end
 
   it "configs active job queue adapter" do
@@ -206,6 +208,14 @@ RSpec.describe "Suspend a new project with default configuration" do
     )
     expect(test_config).to match(
       /^ +config.active_job.queue_adapter = :inline$/
+    )
+  end
+
+  it "configs background jobs for rspec" do
+    delayed_job = IO.read("#{project_path}/bin/delayed_job")
+
+    expect(delayed_job).to match(
+      /^require 'delayed\/command'$/,
     )
   end
 
@@ -284,7 +294,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "creates heroku application manifest file with application name in it" do
     app_json_file = IO.read("#{project_path}/app.json")
 
-    expect(app_json_file).to match(/"name":"#{app_name.dasherize}"/)
+    expect(app_json_file).to match(/"name":\s*"#{app_name.dasherize}"/)
   end
 
   def app_name

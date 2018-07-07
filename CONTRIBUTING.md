@@ -13,9 +13,6 @@ Set up your machine:
 
     ./bin/setup
 
-If you're having trouble installing `capybara-webkit` check their [installation
-instructions](https://github.com/thoughtbot/capybara-webkit#qt-dependency-and-installation-issues).
-
 Make sure the tests pass:
 
     rake
@@ -52,3 +49,11 @@ We may suggest changes.
 
 To update the Ruby version,
 change `.ruby-version` and `.travis.yml`.
+
+If you see this error while running tests:
+
+```
+Your Ruby version is XXX, but your Gemfile specified YYY (Bundler::RubyVersionMismatch)
+```
+
+Try removing the `tmp/` directory and re-running the tests.

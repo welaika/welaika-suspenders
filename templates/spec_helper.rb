@@ -1,13 +1,12 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
+  # TODO: interactors
   add_group 'Services', 'app/services'
 end
 
-# Save to CircleCI's artifacts directory if we're on CircleCI
 if ENV['CIRCLE_ARTIFACTS']
   dir = File.join(ENV['CIRCLE_ARTIFACTS'], 'coverage')
   SimpleCov.coverage_dir(dir)
-end
 
 require 'webmock/rspec'
 require 'timecop'

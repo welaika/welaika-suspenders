@@ -6,6 +6,7 @@ require 'date'
 Gem::Specification.new do |s|
   s.required_ruby_version = ">= #{Suspenders::RUBY_VERSION}"
   s.authors = ['thoughtbot', 'weLaika']
+  s.required_rubygems_version = ">= 2.7.4"
   s.date = Date.today.strftime('%Y-%m-%d')
 
   s.description = <<-HERE
