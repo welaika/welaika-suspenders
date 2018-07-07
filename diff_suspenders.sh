@@ -11,5 +11,5 @@ diff --minimal \
      --exclude="NEWS.md" \
      --exclude="USAGE" \
      --exclude="LICENSE" \
-     --exlcude="Gemfile.lock" \
+     --exclude="Gemfile.lock" \
      ./ ../suspenders
