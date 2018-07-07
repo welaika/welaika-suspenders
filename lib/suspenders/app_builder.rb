@@ -103,10 +103,6 @@ module Suspenders
       copy_file 'fixtures_helper_rspec.rb', 'spec/support/fixtures_helper.rb'
     end
 
-    def set_up_faker
-      copy_file 'faker_rspec.rb', 'spec/support/faker.rb'
-    end
-
     def configure_smtp
       copy_file 'smtp.rb', 'config/smtp.rb'
 
