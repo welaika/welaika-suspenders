@@ -46,6 +46,10 @@ module Suspenders
       copy_file "action_mailer.rb", "spec/support/action_mailer.rb"
     end
 
+    def create_binstubs
+      bundle_command "binstubs rspec-core"
+    end
+
     def add_helpers_for_rspec
       copy_file 'queries_helper_rspec.rb', 'spec/support/queries_helper.rb'
       copy_file 'fixtures_helper_rspec.rb', 'spec/support/fixtures_helper.rb'
