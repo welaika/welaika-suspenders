@@ -18,9 +18,5 @@ module Suspenders
         RUBY
       end
     end
-
-    def configure_ci
-      template "circle.yml.erb", "circle.yml"
-    end
   end
 end
