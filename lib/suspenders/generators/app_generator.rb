@@ -51,7 +51,6 @@ module Suspenders
       invoke :setup_database
       invoke :setup_bundler_audit
       invoke :setup_spring
-      invoke :create_binstubs
       invoke :generate_default
       invoke :setup_default_directories
       invoke :create_local_heroku_setup
@@ -63,8 +62,6 @@ module Suspenders
     def customize_gemfile
       build :replace_gemfile, options[:path]
       bundle_command 'install'
-      build :configure_simple_form
-      build :configure_draper
     end
 
     def setup_database
@@ -145,11 +142,6 @@ module Suspenders
     def setup_spring
       say "Springifying binstubs"
       build :setup_spring
-    end
-
-    def create_binstubs
-      say "Create binstubs"
-      build :create_binstubs
     end
 
     def copy_miscellaneous_files
