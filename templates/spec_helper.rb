@@ -1,4 +1,5 @@
 require 'simplecov'
+
 SimpleCov.start 'rails' do
   # TODO: interactors
   add_group 'Interactions', 'app/interactions'
