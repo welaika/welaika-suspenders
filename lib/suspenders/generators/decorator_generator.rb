@@ -1,0 +1,19 @@
+require "rails/generators"
+
+module Suspenders
+  class DraperGenerator < Rails::Generators::Base
+    source_root File.expand_path(
+      File.join("..", "..", "..", "templates"),
+      File.dirname(__FILE__),
+    )
+
+    def add_factory_bot
+      gem "draper"
+      Bundler.with_clean_env { run "bundle install" }
+    end
+
+    def configure_draper
+      bundle_command "exec rails generate draper:install"
+    end
+  end
+end
