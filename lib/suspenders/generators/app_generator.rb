@@ -176,8 +176,10 @@ module Suspenders
       generate("suspenders:factories")
       generate("suspenders:lint")
       generate("suspenders:jobs")
-      generate("suspenders:analytics")
       generate("suspenders:views")
+      generate("suspenders:decorator")
+      generate("suspenders:faker")
+      generate("suspenders:security")
     end
 
     def generate_production_default
