@@ -1,12 +1,13 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   # TODO: interactors
-  add_group 'Services', 'app/services'
+  add_group 'Interactions', 'app/interactions'
 end
 
 if ENV['CIRCLE_ARTIFACTS']
   dir = File.join(ENV['CIRCLE_ARTIFACTS'], 'coverage')
   SimpleCov.coverage_dir(dir)
+end
 
 require 'webmock/rspec'
 require 'timecop'

@@ -65,7 +65,6 @@ module Suspenders
       bundle_command 'install'
       build :configure_simple_form
       build :configure_draper
-      build :configure_active_interaction
       build :configure_errbit
     end
 

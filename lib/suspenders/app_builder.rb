@@ -242,10 +242,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       bundle_command "exec rails generate draper:install"
     end
 
-    def configure_active_interaction
-      copy_file "sample_service.rb", "app/services/sample_service.rb"
-    end
-
     def configure_errbit
       copy_file "errbit.rb", "config/initializers/errbit.rb"
     end
@@ -275,7 +271,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         'app/decorators',
         'app/forms',
         'app/queries',
-        'app/services',
+        'app/interactions',
         'app/views/pages',
         'spec/decorators',
         'spec/fixtures',
@@ -284,7 +280,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         'spec/lib',
         'spec/queries',
         'spec/requests',
-        'spec/services',
+        'spec/interactions',
         'spec/support/matchers',
         'spec/support/mixins',
         'spec/support/shared_examples'

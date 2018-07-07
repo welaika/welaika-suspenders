@@ -64,7 +64,7 @@ List of changes we made since [this is commit](https://github.com/thoughtbot/sus
 - add some html meta tags
 - use EU region as default for Heroku
 - use CDATA wrapper for javascript
-- create common folders like `app/queries`, `app/services`, etc.
+- create common folders like `app/queries`, `app/interactions`, etc.
 - use `application.sass` instead of `application.scss`
 - add `brakeman` gem
 - set `Rome` as `time_zone`
