@@ -225,9 +225,6 @@ config.public_file_server.headers = {
       bundle_command "exec rails generate draper:install"
     end
 
-    def configure_errbit
-      copy_file "errbit.rb", "config/initializers/errbit.rb"
-    end
 
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}

@@ -65,7 +65,6 @@ module Suspenders
       bundle_command 'install'
       build :configure_simple_form
       build :configure_draper
-      build :configure_errbit
     end
 
     def setup_database
@@ -202,7 +201,7 @@ module Suspenders
 
     def outro
       say "Congratulations! You just pulled our suspenders."
-      say "Read README.md and configure Errbit."
+      say "Read README.md!"
     end
 
     def self.banner
