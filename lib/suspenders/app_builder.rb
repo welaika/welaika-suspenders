@@ -223,6 +223,7 @@ config.public_file_server.headers = {
         'spec/queries',
         'spec/interactions',
         'spec/fixtures',
+        'spec/factories',
         'spec/support/matchers',
         'spec/support/mixins',
         'spec/support/shared_examples'

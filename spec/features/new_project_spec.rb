@@ -82,10 +82,6 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
 
-  it "adds support file for factory girl" do
-    expect(File).to exist("#{project_path}/spec/support/factory_girl.rb")
-  end
-
   it "adds rspec helper for fixtures" do
     expect(File).to exist("#{project_path}/spec/support/fixtures_helper.rb")
   end

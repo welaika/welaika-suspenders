@@ -16,10 +16,6 @@ module Suspenders
       copy_file "factory_bot_rspec.rb", "spec/support/factory_bot.rb"
     end
 
-    def generate_empty_factories_file
-      copy_file "factories.rb", "spec/factories.rb"
-    end
-
     def provide_dev_prime_task
       copy_file "dev.rake", "lib/tasks/dev.rake"
     end
