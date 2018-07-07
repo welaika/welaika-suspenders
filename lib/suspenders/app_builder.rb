@@ -204,10 +204,6 @@ config.public_file_server.headers = {
       copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
     end
 
-    def configure_capybara
-      copy_file "capybara.rb", "spec/support/capybara.rb"
-    end
-
     def configure_locales_and_time_zone
       remove_file "config/locales/en.yml"
       template "config_locales_it.yml.erb", "config/locales/it.yml"
@@ -221,20 +217,8 @@ config.public_file_server.headers = {
       inject_into_class 'config/application.rb', 'Application', config
     end
 
-    def configure_rack_timeout
-      rack_timeout_config = <<-RUBY
-Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
-      RUBY
-
-      append_file "config/environments/production.rb", rack_timeout_config
-    end
-
     def configure_slim
       copy_file 'slim.rb', 'config/initializers/slim.rb'
-    end
-
-    def configure_simple_form
-      bundle_command "exec rails generate simple_form:install"
     end
 
     def configure_draper
