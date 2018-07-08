@@ -49,7 +49,6 @@ module Suspenders
       invoke :remove_routes_comment_lines
       invoke :setup_dotfiles
       invoke :setup_database
-      invoke :setup_bundler_audit
       invoke :setup_spring
       invoke :generate_default
       invoke :setup_default_directories

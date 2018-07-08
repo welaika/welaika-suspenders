@@ -26,8 +26,10 @@ module Suspenders
     end
 
     def create_binstubs
-      bundle_command "binstubs rubocop"
-      bundle_command "binstubs slim_lint"
+      Bundler.with_clean_env do
+        run "bundle binstubs rubocop"
+        run "bundle binstubs slim_lint"
+      end
     end
   end
 end

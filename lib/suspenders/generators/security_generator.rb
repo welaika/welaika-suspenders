@@ -23,7 +23,7 @@ module Suspenders
     end
 
     def create_binstubs
-      bundle_command "binstubs brakeman"
+      Bundler.with_clean_env { run "bundle binstubs brakeman" }
     end
   end
 end

@@ -47,7 +47,7 @@ module Suspenders
     end
 
     def create_binstubs
-      bundle_command "binstubs rspec-core"
+      Bundler.with_clean_env { run "bundle binstubs rspec-core" }
     end
 
     def add_helpers_for_rspec

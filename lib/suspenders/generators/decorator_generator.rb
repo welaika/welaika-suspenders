@@ -13,7 +13,7 @@ module Suspenders
     end
 
     def configure_draper
-      bundle_command "exec rails generate draper:install"
+      generate "draper:install", "--force"
     end
   end
 end
