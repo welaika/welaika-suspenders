@@ -24,6 +24,16 @@ module Suspenders
       )
     end
 
+    def env_vars
+      expand_json(
+        "app.json",
+        env: {
+          SENTRY_DNS: { required: true },
+          SENTRY_CURRENT_ENV: { required: true }
+        }
+      )
+    end
+
     private
 
     def context_configuration
