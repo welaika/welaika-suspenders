@@ -2,6 +2,8 @@ require "rails/generators"
 
 module Suspenders
   class ErrorReportingGenerator < Rails::Generators::Base
+    include Suspenders::Actions
+
     source_root File.expand_path(
       File.join("..", "..", "..", "templates"),
       File.dirname(__FILE__),
