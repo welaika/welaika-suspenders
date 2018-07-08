@@ -9,7 +9,7 @@ module Suspenders
 
     def add_testing_gems
       gem "spring-commands-rspec", group: :development
-      gem "rspec-rails", "~> 3.6", group: %i(development test)
+      gem "rspec-rails", "~> 3.7", group: %i(development test)
       gem "shoulda-matchers", group: :test
 
       Bundler.with_clean_env { run "bundle install" }
