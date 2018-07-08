@@ -2,18 +2,12 @@ require: rubocop-rspec
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  DisplayCopNames: true
-  TargetRubyVersion: 2.4
   Exclude:
     - 'bin/*'
     - 'config/**/*'
     - 'db/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
-
-Layout/TrailingBlankLines:
-  Exclude:
-    - 'Gemfile'
 
 Lint/Debugger:
   Exclude:
@@ -37,9 +31,3 @@ Naming/FileName:
 
 Rails:
   Enabled: true
-
-Style/Documentation:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
