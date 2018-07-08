@@ -36,7 +36,7 @@ module Suspenders
     end
 
     def create_application_layout
-      template "suspenders_layout.html.slim.slim",
+      template "suspenders_layout.html.slim",
         "app/views/layouts/application.html.slim",
         force: true
     end
