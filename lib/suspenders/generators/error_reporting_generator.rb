@@ -28,7 +28,7 @@ module Suspenders
       expand_json(
         "app.json",
         env: {
-          SENTRY_DNS: { required: true },
+          SENTRY_DSN: { required: true },
           SENTRY_CURRENT_ENV: { required: true }
         }
       )
