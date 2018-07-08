@@ -52,7 +52,6 @@ module Suspenders
 
     def add_helpers_for_rspec
       copy_file 'queries_helper_rspec.rb', 'spec/support/queries_helper.rb'
-      copy_file 'fixtures_helper_rspec.rb', 'spec/support/fixtures_helper.rb'
     end
 
     def add_capybara_helper
