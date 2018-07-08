@@ -61,6 +61,7 @@ module Suspenders
     def customize_gemfile
       build :replace_gemfile, options[:path]
       bundle_command 'install'
+      bundle_command 'bundle binstubs bundler --force'
     end
 
     def setup_database
