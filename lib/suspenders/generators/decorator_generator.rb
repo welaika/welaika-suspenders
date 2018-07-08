@@ -1,7 +1,7 @@
 require "rails/generators"
 
 module Suspenders
-  class DraperGenerator < Rails::Generators::Base
+  class DecoratorGenerator < Rails::Generators::Base
     source_root File.expand_path(
       File.join("..", "..", "..", "templates"),
       File.dirname(__FILE__),
