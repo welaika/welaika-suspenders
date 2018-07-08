@@ -180,6 +180,7 @@ module Suspenders
       generate("suspenders:decorator")
       generate("suspenders:faker")
       generate("suspenders:security")
+      generate("suspenders:error_reporting")
     end
 
     def generate_production_default
