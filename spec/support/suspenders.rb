@@ -51,7 +51,7 @@ module SuspendersTestHelpers
 
         with_env("HOME", tmp_path) do
           debug `git add .`
-          debug `git commit -m 'Initial commit'`
+          debug `OVERCOMMIT_DISABLE=1 git commit -m 'Initial commit'`
         end
       end
     end
