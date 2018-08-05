@@ -157,7 +157,7 @@ config.public_file_server.headers = {
     def replace_gemfile(path)
       template 'Gemfile.erb', 'Gemfile', force: true do |content|
         if path
-          content.gsub(%r{gem .welaika-suspenders.}) { |s| %{#{s}, path: "#{path}"} }
+          content.gsub(%r{gem ['"]welaika-suspenders['"].*}) { |s| %{#{s}, path: "#{path}"} }
         else
           content
         end
