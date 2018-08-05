@@ -24,7 +24,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "ensures project specs pass" do
     Dir.chdir(project_path) do
       Bundler.with_clean_env do
-        expect(`rake`).to include('0 failures')
+        expect(`bundle exec rspec spec/`).to include('0 failures')
       end
     end
   end
@@ -230,6 +230,7 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/bin/brakeman")
     expect(File).to exist("#{project_path}/bin/rubocop")
     expect(File).to exist("#{project_path}/bin/rspec")
+    expect(File).to exist("#{project_path}/bin/overcommit")
   end
 
   it "removes comments and extra newlines from config files" do
