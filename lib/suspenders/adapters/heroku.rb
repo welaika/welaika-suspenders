@@ -97,6 +97,15 @@ module Suspenders
         end
       end
 
+      def set_heroku_metadata_for_sentry
+        %w(staging production).each do |environment|
+          run_toolbelt_command(
+            "labs:enable runtime-dyno-metadata",
+            environment
+          )
+        end
+      end
+
       private
 
       attr_reader :app_builder
