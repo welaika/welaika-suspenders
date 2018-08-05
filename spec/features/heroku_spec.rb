@@ -39,19 +39,6 @@ RSpec.describe "Heroku" do
     end
   end
 
-  context "--heroku with region flag" do
-    before(:all) do
-      clean_up
-      run_suspenders(%{--heroku=true --heroku-flags="--region eu"})
-      setup_app_dependencies
-    end
-
-    it "suspends a project with extra Heroku flags" do
-      expect(FakeHeroku).to have_created_app_for("staging", "--region eu")
-      expect(FakeHeroku).to have_created_app_for("production", "--region eu")
-    end
-  end
-
   def clean_up
     drop_dummy_database
     remove_project_directory
