@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CapybaraHelpers
   def page!
     save_and_open_page

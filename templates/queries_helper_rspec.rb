@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module QueriesHelper
   def log_queries!
     ActiveRecord::Base.logger = Logger.new(STDOUT)
