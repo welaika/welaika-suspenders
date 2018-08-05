@@ -32,7 +32,7 @@ module Suspenders
         "app.json",
         env: {
           SENTRY_DSN: { required: true },
-          SENTRY_CURRENT_ENV: { required: true }
+          SENTRY_ENV: { required: true }
         }
       )
     end

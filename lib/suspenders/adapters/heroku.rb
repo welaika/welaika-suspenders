@@ -37,10 +37,10 @@ module Suspenders
         end
       end
 
-      def set_heroku_honeybadger_env
+      def set_heroku_error_reporting_env
         %w(staging production).each do |environment|
           run_toolbelt_command(
-            "config:add HONEYBADGER_ENV=#{environment}",
+            "config:add SENTRY_ENV=#{environment}",
             environment,
           )
         end
