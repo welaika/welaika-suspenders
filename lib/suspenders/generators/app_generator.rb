@@ -32,6 +32,9 @@ module Suspenders
     class_option :skip_turbolinks,
                  type: :boolean, default: true, desc: "Skip turbolinks gem"
 
+    class_option :skip_spring, type: :boolean, default: true,
+                 desc: "Don't install Spring application preloader"
+
     def finish_template
       invoke :suspenders_customization
       super
