@@ -11,6 +11,8 @@ RSpec.configure do |config|
 
   config.example_status_persistence_file_path = 'tmp/rspec_examples.txt'
 
+  config.default_formatter = 'doc'
+
   config.before(:all) do
     add_fakes_to_path
     create_tmp_directory
