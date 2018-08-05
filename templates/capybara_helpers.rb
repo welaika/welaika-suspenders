@@ -1,4 +1,4 @@
-module CapybaraHelper
+module CapybaraHelpers
   def page!
     save_and_open_page
   end
@@ -9,5 +9,5 @@ module CapybaraHelper
 end
 
 RSpec.configure do |config|
-  config.include CapybaraHelper, type: :feature
+  config.include CapybaraHelpers, type: :feature
 end
