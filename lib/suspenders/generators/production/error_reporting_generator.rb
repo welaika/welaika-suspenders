@@ -7,7 +7,7 @@ module Suspenders
       include Suspenders::Actions
 
       source_root File.expand_path(
-        File.join("..", "..", "..", "templates"),
+        File.join("..", "..", "..", "..", "templates"),
         File.dirname(__FILE__),
       )
 
