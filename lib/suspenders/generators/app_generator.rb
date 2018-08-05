@@ -175,7 +175,6 @@ module Suspenders
       generate("suspenders:db_optimizations")
       generate("suspenders:factories")
       generate("suspenders:lint")
-      generate("suspenders:jobs")
       generate("suspenders:views")
       generate("suspenders:decorator")
       generate("suspenders:faker")
