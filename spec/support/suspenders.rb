@@ -41,7 +41,7 @@ module SuspendersTestHelpers
       add_fakes_to_path
 
       with_revision_for_honeybadger do
-        debug `#{system_rails_bin} new #{APP_NAME}`
+        debug `#{system_rails_bin} new #{APP_NAME} --skip-spring`
       end
 
       Dir.chdir(APP_NAME) do
