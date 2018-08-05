@@ -1,0 +1,14 @@
+gemfile: 'Gemfile'
+
+verify_signatures: false # (default: true)
+
+PreCommit:
+  RuboCop:
+    enabled: true
+    on_warn: fail # Treat all warnings as failures
+    command: ['bundle', 'exec', 'rubocop'] # Invoke within Bundler context
+
+  SlimLint:
+    enabled: true
+    on_warn: fail # Treat all warnings as failures
+    command: ['bundle', 'exec', 'slim-lint'] # Invoke within Bundler context

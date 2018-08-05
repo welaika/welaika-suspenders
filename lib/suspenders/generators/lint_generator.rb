@@ -11,6 +11,7 @@ module Suspenders
       gem 'rubocop', require: false, group: :development
       gem 'rubocop-rspec', require: false, group: :development
       gem 'slim_lint', require: false, group: :development
+      gem 'overcommit', require: false, group: :development
       Bundler.with_clean_env { run "bundle install" }
     end
 
@@ -25,10 +26,17 @@ module Suspenders
       copy_file "slim-lint.yml", ".slim-lint.yml"
     end
 
+    def setup_overcommit
+      run "overcommit --install"
+      copy_file "overcommit.yml", ".overcommit.yml"
+      run "overcommit --sign"
+    end
+
     def create_binstubs
       Bundler.with_clean_env do
         run "bundle binstubs rubocop"
         run "bundle binstubs slim_lint"
+        run "bundle binstubs overcommit"
       end
     end
   end
