@@ -191,7 +191,7 @@ module Suspenders
     end
 
     def self.banner
-      "suspenders #{arguments.map(&:usage).join(' ')} [options]"
+      "welaika-suspenders #{arguments.map(&:usage).join(' ')} [options]"
     end
 
     protected
