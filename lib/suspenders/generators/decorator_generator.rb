@@ -7,7 +7,7 @@ module Suspenders
       File.dirname(__FILE__),
     )
 
-    def add_factory_bot
+    def add_draper_gem
       gem "draper"
       Bundler.with_clean_env { run "bundle install" }
     end
