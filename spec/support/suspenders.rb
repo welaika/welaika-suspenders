@@ -21,7 +21,7 @@ module SuspendersTestHelpers
       Dir.chdir(APP_NAME) do
         with_env("HOME", tmp_path) do
           debug `git add .`
-          debug `git commit -m 'Initial commit'`
+          debug `OVERCOMMIT_DISABLE=1 git commit -m 'Initial commit'`
         end
       end
     end
@@ -46,7 +46,7 @@ module SuspendersTestHelpers
 
       Dir.chdir(APP_NAME) do
         File.open("Gemfile", "a") do |file|
-          file.puts %{gem "suspenders", path: #{root_path.inspect}}
+          file.puts %{gem "welaika-suspenders", path: #{root_path.inspect}}
         end
 
         with_env("HOME", tmp_path) do
