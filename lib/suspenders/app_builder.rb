@@ -314,7 +314,10 @@ you can deploy to staging and production with:
     end
 
     def setup_rakefile
-      copy_file 'Rakefile', 'Rakefile', force: true
+      # NOTE: we named our file `rakefile_template` and not
+      # `Rakefile` because otherwise `copy_file` would copy the
+      # rails `Rakefile` into the project folder.
+      copy_file 'rakefile_template.rb', 'Rakefile', force: true
     end
 
     private
