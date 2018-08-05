@@ -10,7 +10,7 @@ RSpec.describe "Command line help output" do
   it "provides the correct usage statement for suspenders" do
     expect(help_text).to include <<~EOH
       Usage:
-        suspenders APP_PATH [options]
+        welaika-suspenders APP_PATH [options]
     EOH
   end
 

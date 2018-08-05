@@ -13,14 +13,10 @@ RSpec.describe "Heroku" do
 
       expect(FakeHeroku).to have_created_app_for("staging", "--region eu")
       expect(FakeHeroku).to have_created_app_for("production", "--region eu")
-      expect(FakeHeroku).to have_configured_vars("staging", "SECRET_KEY_BASE")
-      expect(FakeHeroku).to have_configured_vars(
-        "production",
-        "SECRET_KEY_BASE",
-      )
       %w(staging production).each do |env|
         expect(FakeHeroku).to have_configured_vars(env, "APPLICATION_HOST")
-        expect(FakeHeroku).to have_configured_vars(env, "HONEYBADGER_ENV")
+        expect(FakeHeroku).to have_configured_vars(env, "SENTRY_DSN")
+        expect(FakeHeroku).to have_configured_vars(env, "SECRET_KEY_BASE")
       end
       expect(FakeHeroku).to have_setup_pipeline_for(app_name)
 

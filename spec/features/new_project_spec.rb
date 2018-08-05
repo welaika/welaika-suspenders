@@ -11,13 +11,13 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "uses custom Gemfile" do
     gemfile_file = IO.read("#{project_path}/Gemfile")
     expect(gemfile_file).to match(
-      /^ruby "#{Suspenders::RUBY_VERSION}"$/,
+      /^ruby '#{Suspenders::RUBY_VERSION}'$/,
     )
     expect(gemfile_file).to match(
-      /^gem "autoprefixer-rails"$/,
+      /^gem 'autoprefixer-rails'$/,
     )
     expect(gemfile_file).to match(
-      /^gem "rails", "#{Suspenders::RAILS_VERSION}"$/,
+      /^gem 'rails', '#{Suspenders::RAILS_VERSION}'$/,
     )
   end
 
@@ -25,14 +25,6 @@ RSpec.describe "Suspend a new project with default configuration" do
     Dir.chdir(project_path) do
       Bundler.with_clean_env do
         expect(`bundle exec rspec spec/`).to include('0 failures')
-      end
-    end
-  end
-
-  it "includes the bundle:audit task" do
-    Dir.chdir(project_path) do
-      Bundler.with_clean_env do
-        expect(`rails -T`).to include("rails bundle:audit")
       end
     end
   end
@@ -82,25 +74,16 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
 
-  it "adds rspec helper for fixtures" do
-    expect(File).to exist("#{project_path}/spec/support/fixtures_helper.rb")
-  end
-
   it "ensures Gemfile contains `rack-mini-profiler`" do
     gemfile = IO.read("#{project_path}/Gemfile")
 
-    expect(gemfile).to include %{gem "rack-mini-profiler", require: false}
+    expect(gemfile).to include %{gem 'rack-mini-profiler', require: false}
   end
 
   it "ensures .sample.env defaults to RACK_MINI_PROFILER=0" do
     env = IO.read("#{project_path}/.env")
 
     expect(env).to include "RACK_MINI_PROFILER=0"
-  end
-
-  it "initializes ActiveJob to avoid memory bloat" do
-    expect(File).
-      to exist("#{project_path}/config/initializers/active_job.rb")
   end
 
   it "creates a rack-mini-profiler initializer" do
