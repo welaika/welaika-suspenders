@@ -55,7 +55,7 @@ module Suspenders
     end
 
     def add_capybara_helper
-      copy_file 'capybara_helper.rb', 'spec/support/capybara_helper.rb'
+      copy_file 'capybara_helpers.rb', 'spec/support/capybara_helpers.rb'
     end
 
     private
