@@ -7,9 +7,11 @@ module Suspenders
 
       def set_heroku_remotes
         remotes = <<~SHELL
+          echo "\n== Adding Heroku remotes =="
           #{command_to_join_heroku_app('staging')}
           #{command_to_join_heroku_app('production')}
 
+          echo "\n== Setting default heroku remote to 'staging' =="
           git config heroku.remote staging
         SHELL
 
@@ -127,11 +129,10 @@ module Suspenders
         heroku_app_name = heroku_app_name_for(environment)
         <<~SHELL
 
-          if heroku join --app #{heroku_app_name} > /dev/null 2>&1; then
-            git remote add #{environment} git@heroku.com:#{heroku_app_name}.git || true
-            printf 'You are a collaborator on the "#{heroku_app_name}" Heroku app\n'
+          if heroku apps | grep #{heroku_app_name} > /dev/null 2>&1; then
+            git remote add -f #{environment} git@heroku.com:#{heroku_app_name}.git || true
           else
-            printf 'Ask for access to the "#{heroku_app_name}" Heroku app\n'
+            echo "** Ask for access to the '#{heroku_app_name}' Heroku app and run this script again **"
           fi
         SHELL
       end
