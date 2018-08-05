@@ -2,6 +2,7 @@ require: rubocop-rspec
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+  DisplayCopNames: true
   Exclude:
     - 'bin/*'
     - 'config/**/*'
@@ -11,10 +12,7 @@ AllCops:
 
 Lint/Debugger:
   Exclude:
-    - 'spec/support/capybara.rb'
-
-Metrics/AbcSize:
-  Max: 20
+    - 'spec/support/capybara_helpers.rb'
 
 Metrics/BlockLength:
   Exclude:
@@ -24,10 +22,6 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Max: 100
-
-Naming/FileName:
-  Exclude:
-    - 'app/views/**/*'
 
 Rails:
   Enabled: true
