@@ -17,13 +17,11 @@ module Suspenders
     end
 
     def setup_rubocop
-      copy_file "rubocop.rake", "lib/tasks/rubocop.rake"
       copy_file "rubocop.yml", ".rubocop.yml"
       copy_file "rubocop_todo.yml", ".rubocop_todo.yml"
     end
 
     def setup_slim_lint
-      copy_file "slim-lint.rake", "lib/tasks/slim-lint.rake"
       copy_file "slim-lint.yml", ".slim-lint.yml"
     end
 

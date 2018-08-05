@@ -16,6 +16,10 @@ module Suspenders
       copy_file "factory_bot_rspec.rb", "spec/support/factory_bot.rb"
     end
 
+    def set_up_factory_lint
+      copy_file 'factory_bot.rake', 'lib/tasks/factory_bot.rake'
+    end
+
     def provide_dev_prime_task
       copy_file "dev.rake", "lib/tasks/dev.rake"
     end

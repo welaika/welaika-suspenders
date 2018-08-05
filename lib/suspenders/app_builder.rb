@@ -313,25 +313,8 @@ you can deploy to staging and production with:
         "Rails.application.routes.draw do\nend"
     end
 
-    def setup_default_rake_task
-      append_file 'Rakefile' do
-        <<-EOS
-task(:default).clear
-
-if defined? RSpec
-  task(:spec).clear
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.verbose = false
-  end
-end
-
-task default: :rubocop
-task default: :slim_lint
-task default: 'brakeman:check'
-task default: 'bundle:audit'
-task default: :spec
-        EOS
-      end
+    def setup_rakefile
+      copy_file 'Rakefile', 'Rakefile', force: true
     end
 
     private
