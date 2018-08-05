@@ -49,7 +49,6 @@ module Suspenders
       invoke :remove_routes_comment_lines
       invoke :setup_dotfiles
       invoke :setup_database
-      invoke :setup_spring
       invoke :generate_default
       invoke :setup_default_directories
       invoke :create_local_heroku_setup
@@ -141,11 +140,6 @@ module Suspenders
       build :setup_default_directories
     end
 
-    def setup_spring
-      say "Springifying binstubs"
-      build :setup_spring
-    end
-
     def copy_miscellaneous_files
       say 'Copying miscellaneous support files'
       build :copy_miscellaneous_files
@@ -165,7 +159,6 @@ module Suspenders
     end
 
     def generate_default
-      run("spring stop")
       generate("suspenders:static")
       generate("suspenders:stylesheet_base")
       generate("suspenders:testing")

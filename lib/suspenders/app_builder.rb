@@ -260,10 +260,6 @@ you can deploy to staging and production with:
       run "chmod a+x bin/deploy"
     end
 
-    def setup_spring
-      bundle_command "exec spring binstub --all"
-    end
-
     def copy_miscellaneous_files
       copy_file "browserslist", "browserslist"
       copy_file "errors.rb", "config/initializers/errors.rb"

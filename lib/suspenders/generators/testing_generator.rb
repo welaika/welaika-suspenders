@@ -8,7 +8,6 @@ module Suspenders
     )
 
     def add_testing_gems
-      gem "spring-commands-rspec", group: :development
       gem "rspec-rails", "~> 3.8", group: %i(development test)
       gem "shoulda-matchers", group: :test
 
