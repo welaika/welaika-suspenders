@@ -14,7 +14,7 @@ module Suspenders
       :create_staging_heroku_app,
       :set_heroku_application_host,
       :set_heroku_backup_schedule,
-      :set_heroku_honeybadger_env,
+      :set_heroku_error_reporting_env,
       :set_heroku_rails_secrets,
       :set_heroku_remotes,
       :set_heroku_metadata_for_sentry,
