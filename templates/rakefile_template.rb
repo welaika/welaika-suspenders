@@ -14,7 +14,7 @@ task :default do
   sh 'bundle exec rubycritic app/ config/ lib/ --no-browser --minimum-score 94 --format console'
   sh 'bundle exec bundle-audit check --update'
   sh 'bundle exec brakeman -z'
-  sh 'bundle exec rake factory_lint'
-  sh 'bundle exec rails db:migrate RAILS_env=test'
+  sh 'bundle exec rails db:migrate RAILS_ENV=test'
+  sh 'bundle exec rake factory_bot:lint RAILS_ENV=test'
   sh 'bundle exec rspec spec/'
 end
