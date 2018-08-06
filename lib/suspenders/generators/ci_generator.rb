@@ -11,7 +11,7 @@ module Suspenders
     end
 
     def copy_database_yml_for_gitlab
-      copy_file 'database.gitlab.yml', 'database.gitlab.yml'
+      copy_file 'database.gitlab.yml', 'config/database.gitlab.yml'
     end
   end
 end
