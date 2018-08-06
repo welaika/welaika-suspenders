@@ -53,10 +53,6 @@ module Suspenders
       copy_file 'queries_helper_rspec.rb', 'spec/support/queries_helper.rb'
     end
 
-    def add_capybara_helper
-      copy_file 'capybara_helpers.rb', 'spec/support/capybara_helpers.rb'
-    end
-
     private
 
     def empty_directory_with_keep_file(destination)

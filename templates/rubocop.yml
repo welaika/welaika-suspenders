@@ -10,10 +10,6 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
 
-Lint/Debugger:
-  Exclude:
-    - 'spec/support/capybara_helpers.rb'
-
 Metrics/BlockLength:
   Exclude:
     - 'app/admin/**/*'
