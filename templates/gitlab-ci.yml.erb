@@ -39,6 +39,15 @@ quality:rubocop:
     - bundle check --path vendor/bundle
     - bundle exec rubocop
 
+quality:slim_lint:
+  stage: quality
+  cache:
+    <<: *gems-cache-settings
+    policy: pull
+  script:
+    - bundle check --path vendor/bundle
+    - bundle exec slim-lint app/views/
+
 quality:bundler-audit:
   stage: quality
   cache:

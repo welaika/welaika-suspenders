@@ -11,6 +11,7 @@ task(:default).clear
 desc 'Run linters, quality, security and tests'
 task :default do
   sh 'bundle exec rubocop'
+  sh 'bundle exec slim-lint app/views/'
   sh 'bundle exec rubycritic app/ config/ lib/ --no-browser --minimum-score 94 --format console'
   sh 'bundle exec bundle-audit check --update'
   sh 'bundle exec brakeman -z'
