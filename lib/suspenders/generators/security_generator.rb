@@ -14,7 +14,10 @@ module Suspenders
     end
 
     def create_binstubs
-      Bundler.with_clean_env { run "bundle binstubs brakeman" }
+      Bundler.with_clean_env do
+        run "bundle binstubs brakeman"
+        run "bundle binstubs bundler-audit"
+      end
     end
   end
 end
