@@ -5,12 +5,13 @@ Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a
 
 ## Installation
 
-First ensure you have PostgreSQL, npm and yarn.
+First ensure you have PostgreSQL, npm, yarn and chromedriver
 
     $ brew install postgresql
     $ brew install node
     $ npm install npm@latest -g # To update npm if you have already installed it
     $ brew install yarn
+    $ brew casks install chromedriver
 
 then install the suspenders gem:
 
@@ -30,7 +31,7 @@ You can optionally specify alternate Heroku flags:
 
     welaika-suspenders projectname \
       --heroku true \
-      --heroku-flags "--region eu --addons heroku-postgresql,sendgrid,logentries,scheduler,newrelic"
+      --heroku-flags "--region eu --addons heroku-postgresql,sendgrid,logentries,scheduler"
 
 See all possible Heroku flags:
 
