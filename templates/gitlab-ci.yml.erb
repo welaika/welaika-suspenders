@@ -1,0 +1,105 @@
+image: ruby:<%= Suspenders::RUBY_VERSION %>
+
+variables:
+  GET_SOURCES_ATTEMPTS: 3
+  ARTIFACT_DOWNLOAD_ATTEMPTS: 3
+  RESTORE_CACHE_ATTEMPTS: 3
+  POSTGRES_DB: rails_app_test
+  POSTGRES_USER: root
+  POSTGRES_PASSWORD: ''
+  SELENIUM_REMOTE_URL: "http://selenium__standalone-chrome:4444/wd/hub/"
+
+.services: &rails-services
+  - postgres:<%= Suspenders::POSTGRES_VERSION %>
+  - selenium/standalone-chrome:latest
+
+.cache: &gems-cache-settings
+  key: "gems-$CI_COMMIT_REF_SLUG"
+  paths:
+    - vendor/bundle
+
+stages:
+  - setup
+  - quality
+  - test
+
+prepare:
+  stage: setup
+  cache:
+    <<: *gems-cache-settings
+  script:
+    - bundle install --retry 3 --deployment --jobs $(nproc)
+
+quality:rubocop:
+  stage: quality
+  cache:
+    <<: *gems-cache-settings
+    policy: pull
+  script:
+    - bundle check --path vendor/bundle
+    - bundle exec rubocop
+
+quality:bundler-audit:
+  stage: quality
+  cache:
+    <<: *gems-cache-settings
+    policy: pull
+  script:
+    - bundle check --path vendor/bundle
+    - bundle exec bundle-audit check --update
+
+quality:brakeman:
+  stage: quality
+  cache:
+    <<: *gems-cache-settings
+    policy: pull
+  script:
+    - bundle check --path vendor/bundle
+    - bundle exec brakeman -z --skip-files vendor/bundle
+
+quality:rubycritic:
+  stage: quality
+  cache:
+    <<: *gems-cache-settings
+    policy: pull
+  script:
+    - bundle check --path vendor/bundle
+    - bundle exec rubycritic app/ config/ lib/ --no-browser --minimum-score 94 --format console
+
+test:rspec:
+  stage: test
+  services: *rails-services
+  cache:
+    <<: *gems-cache-settings
+    policy: pull
+  script:
+    # Install node
+    - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+    - apt-get update -qq && apt-get install -qq nodejs
+
+    # Install yarn
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+    - apt-get update -qq && apt-get install -qq yarn
+
+    # Verify node and yarn versions
+    - node --version
+    - yarn --version
+
+    # Setup environment
+    - cp -f config/database.gitlab.yml config/database.yml
+    - bundle check --path vendor/bundle
+    - bin/yarn
+    - bundle exec rails db:setup RAILS_ENV=test
+
+    # Run tests
+    - bundle exec rspec spec/
+  coverage: '/\(\d+.\d+\%\) covered/'
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    when: always
+    expire_in: 5 days
+    paths:
+      - coverage/
+      - tmp/screenshots/
+      - tmp/capybara/

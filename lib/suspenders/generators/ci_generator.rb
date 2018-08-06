@@ -6,17 +6,12 @@ module Suspenders
       File.join("..", "..", "..", "templates"),
       File.dirname(__FILE__))
 
-    def simplecov_test_integration
-      inject_into_file "spec/spec_helper.rb", before: 'SimpleCov.start "rails"' do
-        <<-RUBY
+    def setup_gitlab_ci
+      template 'gitlab-ci.yml.erb', '.gitlab-ci.yml'
+    end
 
-  if ENV["CIRCLE_ARTIFACTS"]
-    dir = File.join(ENV["CIRCLE_ARTIFACTS"], "coverage")
-    SimpleCov.coverage_dir(dir)
-  end
-
-        RUBY
-      end
+    def copy_database_yml_for_gitlab
+      copy 'database.gitlab.yml', 'database.gitlab.yml'
     end
   end
 end

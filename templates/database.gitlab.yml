@@ -1,0 +1,8 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rails_app_test
+  pool: 5
+  host: postgres # should match gitlab service name
+  username: root
+  password: ''
