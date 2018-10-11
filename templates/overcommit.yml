@@ -11,4 +11,4 @@ PreCommit:
   SlimLint:
     enabled: true
     on_warn: fail # Treat all warnings as failures
-    command: ['bundle', 'exec', 'slim-lint', 'app/views/'] # Invoke within Bundler context
+    command: ['bundle', 'exec', 'slim-lint'] # Invoke within Bundler context
