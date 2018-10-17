@@ -1,4 +1,5 @@
 # weLaika's Suspenders [![Build Status](https://travis-ci.org/welaika/welaika-suspenders.svg?branch=master)](https://travis-ci.org/welaika/welaika-suspenders)
+=======
 
 This is a [suspenders](https://github.com/thoughtbot/suspenders) fork in use at [weLaika](http://dev.welaika.com).
 Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a great starting point.
@@ -31,7 +32,7 @@ You can optionally specify alternate Heroku flags:
 
     welaika-suspenders projectname \
       --heroku true \
-      --heroku-flags "--region eu --addons heroku-postgresql,sendgrid,logentries,scheduler"
+      --heroku-flags "--addons sendgrid,logentries,scheduler"
 
 See all possible Heroku flags:
 
