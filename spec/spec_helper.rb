@@ -1,4 +1,6 @@
 require 'bundler/setup'
+require 'pry-byebug'
+require 'awesome_print'
 
 Bundler.require(:default, :test)
 
