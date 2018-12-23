@@ -5,6 +5,9 @@
 .byebug_history
 /.bundle
 /.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
 /coverage/*
 /db/*.sqlite3
 /db/*.sqlite3-journal
