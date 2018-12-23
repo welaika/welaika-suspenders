@@ -48,8 +48,6 @@ module Suspenders
       invoke :configure_app
       invoke :copy_miscellaneous_files
       invoke :customize_error_pages
-      invoke :remove_config_comment_lines
-      invoke :remove_routes_comment_lines
       invoke :setup_dotfiles
       invoke :setup_database
       invoke :generate_default
@@ -57,6 +55,8 @@ module Suspenders
       invoke :create_local_heroku_setup
       invoke :create_heroku_apps
       invoke :generate_production_default
+      invoke :remove_config_comment_lines
+      invoke :remove_routes_comment_lines
       invoke :outro
     end
 
@@ -91,6 +91,7 @@ module Suspenders
 
     def setup_production_environment
       say 'Setting up the production environment'
+      build :set_application_host_for_review_apps
       build :enable_rack_canonical_host
       build :enable_rack_deflater
       build :setup_asset_host
