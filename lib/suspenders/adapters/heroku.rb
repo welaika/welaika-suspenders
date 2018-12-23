@@ -39,12 +39,20 @@ module Suspenders
         end
       end
 
-      def set_heroku_error_reporting_env
+      def set_heroku_smtp_settings
         %w(staging production).each do |environment|
-          run_toolbelt_command(
-            "config:add SENTRY_ENV=#{environment}",
-            environment,
-          )
+          run_toolbelt_command("config:add SMTP_ADDRESS=smtp.example.com", environment)
+          run_toolbelt_command("config:add SMTP_DOMAIN=example.com", environment)
+          run_toolbelt_command("config:add SMTP_USERNAME=username", environment)
+          run_toolbelt_command("config:add SMTP_PASSWORD=password", environment)
+        end
+      end
+
+      def set_heroku_sentry_configuration
+        %w(staging production).each do |environment|
+          run_toolbelt_command("config:add SENTRY_ENV=#{environment}", environment)
+          run_toolbelt_command("config:add SENTRY_DSN='https://changeme@sentry.io/changeme'", environment)
+          run_toolbelt_command("labs:enable runtime-dyno-metadata", environment)
         end
       end
 
@@ -95,15 +103,6 @@ module Suspenders
           run_toolbelt_command(
             "config:add APPLICATION_HOST=#{heroku_app_name}-#{environment}.herokuapp.com",
             environment,
-          )
-        end
-      end
-
-      def set_heroku_metadata_for_sentry
-        %w(staging production).each do |environment|
-          run_toolbelt_command(
-            "labs:enable runtime-dyno-metadata",
-            environment
           )
         end
       end

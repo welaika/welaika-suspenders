@@ -15,7 +15,11 @@ RSpec.describe "Heroku" do
       %w(staging production).each do |env|
         expect(FakeHeroku).to have_configured_vars(env, "APPLICATION_HOST")
         expect(FakeHeroku).to have_configured_vars(env, "SENTRY_DSN")
-        expect(FakeHeroku).to have_configured_vars(env, "SECRET_KEY_BASE")
+        expect(FakeHeroku).to have_configured_vars(env, "SENTRY_ENV")
+        expect(FakeHeroku).to have_configured_vars(env, "SMTP_ADDRESS")
+        expect(FakeHeroku).to have_configured_vars(env, "SMTP_DOMAIN")
+        expect(FakeHeroku).to have_configured_vars(env, "SMTP_PASSWORD")
+        expect(FakeHeroku).to have_configured_vars(env, "SMTP_USERNAME")
       end
       expect(FakeHeroku).to have_setup_pipeline_for(app_name)
 
