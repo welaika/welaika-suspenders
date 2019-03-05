@@ -13,8 +13,10 @@ variables:
   - postgres:<%= Suspenders::POSTGRES_VERSION %>
   - selenium/standalone-chrome:latest
 
-.cache: &gems-cache-settings
-  key: "gems-$CI_COMMIT_REF_SLUG"
+.cache: &cache-settings
+  key: "$CI_COMMIT_REF_SLUG"
+  untracked: true
+  policy: pull
   paths:
     - vendor/bundle
 
@@ -26,15 +28,15 @@ stages:
 prepare:
   stage: setup
   cache:
-    <<: *gems-cache-settings
+    <<: *cache-settings
+    policy: pull-push
   script:
     - bundle install --retry 3 --deployment --jobs $(nproc)
 
 quality:rubocop:
   stage: quality
   cache:
-    <<: *gems-cache-settings
-    policy: pull
+    <<: *cache-settings
   script:
     - bundle check --path vendor/bundle
     - bundle exec rubocop
@@ -42,8 +44,7 @@ quality:rubocop:
 quality:slim_lint:
   stage: quality
   cache:
-    <<: *gems-cache-settings
-    policy: pull
+    <<: *cache-settings
   script:
     - bundle check --path vendor/bundle
     - bundle exec slim-lint app/views/
@@ -51,8 +52,7 @@ quality:slim_lint:
 quality:bundler-audit:
   stage: quality
   cache:
-    <<: *gems-cache-settings
-    policy: pull
+    <<: *cache-settings
   script:
     - bundle check --path vendor/bundle
     - bundle exec bundle-audit check --update
@@ -60,8 +60,7 @@ quality:bundler-audit:
 quality:brakeman:
   stage: quality
   cache:
-    <<: *gems-cache-settings
-    policy: pull
+    <<: *cache-settings
   script:
     - bundle check --path vendor/bundle
     - bundle exec brakeman -z --skip-files vendor/bundle
@@ -69,8 +68,7 @@ quality:brakeman:
 quality:rubycritic:
   stage: quality
   cache:
-    <<: *gems-cache-settings
-    policy: pull
+    <<: *cache-settings
   script:
     - bundle check --path vendor/bundle
     - bundle exec rubycritic app/ config/ lib/ --no-browser --minimum-score 94 --format console
@@ -79,8 +77,7 @@ test:rspec:
   stage: test
   services: *rails-services
   cache:
-    <<: *gems-cache-settings
-    policy: pull
+    <<: *cache-settings
   script:
     # Install node
     - curl -sL https://deb.nodesource.com/setup_10.x | bash -
