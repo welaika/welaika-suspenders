@@ -1,12 +1,7 @@
-require "rails/generators"
+require_relative "base"
 
 module Suspenders
-  class LintGenerator < Rails::Generators::Base
-    source_root File.expand_path(
-      File.join("..", "..", "..", "templates"),
-      File.dirname(__FILE__),
-    )
-
+  class LintGenerator < Generators::Base
     def add_linters_gems
       gem 'rubocop', require: false, group: :development
       gem 'rubocop-rspec', require: false, group: :development

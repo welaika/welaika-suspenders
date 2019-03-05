@@ -1,11 +1,7 @@
-require "rails/generators"
+require_relative "base"
 
 module Suspenders
-  class StylesheetBaseGenerator < Rails::Generators::Base
-    source_root File.expand_path(
-      File.join("..", "..", "..", "templates"),
-      File.dirname(__FILE__))
-
+  class StylesheetBaseGenerator < Generators::Base
     def add_css_config
       copy_file(
         "application.sass",

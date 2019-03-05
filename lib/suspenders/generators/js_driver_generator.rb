@@ -1,12 +1,7 @@
-require "rails/generators"
+require_relative "base"
 
 module Suspenders
-  class JsDriverGenerator < Rails::Generators::Base
-    source_root File.expand_path(
-      File.join("..", "..", "..", "templates"),
-      File.dirname(__FILE__),
-    )
-
+  class JsDriverGenerator < Generators::Base
     def add_gems
       gem 'capybara', '>= 2.15', '< 4.0', group: :test
       gem 'selenium-webdriver', group: :test

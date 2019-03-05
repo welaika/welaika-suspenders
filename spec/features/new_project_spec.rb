@@ -14,7 +14,7 @@ RSpec.describe "Suspend a new project with default configuration" do
       /^ruby '#{Suspenders::RUBY_VERSION}'$/,
     )
     expect(gemfile_file).to match(
-      /^gem 'autoprefixer-rails'$/,
+      /^gem 'active_interaction'/,
     )
     expect(gemfile_file).to match(
       /^gem 'rails', '#{Suspenders::RAILS_VERSION}'$/,
@@ -57,9 +57,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "makes bin/setup executable" do
-    bin_setup_path = "#{project_path}/bin/setup"
-
-    expect(File.stat(bin_setup_path)).to be_executable
+    expect("bin/setup").to be_executable
   end
 
   it "adds support file for action mailer" do
@@ -213,9 +211,38 @@ RSpec.describe "Suspend a new project with default configuration" do
     ]
 
     config_files.each do |file|
-      expect(file).not_to match(/.*#.*/)
-      expect(file).not_to match(/^$\n/)
+      expect(file).not_to match(%r{.*#.*})
+      expect(file).not_to eq(file.strip)
+      expect(file).not_to match(%r{^$\n\n})
     end
+  end
+
+  it "creates review apps setup script" do
+    bin_setup_path = "#{project_path}/bin/setup_review_app"
+    bin_setup = IO.read(bin_setup_path)
+
+    expect(bin_setup).to include("PARENT_APP_NAME=#{app_name.dasherize}-staging")
+    expect(bin_setup).to include("APP_NAME=#{app_name.dasherize}-staging-pr-$1")
+    expect(bin_setup).
+      to include("heroku run rails db:migrate --exit-code --app $APP_NAME")
+    expect(bin_setup).to include("heroku ps:scale worker=1 --app $APP_NAME")
+    expect(bin_setup).to include("heroku restart --app $APP_NAME")
+
+    expect("bin/setup_review_app").to be_executable
+  end
+
+  it "creates deploy script" do
+    bin_deploy_path = "#{project_path}/bin/deploy"
+    bin_deploy = IO.read(bin_deploy_path)
+
+    expect(bin_deploy).to include("heroku run rails db:migrate --exit-code")
+    expect("bin/deploy").to be_executable
+  end
+
+  it "creates heroku application manifest file with application name in it" do
+    app_json_file = IO.read("#{project_path}/app.json")
+
+    expect(app_json_file).to match(/"name":\s*"#{app_name.dasherize}"/)
   end
 
   def app_name
@@ -225,6 +252,12 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "adds high_voltage" do
     gemfile = IO.read("#{project_path}/Gemfile")
     expect(gemfile).to match(/high_voltage/)
+  end
+
+  it "adds sassc-rails" do
+    gemfile = read_project_file("Gemfile")
+
+    expect(gemfile).to match(/sassc-rails/)
   end
 
   it "doesn't use turbolinks" do

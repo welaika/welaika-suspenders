@@ -19,8 +19,9 @@ gem 'rack-canonical-host'
 gem 'rails', '<%= Suspenders::RAILS_VERSION %>'
 gem 'rails-i18n'
 gem 'recipient_interceptor'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 gem 'title'
+gem 'tzinfo-data', platforms: [:mingw, :x64_mingw, :mswin, :jruby]
 gem 'uglifier', '>= 1.3.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 <% if options[:webpack] %>
@@ -48,4 +49,4 @@ group :test do
   gem 'webmock'
 end
 
-gem 'welaika-suspenders', '~> <%= Suspenders::VERSION %>', group: %i[development test]
+gem 'welaika-suspenders', group: %i[development test]

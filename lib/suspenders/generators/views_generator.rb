@@ -1,12 +1,7 @@
-require "rails/generators"
+require_relative "base"
 
 module Suspenders
-  class ViewsGenerator < Rails::Generators::Base
-    source_root File.expand_path(
-      File.join("..", "..", "..", "templates"),
-      File.dirname(__FILE__),
-    )
-
+  class ViewsGenerator < Generators::Base
     def add_slim_gem
       gem "slim-rails"
       Bundler.with_clean_env { run "bundle install" }

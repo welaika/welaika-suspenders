@@ -1,12 +1,7 @@
-require "rails/generators"
+require_relative "base"
 
 module Suspenders
-  class TestingGenerator < Rails::Generators::Base
-    source_root File.expand_path(
-      File.join("..", "..", "..", "templates"),
-      File.dirname(__FILE__),
-    )
-
+  class TestingGenerator < Generators::Base
     def add_testing_gems
       gem "rspec-rails", "~> 3.8", group: %i(development test)
       gem "shoulda-matchers", group: :test

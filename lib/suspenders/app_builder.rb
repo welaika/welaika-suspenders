@@ -7,10 +7,8 @@ module Suspenders
 
     def_delegators(
       :heroku_adapter,
-      :create_heroku_application_manifest_file,
       :create_heroku_pipeline,
       :create_production_heroku_app,
-      :create_review_apps_setup_script,
       :create_staging_heroku_app,
       :set_heroku_application_host,
       :set_heroku_backup_schedule,
@@ -98,21 +96,6 @@ module Suspenders
 
     def configure_local_mail
       copy_file "email.rb", "config/initializers/email.rb"
-    end
-
-    def set_application_host_for_review_apps
-      config = <<-RUBY
-  if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
-    ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
-    ENV["ASSET_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
-  end
-      RUBY
-
-      inject_into_file(
-        "config/environments/production.rb",
-        config,
-        after: "Rails.application.configure do\n",
-      )
     end
 
     def enable_rack_canonical_host
@@ -251,24 +234,6 @@ config.public_file_server.headers = {
     def create_heroku_apps(flags)
       create_staging_heroku_app(flags)
       create_production_heroku_app(flags)
-    end
-
-    def create_deploy_script
-      copy_file "bin_deploy", "bin/deploy"
-
-      instructions = <<-MARKDOWN
-
-## Deploying
-
-If you have previously run the `./bin/setup` script,
-you can deploy to staging and production with:
-
-    % ./bin/deploy staging
-    % ./bin/deploy production
-      MARKDOWN
-
-      append_file "README.md", instructions
-      run "chmod a+x bin/deploy"
     end
 
     def copy_miscellaneous_files

@@ -1,9 +1,9 @@
 require_relative "base"
 
 module Suspenders
-  class StaticGenerator < Generators::Base
-    def add_high_voltage
-      gem "high_voltage"
+  class JsonGenerator < Generators::Base
+    def add_oj
+      gem "oj"
       Bundler.with_clean_env { run "bundle install" }
     end
   end
