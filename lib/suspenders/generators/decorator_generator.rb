@@ -1,12 +1,7 @@
 require "rails/generators"
 
 module Suspenders
-  class DecoratorGenerator < Rails::Generators::Base
-    source_root File.expand_path(
-      File.join("..", "..", "..", "templates"),
-      File.dirname(__FILE__),
-    )
-
+  class DecoratorGenerator < Generators::Base
     def add_draper_gem
       gem "draper"
       Bundler.with_clean_env { run "bundle install" }

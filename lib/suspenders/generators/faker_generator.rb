@@ -1,12 +1,7 @@
 require "rails/generators"
 
 module Suspenders
-  class FakerGenerator < Rails::Generators::Base
-    source_root File.expand_path(
-      File.join("..", "..", "..", "templates"),
-      File.dirname(__FILE__),
-    )
-
+  class FakerGenerator < Generators::Base
     def add_factory_bot
       gem 'faker', group: %i(development test)
       Bundler.with_clean_env { run "bundle install" }
