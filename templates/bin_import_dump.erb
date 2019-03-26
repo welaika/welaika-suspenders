@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Downloads a live dump from Heroku remote
+
+# Exit if any subcommand fails
+set -e
+
+target="${1:-staging}"
+
+heroku pg:backups:capture --remote "$target"
+heroku pg:backups:download --remote "$target"
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $(whoami) -d <%= app_name %>_development latest.dump
+rm latest.dump

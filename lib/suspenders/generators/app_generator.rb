@@ -167,6 +167,7 @@ module Suspenders
       generate("suspenders:decorator")
       generate("suspenders:faker")
       generate("suspenders:security")
+      generate("suspenders:import_dump")
     end
 
     def generate_deployment_default
