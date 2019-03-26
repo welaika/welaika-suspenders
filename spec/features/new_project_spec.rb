@@ -170,7 +170,7 @@ RSpec.describe "Suspend a new project with default configuration" do
     email_config = IO.read(email_file)
 
     expect(email_config).
-      to include(%{RecipientInterceptor.new(ENV["EMAIL_RECIPIENTS"])})
+      to include(%{RecipientInterceptor.new(ENV["EMAIL_RECIPIENTS"], subject_prefix: '[STAGING]'})
   end
 
   it "configs bullet gem in development" do
