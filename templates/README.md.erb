@@ -2,15 +2,7 @@
 
 ## Getting Started
 
-After you have cloned this repo, run this setup script to set up your machine
-with the necessary dependencies to run and test this app:
-
-    % ./bin/setup
-
-It assumes you have a machine equipped with Ruby, Postgres or MySQL, Node, Yarn and ImageMagick.
-
 To install Ruby, read the [rbenv guide](https://github.com/rbenv/rbenv#installation)
-or the [rvm guide](https://rvm.io/rvm/install).
 
 To install Postgres:
 
@@ -38,9 +30,17 @@ To install ImageMagick (delete if not applicable):
 
     $ brew install imagemagick@6
 
-After setting up, you can run the application using [Heroku Local](https://devcenter.heroku.com/articles/heroku-local):
+Now, clone this repo and you are ready to run the setup script:
+
+    % ./bin/setup
+
+You can run the application using [Heroku Local](https://devcenter.heroku.com/articles/heroku-local):
 
     $ heroku local
+
+Run the quality checks and the tests suite:
+
+    $ rake
 
 ## Setup on Heroku (delete if not applicable):
 
