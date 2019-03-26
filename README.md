@@ -8,7 +8,7 @@ Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a
 
 First ensure you have PostgreSQL, npm, yarn and chromedriver
 
-    $ brew install postgresql
+    $ brew install postgresql@10
     $ brew install node
     $ npm install npm@latest -g # To update npm if you have already installed it
     $ brew install yarn
