@@ -9,6 +9,13 @@ variables:
   POSTGRES_PASSWORD: ''
   SELENIUM_REMOTE_URL: "http://selenium__standalone-chrome:4444/wd/hub/"
 
+.job-creation-policy: &job-creation-policy
+  only:
+    - master
+    - merge_requests
+  except:
+    - staging
+
 .services: &rails-services
   - postgres:<%= Suspenders::POSTGRES_VERSION %>
   - selenium/standalone-chrome:latest
@@ -26,6 +33,7 @@ stages:
   - test
 
 prepare:
+  <<: *job-creation-policy
   stage: setup
   cache:
     <<: *cache-settings
@@ -34,6 +42,7 @@ prepare:
     - bundle install --retry 3 --deployment --jobs $(nproc)
 
 quality:rubocop:
+  <<: *job-creation-policy
   stage: quality
   cache:
     <<: *cache-settings
@@ -42,6 +51,7 @@ quality:rubocop:
     - bundle exec rubocop
 
 quality:slim_lint:
+  <<: *job-creation-policy
   stage: quality
   cache:
     <<: *cache-settings
@@ -50,6 +60,7 @@ quality:slim_lint:
     - bundle exec slim-lint app/views/
 
 quality:bundler-audit:
+  <<: *job-creation-policy
   stage: quality
   cache:
     <<: *cache-settings
@@ -58,6 +69,7 @@ quality:bundler-audit:
     - bundle exec bundle-audit check --update
 
 quality:brakeman:
+  <<: *job-creation-policy
   stage: quality
   cache:
     <<: *cache-settings
@@ -66,6 +78,7 @@ quality:brakeman:
     - bundle exec brakeman -z --skip-files vendor/bundle
 
 quality:rubycritic:
+  <<: *job-creation-policy
   stage: quality
   cache:
     <<: *cache-settings
@@ -74,6 +87,7 @@ quality:rubycritic:
     - bundle exec rubycritic app/ config/ lib/ --no-browser --minimum-score 94 --format console
 
 test:rspec:
+  <<: *job-creation-policy
   stage: test
   services: *rails-services
   cache:
