@@ -20,6 +20,8 @@ To install Node:
 
     $ brew install node
 
+(or use [nvm](https://github.com/creationix/nvm) if you want).
+
 To update Node:
 
     $ npm install npm@latest -g
@@ -32,12 +34,50 @@ To install Chromedriver (for integration test):
 
     $ brew cask install chromedriver
 
-To install ImageMagick:
+To install ImageMagick (delete if not applicable):
 
-    $ brew install imagemagick
+    $ brew install imagemagick@6
 
-After setting up, you can run the application using [Heroku Local]:
+After setting up, you can run the application using [Heroku Local](https://devcenter.heroku.com/articles/heroku-local):
 
-    % heroku local
+    $ heroku local
 
-[Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
+## Setup on Heroku (delete if not applicable):
+
+### Database
+
+https://elements.heroku.com/addons/heroku-postgresql
+
+Choose the PostgreSQL version you want to use (e.g. 10):
+
+    $ heroku addons:create heroku-postgresql:hobby-dev --version=10 --remote=staging
+    $ heroku addons:create heroku-postgresql:hobby-dev --version=10 --remote=production
+
+Further reading:
+
+https://devcenter.heroku.com/articles/heroku-postgres-plans
+
+### Logs
+
+https://elements.heroku.com/addons/logentries
+
+    $ heroku addons:create logentries:le_tryit --remote=staging
+    $ heroku addons:create logentries:le_tryit --remote=production
+
+### Cronjobs (if you need them):
+
+https://elements.heroku.com/addons/scheduler
+
+    $ https://elements.heroku.com/addons/scheduler
+
+### Sentry
+
+For Sentry's release detection to work correctly, please run
+
+    $ heroku labs:enable runtime-dyno-metadata
+
+### Redis (if you need for Sidekiq):
+
+https://elements.heroku.com/addons/heroku-redis
+
+    $ heroku addons:create heroku-redis:hobby-dev
