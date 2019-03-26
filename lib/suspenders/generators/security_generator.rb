@@ -1,4 +1,4 @@
-require "rails/generators"
+require_relative "base"
 
 module Suspenders
   class SecurityGenerator < Generators::Base
