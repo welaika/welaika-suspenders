@@ -5,6 +5,7 @@ module Suspenders
     def add_linters_gems
       gem 'rubocop', require: false, group: :development
       gem 'rubocop-performance', require: false, group: :development
+      gem 'rubocop-rails', require: false, group: :development
       gem 'rubocop-rspec', require: false, group: :development
       gem 'slim_lint', require: false, group: :development
       gem 'overcommit', require: false, group: :development
