@@ -8,7 +8,7 @@ module Suspenders
       end
 
       def configure_rack_timeout
-        append_file ".env", rack_timeout_config
+        append_file ".env.sample", rack_timeout_config
       end
 
       private

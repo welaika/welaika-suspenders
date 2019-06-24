@@ -12,7 +12,7 @@ bin/yarn
 
 echo "\n== Copying sample files =="
 if [ ! -f .env.local ]; then
-  cp .env .env.local
+  cp .env.sample .env.local
 fi
 
 echo "\n== Preparing database and seeds =="

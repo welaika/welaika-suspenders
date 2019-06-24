@@ -4,6 +4,7 @@
 *.swp
 .byebug_history
 /.bundle
+/.env
 /.env.local
 /.env.development.local
 /.env.test.local

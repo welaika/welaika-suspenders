@@ -36,7 +36,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   end
 
   it "copies dotfiles" do
-    %w[.ctags .env].each do |dotfile|
+    %w[.ctags .env.sample].each do |dotfile|
       expect(File).to exist("#{project_path}/#{dotfile}")
     end
   end
@@ -78,8 +78,8 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(gemfile).to include %{gem 'rack-mini-profiler', require: false}
   end
 
-  it "ensures .sample.env defaults to RACK_MINI_PROFILER=0" do
-    env = IO.read("#{project_path}/.env")
+  it "ensures .env.sample defaults to RACK_MINI_PROFILER=0" do
+    env = IO.read("#{project_path}/.env.sample")
 
     expect(env).to include "RACK_MINI_PROFILER=0"
   end
