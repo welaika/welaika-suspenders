@@ -1,1 +1,0 @@
-* aggiornare rspec-rails
