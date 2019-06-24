@@ -5,6 +5,7 @@ module Suspenders
     def add_gems
       gem 'capybara', '>= 2.15', '< 4.0', group: :test
       gem 'selenium-webdriver', group: :test
+      gem 'webdrivers', '~> 4.0', group: :test
       Bundler.with_clean_env { run "bundle install" }
     end
 
