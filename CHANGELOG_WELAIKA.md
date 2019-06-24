@@ -6,3 +6,4 @@
 * Change: rubocop is not splitted in several gems
 * Feature: use a custom docker image for gitlab.ci. We experimented this already in a couple of projects. We use a docker image so we can install node, yarn and chrome once for all.
 * Change: removed the CI configuration for a remote selenium webdriver. We don't need it anymore. Some old projects still uses it, but newer ones will just use headless Chrome and a custom docker image.
+* Change: use bundler 2 now that Heroku supports it https://devcenter.heroku.com/articles/ruby-support#libraries
