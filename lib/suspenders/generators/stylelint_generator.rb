@@ -7,7 +7,7 @@ module Suspenders
                       "stylelint-config-recommended",
                       "stylelint-order",
                       "stylelint-declaration-block-no-ignored-properties",
-                      "stylelint stylelint-scss"]
+                      "stylelint-scss"]
       action YarnInstall.new(self, dependencies, "--dev")
     end
 

@@ -5,8 +5,7 @@ RSpec.describe "suspenders:stylelint", type: :generator do
     it "creates .stylelintrc.json" do
       with_app { generate("suspenders:stylelint") }
 
-      expect(".stylelintrc.json").
-        to match_contents(%r{"extends": "@thoughtbot/stylelint-config"})
+      expect(".stylelintrc.json").to exist_as_a_file
     end
 
     it "adds stylelint to the package.json" do
