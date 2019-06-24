@@ -9,20 +9,11 @@ RSpec.describe "suspenders:stylelint", type: :generator do
         to match_contents(%r{"extends": "@thoughtbot/stylelint-config"})
     end
 
-    it "adds stylelint and @thoughtbot/stylelint-config to the package.json" do
+    it "adds stylelint to the package.json" do
       with_app { generate("suspenders:stylelint") }
 
       expect("package.json").to match_contents(/devDependencies/)
       expect("package.json").to match_contents(/stylelint/)
-      expect("package.json").to match_contents(%r{@thoughtbot/stylelint-config})
-    end
-
-    it "uncomments the hound config_file option" do
-      with_app { generate("suspenders:stylelint") }
-
-      expect(".hound.yml").to(
-        match_contents(/^  config_file: \.stylelintrc\.json/),
-      )
     end
   end
 
@@ -36,25 +27,13 @@ RSpec.describe "suspenders:stylelint", type: :generator do
       expect(".stylelintrc.json").not_to exist_as_a_file
     end
 
-    it "removes stylelint and @thoughtbot/stylelint-config from package.json" do
+    it "removes stylelint from package.json" do
       with_app do
         generate("suspenders:stylelint")
         destroy("suspenders:stylelint")
       end
 
       expect("package.json").not_to match_contents(/stylelint/)
-      expect("package.json").
-        not_to match_contents(%r{@thoughtbot/stylelint-config})
-    end
-
-    it "comments in the hound config_file option" do
-      with_app do
-        generate("suspenders:stylelint")
-        destroy("suspenders:stylelint")
-      end
-
-      expect(".hound.yml").
-        to match_contents(/^  # config_file: \.stylelintrc\.json/)
     end
   end
 end

@@ -12,3 +12,12 @@ PreCommit:
     enabled: true
     on_warn: fail # Treat all warnings as failures
     command: ['bundle', 'exec', 'slim-lint'] # Invoke within Bundler context
+
+  Stylelint:
+    enabled: true
+    description: 'Check styles with Stylelint'
+    command: ['npx', 'stylelint']
+    include:
+      - '**/*.scss'
+      - '**/*.sass'
+      - '**/*.css'
