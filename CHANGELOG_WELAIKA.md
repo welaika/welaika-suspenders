@@ -1,3 +1,6 @@
+2.32.1 (June 24, 2019)
+* Change: switch back to bundler 1. I think we are not ready yet for bundler 2
+
 2.32.0 (June 24, 2019)
 * Changed: introduced this file (`CHANGELOG_WELAIKA`) to tracks changes. The original file from thoughtbot is called `NEWS.MD`.
 * Feature: linter for sass files ([stylelint](https://stylelint.io/)). Defaults are almost the same as thoughtbot. I edited some rules to support sass syntax, but probably we will need more tweaks. Voluteers?
