@@ -1,4 +1,4 @@
-image: ruby:<%= Suspenders::RUBY_VERSION %>
+image: registry.gitlab.com/welaika/<%= app_name %>
 
 variables:
   GET_SOURCES_ATTEMPTS: 3
@@ -7,7 +7,6 @@ variables:
   POSTGRES_DB: rails_app_test
   POSTGRES_USER: root
   POSTGRES_PASSWORD: ''
-  SELENIUM_REMOTE_URL: "http://selenium__standalone-chrome:4444/wd/hub/"
 
 .job-creation-policy: &job-creation-policy
   only:
@@ -18,7 +17,6 @@ variables:
 
 .services: &rails-services
   - postgres:<%= Suspenders::POSTGRES_VERSION %>
-  - selenium/standalone-chrome:latest
 
 .cache: &cache-settings
   key: "$CI_COMMIT_REF_SLUG"
@@ -93,15 +91,6 @@ test:rspec:
   cache:
     <<: *cache-settings
   script:
-    # Install node
-    - curl -sL https://deb.nodesource.com/setup_10.x | bash -
-    - apt-get install -qq nodejs
-
-    # Install yarn
-    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-    - echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
-    - apt-get update -qq && apt-get install -qq yarn
-
     # Verify node and yarn versions
     - node --version
     - yarn --version
