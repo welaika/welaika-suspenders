@@ -48,7 +48,7 @@ quality:rubocop:
     - bundle check --path vendor/bundle
     - bundle exec rubocop
 
-quality:sasslint:
+quality:stylelint:
   <<: *job-creation-policy
   stage: quality
   cache:
