@@ -1,3 +1,6 @@
+2.32.2 (June 24, 2019)
+* Fix: stylelint on gitlab was not working
+
 2.32.1 (June 24, 2019)
 * Change: switch back to bundler 1. I think we are not ready yet for bundler 2
 

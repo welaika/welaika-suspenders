@@ -54,6 +54,7 @@ quality:stylelint:
   cache:
     <<: *cache-settings
   script:
+    - bin/yarn
     - npx stylelint app/assets/stylesheets
 
 quality:slim_lint:
