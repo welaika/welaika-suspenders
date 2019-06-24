@@ -81,3 +81,19 @@ For Sentry's release detection to work correctly, please run
 https://elements.heroku.com/addons/heroku-redis
 
     $ heroku addons:create heroku-redis:hobby-dev
+
+## Gitlab Docker Image
+
+We use a customer Docker image for our gitlab CI.
+
+You can read more about submitting a new image version [here](https://gitlab.com/welaika/<%= app_name %>/container_registry).
+
+Since our `Dockerfile` is called `Dockerfile.gitlab`, the commands are slightly different:
+
+
+```bash
+$ docker build -f Dockerfile.gitlab -t registry.gitlab.com/welaika/<%= app_name %> .
+$ docker push registry.gitlab.com/welaika/<%= app_name %>
+```
+
+Eventually, you can lint Dockerfiles with [hadolint](https://github.com/hadolint/hadolint)

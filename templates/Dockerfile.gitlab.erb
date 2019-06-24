@@ -1,0 +1,56 @@
+FROM ruby:<%= Suspenders::RUBY_VERSION %>
+
+LABEL maintainer="fabrizio.monti@welaika.com"
+
+# https://github.com/hadolint/hadolint/wiki/DL4006
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# hadolint ignore=DL3008
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends locales \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV LANG en_US.utf8
+
+# install project specific apt packages
+# hadolint ignore=DL3008
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends imagemagick \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# install nodejs
+# hadolint ignore=DL3008
+RUN curl -sSL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# install yarn
+# hadolint ignore=DL3008
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends yarn \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# install chrome
+# `dpkg -i` and `apt-get -f` must be different bash commands, so we must use `;` instead of `&&` chain
+RUN curl -sS -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && dpkg -i google-chrome-stable_current_amd64.deb; \
+    apt-get update \
+    && apt-get -y --fix-broken --no-install-recommends install \
+    && rm google-chrome-stable_current_amd64.deb \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN gem install bundler --version '< 2' \
+    && bundle config git.allow_insecure true \
+    && bundle config silence_root_warning true \
+    && bundle config jobs "$(nproc)"
+
+CMD ["irb"]

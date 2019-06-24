@@ -1,0 +1,28 @@
+# Git
+/.git
+/.gitignore
+
+# Editor temp files
+*.swp *.swo
+
+# Logs
+/log/*
+
+# Dumps
+/*.sql.gz
+/latest.dump
+
+# Temp files
+/tmp/*
+
+# Node
+/node_modules/*
+
+# Uploads
+/public/system/*
+/public/uploads/*
+/storage/*
+/uploads/*
+
+# Test
+/coverage/*
