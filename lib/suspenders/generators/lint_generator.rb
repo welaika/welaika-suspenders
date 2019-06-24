@@ -8,9 +8,12 @@ module Suspenders
       gem 'rubocop-rails', require: false, group: :development
       gem 'rubocop-rspec', require: false, group: :development
       gem 'slim_lint', require: false, group: :development
-      gem 'overcommit', require: false, group: :development
+      gem 'overcommit', '>= 0.48.1', require: false, group: :development
       gem 'rubycritic', require: false, group: :development
-      Bundler.with_clean_env { run "bundle install" }
+
+      # FIXME: switch back to bundle install once https://github.com/sds/overcommit/pull/649
+      # will be merged
+      Bundler.with_clean_env { run "bundle update" }
     end
 
     def setup_rubocop
