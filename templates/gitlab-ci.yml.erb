@@ -48,6 +48,14 @@ quality:rubocop:
     - bundle check --path vendor/bundle
     - bundle exec rubocop
 
+quality:sasslint:
+  <<: *job-creation-policy
+  stage: quality
+  cache:
+    <<: *cache-settings
+  script:
+    - npx stylelint app/assets/stylesheets
+
 quality:slim_lint:
   <<: *job-creation-policy
   stage: quality
