@@ -27,8 +27,9 @@ module Suspenders
       )
     end
 
-    def configure_spec_support_features
+    def configure_system_tests
       empty_directory_with_keep_file "spec/system"
+      empty_directory_with_keep_file "spec/support/system"
     end
 
     def configure_i18n_for_test_environment
