@@ -3,7 +3,7 @@ require_relative "base"
 module Suspenders
   class LintGenerator < Generators::Base
     def add_linters_gems
-      gem 'rubocop', require: false, group: :development
+      gem 'rubocop', '~> 0.71.0', require: false, group: :development
       gem 'rubocop-performance', require: false, group: :development
       gem 'rubocop-rails', require: false, group: :development
       gem 'rubocop-rspec', require: false, group: :development
