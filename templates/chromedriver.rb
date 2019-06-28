@@ -10,19 +10,12 @@ end
 Capybara.register_driver :headless_chrome do |app|
   options = ::Selenium::WebDriver::Chrome::Options.new
   options.headless!
-  # Set a big (15" MBP retina resolution) window size so that
-  # `save_and_open_screenshot` captures the whole page.
   options.add_argument "--window-size=1680,1050"
-
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w[headless disable-gpu] }
-  )
 
   Capybara::Selenium::Driver.new(
     app,
     browser: :chrome,
-    options: options,
-    desired_capabilities: capabilities
+    options: options
   )
 end
 
