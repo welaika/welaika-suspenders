@@ -3,10 +3,22 @@
 # Run this script to deploy the app to Heroku.
 
 set -e
+# set -x # turn debugging on
+
+while getopts "f" options; do
+  case "${options}" in
+    f)
+      force='--force-with-lease'
+      ;;
+    *)
+      ;;
+  esac
+done
+shift $((OPTIND-1))
 
 branch="$(git symbolic-ref HEAD --short)"
 target="${1:-staging}"
 
-git push "$target" "$branch:master"
+git push $force "$target" "$branch:master"
 heroku run rails db:migrate --exit-code --remote "$target"
 heroku restart --remote "$target"

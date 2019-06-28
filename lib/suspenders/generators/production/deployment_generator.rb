@@ -17,7 +17,9 @@ module Suspenders
           you can deploy to staging and production with:
 
               % ./bin/deploy staging
+              % ./bin/deploy -f staging # pushing with force-with-lease, attention!
               % ./bin/deploy production
+              % ./bin/deploy -f production # pushing with force-with-lease, attention!
         MARKDOWN
 
         append_file "README.md", instructions

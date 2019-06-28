@@ -1,3 +1,6 @@
+2.33 (???)
+* Feature: allow to deploy to heroku with push --force-with-lease (useful for staging)
+
 2.32.2 (June 24, 2019)
 * Fix: stylelint on gitlab was not working
 
