@@ -7,11 +7,6 @@ SimpleCov.start 'rails' do
   add_group 'Interactions', 'app/interactions'
 end
 
-if ENV['CIRCLE_ARTIFACTS']
-  dir = File.join(ENV['CIRCLE_ARTIFACTS'], 'coverage')
-  SimpleCov.coverage_dir(dir)
-end
-
 require 'webmock/rspec'
 require 'timecop'
 
