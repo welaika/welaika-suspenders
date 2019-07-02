@@ -27,7 +27,11 @@ module Suspenders
 
         ( source: https://devcenter.heroku.com/articles/heroku-postgresql#pg-reset )
 
-        Remeber to create a new backup schedule if you reset your database!
+        To load schema and seeds, you cannot use `heroku run rake db:setup`, instead use:
+
+            % heroku run rails db:schema:load db:seed --remote=staging
+
+        Remember to create a new backup schedule on Heroku after you reset your database!
 
             % heroku pg:backups:schedule DATABASE_URL --at '2:00 UTC' --remote=staging
 
