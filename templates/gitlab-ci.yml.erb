@@ -93,6 +93,26 @@ quality:rubycritic:
     - bundle check --path vendor/bundle
     - bundle exec rubycritic app/ config/ lib/ --no-browser --minimum-score 94 --format console
 
+test:factory_lint:
+  <<: *job-creation-policy
+  stage: test
+  services: *rails-services
+  cache:
+    <<: *cache-settings
+  script:
+    # Verify node and yarn versions
+    - node --version
+    - yarn --version
+
+    # Setup environment
+    - cp -f config/database.gitlab.yml config/database.yml
+    - bundle check --path vendor/bundle
+    - bin/yarn
+    - bundle exec rails db:setup RAILS_ENV=test
+
+    # Run factory_bot lint
+    - bundle exec rake factory_bot:lint
+
 test:rspec:
   <<: *job-creation-policy
   stage: test
