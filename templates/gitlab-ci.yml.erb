@@ -111,7 +111,7 @@ test:factory_lint:
     - bundle exec rails db:setup RAILS_ENV=test
 
     # Run factory_bot lint
-    - bundle exec rake factory_bot:lint
+    - bundle exec rake factory_bot:lint RAILS_ENV=test
 
 test:rspec:
   <<: *job-creation-policy
