@@ -12,6 +12,15 @@ Capybara.register_driver :headless_chrome do |app|
   options.headless!
   options.add_argument '--window-size=1680,1050'
 
+  if ENV['CI'].present?
+    # NOTE: alternative, create a chrome user
+    #       https://github.com/GoogleChromeLabs/lighthousebot/blob/master/builder/Dockerfile#L35-L40
+    options.add_argument '--no-sandbox'
+
+    options.add_argument '--disable-gpu'
+    options.add_argument '--disable-dev-shm-usage'
+  end
+
   Capybara::Selenium::Driver.new(
     app,
     browser: :chrome,
