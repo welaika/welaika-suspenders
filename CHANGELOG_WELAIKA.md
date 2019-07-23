@@ -1,4 +1,4 @@
-2.33 (???)
+2.33 (July 23th, 2019)
 * Feature: allow to deploy to heroku with push --force-with-lease (useful for staging)
 * Fix: make new Chrome versions (really) headless
 * Fix: remove code written for simple_cov on Circle CI
@@ -7,7 +7,6 @@
 * Feature: add factory_bot lint to gitlabci
 * Fix: SENTRY_ENV environment name was mismatched in .env file
 * Fix: Chrome now runs (again) on docker (for gitlabci)
-
 
 2.32.2 (June 24, 2019)
 * Fix: stylelint on gitlab was not working
