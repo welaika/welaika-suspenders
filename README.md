@@ -22,7 +22,7 @@ If you want to use heroku, please install the [heroku toolbelt](https://toolbelt
 
 Then run:
 
-    welaika-suspenders projectname
+    welaika-suspenders projectname --heroku=true
 
 This will create a Rails app in `projectname` using the latest version of Rails.
 
