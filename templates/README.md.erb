@@ -4,9 +4,15 @@
 
 To install Ruby, read the [rbenv guide](https://github.com/rbenv/rbenv#installation)
 
-To install Postgres:
+To install Postgres 11:
 
-    $ brew install postgresql@10
+    $ brew install postgresql@<%= Suspenders::POSTGRES_VERSION %>
+
+or
+
+    $ brew install postgresql
+
+if `postgresql@<%= Suspenders::POSTGRES_VERSION %>` does not exist yet.
 
 To install Node:
 
@@ -44,10 +50,10 @@ Run the quality checks and the tests suite:
 
 https://elements.heroku.com/addons/heroku-postgresql
 
-Choose the PostgreSQL version you want to use (e.g. 10):
+Choose the PostgreSQL version you want to use:
 
-    $ heroku addons:create heroku-postgresql:hobby-dev --version=10 --remote=staging
-    $ heroku addons:create heroku-postgresql:hobby-dev --version=10 --remote=production
+    $ heroku addons:create heroku-postgresql:hobby-dev --version=<%= Suspenders::POSTGRES_VERSION %> --remote=staging
+    $ heroku addons:create heroku-postgresql:hobby-dev --version=<%= Suspenders::POSTGRES_VERSION %> --remote=production
 
 Further reading:
 

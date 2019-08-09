@@ -5,9 +5,9 @@ Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a
 
 ## Installation
 
-First ensure you have PostgreSQL, npm, yarn and chromedriver
+First ensure you have PostgreSQL (use the same version specified in `Suspenders::POSTGRES_VERSION`), npm and yarn.
 
-    $ brew install postgresql@10
+    $ brew install postgresql
     $ brew install node
     $ npm install npm@latest -g # To update npm if you have already installed it
     $ brew install yarn
