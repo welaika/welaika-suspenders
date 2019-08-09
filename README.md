@@ -39,19 +39,9 @@ See all possible Heroku flags:
 This will create a rails app in `projectname`. This script creates a
 new git repository. It is not meant to be used against an existing repo.
 
+Run the bin/setup script
+
     cd projectname && bin/setup
-
-If you want to add an empty bare repository as origin, run
-
-    git remote add origin git@github.com:welaika/projectname.git
-
-## Sentry && Heroku
-
-After deploying for the first time on Heroku, please run
-
-`heroku labs:enable runtime-dyno-metadata`
-
-for Sentry's release detection to work correctly.
 
 ## Version number
 
