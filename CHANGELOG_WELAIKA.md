@@ -1,6 +1,8 @@
 2.34 (?)
 * Change: gitlab ci steps from prepare -> quality -> test to prepare -> test -> quality. We already run some quality checks with overcommit
 * Change: use :login instead of :plain as smtp authentication system
+* Change: use PostgreSQL 11
+* Documentation: update readme about suspenders
 
 
 2.33 (July 23th, 2019)
