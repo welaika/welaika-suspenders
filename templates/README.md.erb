@@ -88,7 +88,7 @@ Since our `Dockerfile` is called `Dockerfile.gitlab`, the commands are slightly 
 
 
 ```bash
-$ docker build -f Dockerfile.gitlab -t registry.gitlab.com/welaika/<%= app_name %> .
+$ docker build --no-cache -f Dockerfile.gitlab -t registry.gitlab.com/welaika/<%= app_name %> .
 $ docker push registry.gitlab.com/welaika/<%= app_name %>
 ```
 
