@@ -27,8 +27,8 @@ variables:
 
 stages:
   - setup
-  - quality
   - test
+  - quality
 
 prepare:
   <<: *job-creation-policy
@@ -38,6 +38,55 @@ prepare:
     policy: pull-push
   script:
     - bundle install --retry 3 --deployment --jobs $(nproc)
+
+test:factory_lint:
+  <<: *job-creation-policy
+  stage: test
+  services: *rails-services
+  cache:
+    <<: *cache-settings
+  script:
+    # Verify node and yarn versions
+    - node --version
+    - yarn --version
+
+    # Setup environment
+    - cp -f config/database.gitlab.yml config/database.yml
+    - bundle check --path vendor/bundle
+    - bin/yarn
+    - bundle exec rails db:setup RAILS_ENV=test
+
+    # Run factory_bot lint
+    - bundle exec rake factory_bot:lint RAILS_ENV=test
+
+test:rspec:
+  <<: *job-creation-policy
+  stage: test
+  services: *rails-services
+  cache:
+    <<: *cache-settings
+  script:
+    # Verify node and yarn versions
+    - node --version
+    - yarn --version
+
+    # Setup environment
+    - cp -f config/database.gitlab.yml config/database.yml
+    - bundle check --path vendor/bundle
+    - bin/yarn
+    - bundle exec rails db:setup RAILS_ENV=test
+
+    # Run tests
+    - bundle exec rspec spec/
+  coverage: '/\(\d+.\d+\%\) covered/'
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    when: always
+    expire_in: 5 days
+    paths:
+      - coverage/
+      - tmp/screenshots/
+      - tmp/capybara/
 
 quality:rubocop:
   <<: *job-creation-policy
@@ -92,52 +141,3 @@ quality:rubycritic:
   script:
     - bundle check --path vendor/bundle
     - bundle exec rubycritic app/ config/ lib/ --no-browser --minimum-score 94 --format console
-
-test:factory_lint:
-  <<: *job-creation-policy
-  stage: test
-  services: *rails-services
-  cache:
-    <<: *cache-settings
-  script:
-    # Verify node and yarn versions
-    - node --version
-    - yarn --version
-
-    # Setup environment
-    - cp -f config/database.gitlab.yml config/database.yml
-    - bundle check --path vendor/bundle
-    - bin/yarn
-    - bundle exec rails db:setup RAILS_ENV=test
-
-    # Run factory_bot lint
-    - bundle exec rake factory_bot:lint RAILS_ENV=test
-
-test:rspec:
-  <<: *job-creation-policy
-  stage: test
-  services: *rails-services
-  cache:
-    <<: *cache-settings
-  script:
-    # Verify node and yarn versions
-    - node --version
-    - yarn --version
-
-    # Setup environment
-    - cp -f config/database.gitlab.yml config/database.yml
-    - bundle check --path vendor/bundle
-    - bin/yarn
-    - bundle exec rails db:setup RAILS_ENV=test
-
-    # Run tests
-    - bundle exec rspec spec/
-  coverage: '/\(\d+.\d+\%\) covered/'
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-    when: always
-    expire_in: 5 days
-    paths:
-      - coverage/
-      - tmp/screenshots/
-      - tmp/capybara/
