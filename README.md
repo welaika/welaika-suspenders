@@ -11,7 +11,6 @@ First ensure you have PostgreSQL (use the same version specified in `Suspenders:
     $ brew install node
     $ npm install npm@latest -g # To update npm if you have already installed it
     $ brew install yarn
-    $ brew casks install chromedriver
 
 then install the suspenders gem:
 
