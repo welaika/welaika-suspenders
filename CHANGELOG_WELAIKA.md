@@ -1,3 +1,8 @@
+2.34 (?)
+* Change: gitlab ci steps from prepare -> quality -> test to prepare -> test -> quality. We already run some quality checks with overcommit
+* Change: use :login instead of :plain as smtp authentication system
+
+
 2.33 (July 23th, 2019)
 * Feature: allow to deploy to heroku with push --force-with-lease (useful for staging)
 * Fix: make new Chrome versions (really) headless
