@@ -18,6 +18,10 @@ weLaika's fork of the famous thoughbot suspenders gem.
   s.extra_rdoc_files = %w[README.md LICENSE]
   s.files = `git ls-files`.split("\n")
   s.homepage = 'http://github.com/welaika/welaika-suspenders'
+  s.metadata = {
+    'changelog_uri' => 'https://github.com/welaika/welaika-suspenders/blob/master/CHANGELOG_WELAIKA.md',
+    'source_code_uri' => 'https://github.com/welaika/welaika-suspenders'
+  }
   s.license = 'MIT'
   s.name = 'welaika-suspenders'
   s.rdoc_options = ['--charset=UTF-8']
