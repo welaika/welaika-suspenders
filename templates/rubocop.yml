@@ -25,5 +25,10 @@ Metrics/LineLength:
 Rails:
   Enabled: true
 
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/features/**/*'
+    - 'spec/system/**/*'
+
 Style/Documentation:
   Enabled: false
