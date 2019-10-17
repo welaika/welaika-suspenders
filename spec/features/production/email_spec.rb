@@ -7,7 +7,7 @@ RSpec.describe "suspenders:production:email", type: :generator do
     expect("config/smtp.rb").to match_contents(%r{SMTP_SETTINGS\s*=})
 
     expect("config/environments/production.rb").to \
-      match_contents(%r{require.+config/smtp})
+      match_contents(%r{require.+'config', 'smtp'})
     expect("config/environments/production.rb").to \
       match_contents(%r{action_mailer.delivery_method\s*=\s*:smtp})
     expect("config/environments/production.rb").to \

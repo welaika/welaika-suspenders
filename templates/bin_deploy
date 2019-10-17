@@ -20,5 +20,3 @@ branch="$(git symbolic-ref HEAD --short)"
 target="${1:-staging}"
 
 git push $force "$target" "$branch:master"
-heroku run rails db:migrate --exit-code --remote "$target"
-heroku restart --remote "$target"

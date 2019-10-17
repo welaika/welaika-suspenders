@@ -169,6 +169,8 @@ module Suspenders
       generate("suspenders:faker")
       generate("suspenders:security")
       generate("suspenders:import_dump")
+      generate("suspenders:jobs")
+      generate("suspenders:inline_svg")
     end
 
     def generate_deployment_default
@@ -179,6 +181,10 @@ module Suspenders
       generate("suspenders:production:error_reporting")
       generate("suspenders:production:deployment")
       generate("suspenders:production:manifest")
+    end
+
+    def generate_views
+      generate("suspenders:views")
     end
 
     def outro

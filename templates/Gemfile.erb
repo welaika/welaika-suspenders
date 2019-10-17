@@ -23,6 +23,7 @@ gem 'rails', '<%= Suspenders::RAILS_VERSION %>'
 gem 'rails-i18n'
 gem 'recipient_interceptor'
 gem 'sassc-rails'
+gem 'sprockets', '< 4'
 gem 'title'
 gem 'uglifier', '>= 1.3.0'
 <% if options[:webpack] %>
@@ -41,6 +42,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'welaika-suspenders', '< 3'
 end
 
 group :test do
@@ -50,4 +52,3 @@ group :test do
   gem 'webmock'
 end
 
-gem 'welaika-suspenders', group: %i[development test], require: false

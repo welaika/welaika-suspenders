@@ -100,7 +100,7 @@ module Suspenders
 
     def enable_rack_canonical_host
       config = <<-RUBY
-  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
+config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
       RUBY
 
       configure_environment "production", config
@@ -236,8 +236,16 @@ config.public_file_server.headers = {
       create_production_heroku_app(flags)
     end
 
+    def configure_automatic_deployment
+      append_file "Procfile", "release: bin/auto_migrate"
+    end
+
+    def setup_bundler_audit
+      copy_file "bundler_audit.rake", "lib/tasks/bundler_audit.rake"
+      append_file "Rakefile", %{\ntask default: "bundle:audit"\n}
+    end
+
     def copy_miscellaneous_files
-      copy_file "browserslist", "browserslist"
       copy_file "errors.rb", "config/initializers/errors.rb"
       copy_file "json_encoding.rb", "config/initializers/json_encoding.rb"
     end
