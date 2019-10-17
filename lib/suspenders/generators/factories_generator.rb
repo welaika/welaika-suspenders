@@ -4,7 +4,7 @@ module Suspenders
   class FactoriesGenerator < Generators::Base
     def add_factory_bot
       gem "factory_bot_rails", group: %i(development test)
-      gem "database_cleaner", group: %i(development test)
+      gem "database_cleaner", group: %i(development test), require: false
       Bundler.with_clean_env { run "bundle install" }
     end
 
