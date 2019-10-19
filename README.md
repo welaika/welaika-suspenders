@@ -3,6 +3,13 @@
 This is a [suspenders](https://github.com/thoughtbot/suspenders) fork in use at [weLaika](http://dev.welaika.com).
 Big thanks to [thoughtbot](http://thoughtbot.com/community) for providing such a great starting point.
 
+** Warning! **
+
+welaika-suspenders version 2 will install rails 5.
+welaika-suspenders version 3 will install rails 6.
+
+You may want to use version 2 if you need to use solidus 2.9.x
+
 ## Installation
 
 First ensure you have PostgreSQL (use the same version specified in `Suspenders::POSTGRES_VERSION`), npm and yarn.
