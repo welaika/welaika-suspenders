@@ -3,7 +3,7 @@ require_relative "base"
 module Suspenders
   class StylelintGenerator < Generators::Base
     def install_stylelint
-      dependencies = ["stylelint",
+      dependencies = ["stylelint@10", # FIXME: config-recommened is not ready for stylelint 11 yet
                       "stylelint-config-recommended",
                       "stylelint-order",
                       "stylelint-declaration-block-no-ignored-properties",
