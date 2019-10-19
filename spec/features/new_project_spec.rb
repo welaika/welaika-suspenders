@@ -198,22 +198,6 @@ RSpec.describe "Suspend a new project with default configuration" do
     expect(File).to exist("#{project_path}/bin/overcommit")
   end
 
-  it "removes comments and extra newlines from config files" do
-    config_files = [
-      IO.read("#{project_path}/config/application.rb"),
-      IO.read("#{project_path}/config/environment.rb"),
-      development_config,
-      test_config,
-      production_config,
-    ]
-
-    config_files.each do |file|
-      expect(file).not_to match(%r{.*#.*})
-      expect(file).not_to eq(file.strip)
-      expect(file).not_to match(%r{^$\n\n})
-    end
-  end
-
   it "creates review apps setup script" do
     bin_setup_path = "#{project_path}/bin/setup_review_app"
     bin_setup = IO.read(bin_setup_path)
