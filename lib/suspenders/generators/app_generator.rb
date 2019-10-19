@@ -55,7 +55,6 @@ module Suspenders
       invoke :create_heroku_apps
       invoke :generate_deployment_default
       invoke :remove_config_comment_lines
-      invoke :remove_routes_comment_lines
     end
 
     def customize_gemfile
@@ -148,10 +147,6 @@ module Suspenders
       build :remove_config_comment_lines
     end
 
-    def remove_routes_comment_lines
-      build :remove_routes_comment_lines
-    end
-
     def generate_default
       generate("suspenders:json")
       generate("suspenders:static")
@@ -167,6 +162,7 @@ module Suspenders
       generate("suspenders:faker")
       generate("suspenders:security")
       generate("suspenders:import_dump")
+      generate("suspenders:jobs")
       generate("suspenders:inline_svg")
     end
 

@@ -287,12 +287,6 @@ config.public_file_server.headers = {
       end
     end
 
-    def remove_routes_comment_lines
-      replace_in_file 'config/routes.rb',
-        /Rails\.application\.routes\.draw do.*end/m,
-        "Rails.application.routes.draw do\nend"
-    end
-
     def run_rubocop_autocorrect
       Bundler.with_clean_env { run "bundle exec rubocop -a" }
     end

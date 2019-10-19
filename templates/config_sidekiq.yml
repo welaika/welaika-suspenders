@@ -1,0 +1,14 @@
+---
+:concurrency: 5
+
+# Keep in mind that Heroku puts a hard limit of 30 seconds on a process restart,
+# The -t 25 tells Sidekiq to give the jobs 25 seconds to finish before starting
+# the "force shutdown" procedure.
+:timeout: 25
+
+# Sidekiq will run this file through ERB when reading it so you can
+# even put in dynamic logic, like a host-specific queue.
+# http://www.mikeperham.com/2013/11/13/advanced-sidekiq-host-specific-queues/
+:queues:
+  - default
+  - mailers  # for ActionMailer
