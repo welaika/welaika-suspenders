@@ -93,7 +93,7 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "configs locale and timezone" do
     result = IO.read("#{project_path}/config/application.rb")
 
-    expect(result).to match(/^ +config.i18n.available_locales = \[:en, :it\]$/)
+    expect(result).to match(/^ +config.i18n.available_locales = %i\[en it\]$/)
     expect(result).to match(/^ +config.i18n.default_locale = :it$/)
 
     expect(result).to match(/^ +config.time_zone = 'Rome'$/)
@@ -115,7 +115,7 @@ RSpec.describe "Suspend a new project with default configuration" do
 
   it "configures public_file_server.headers in production" do
     expect(production_config).to match(
-      /^ +config.public_file_server.headers = {\n +"Cache-Control" => "public,/,
+      /^ +config.public_file_server.headers = {\n +'Cache-Control' => 'public,/,
     )
   end
 
@@ -153,13 +153,13 @@ RSpec.describe "Suspend a new project with default configuration" do
   it "sets action mailer default host and asset host" do
     config_key = 'config\.action_mailer\.asset_host'
     config_value =
-      %q{ENV\.fetch\("ASSET_HOST", ENV\.fetch\("APPLICATION_HOST"\)\)}
+      %q{ENV\.fetch\('ASSET_HOST', ENV\.fetch\('APPLICATION_HOST'\)\)}
     expect(production_config).to match(/#{config_key} = #{config_value}/)
   end
 
   it "uses APPLICATION_HOST, not HOST in the production config" do
-    expect(production_config).to match(/"APPLICATION_HOST"/)
-    expect(production_config).not_to match(/"HOST"/)
+    expect(production_config).to match(/'APPLICATION_HOST'/)
+    expect(production_config).not_to match(/'HOST'/)
   end
 
   it "configures email interceptor" do

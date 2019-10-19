@@ -100,7 +100,7 @@ module Suspenders
 
     def enable_rack_canonical_host
       config = <<-RUBY
-config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
+config.middleware.use Rack::CanonicalHost, ENV.fetch('APPLICATION_HOST')
       RUBY
 
       configure_environment "production", config
@@ -113,7 +113,7 @@ config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
     def setup_asset_host
       replace_in_file 'config/environments/production.rb',
         "# config.action_controller.asset_host = 'http://assets.example.com'",
-        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))'
+        "config.action_controller.asset_host = ENV.fetch('ASSET_HOST', ENV.fetch('APPLICATION_HOST'))"
 
       if File.exist?("config/initializers/assets.rb")
         replace_in_file 'config/initializers/assets.rb',
@@ -123,7 +123,7 @@ config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
 
       config = <<-EOD
 config.public_file_server.headers = {
-    "Cache-Control" => "public, max-age=31557600",
+    'Cache-Control' => 'public, max-age=31557600',
   }
       EOD
 
@@ -175,7 +175,7 @@ config.public_file_server.headers = {
       template "config_locales_it.yml.erb", "config/locales/it.yml"
 
       config = <<-RUBY
-    config.i18n.available_locales = [:en, :it]
+    config.i18n.available_locales = %i[en it]
     config.i18n.default_locale = :it
     config.time_zone = 'Rome'
       RUBY
@@ -188,10 +188,10 @@ config.public_file_server.headers = {
       action_mailer_asset_host "development", %{"http://localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
       action_mailer_asset_host "test", %{"http://www.example.com"}
-      action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
+      action_mailer_host "production", %{ENV.fetch('APPLICATION_HOST')}
       action_mailer_asset_host(
         "production",
-        %{ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))},
+        %{ENV.fetch('ASSET_HOST', ENV.fetch('APPLICATION_HOST'))},
       )
     end
 
