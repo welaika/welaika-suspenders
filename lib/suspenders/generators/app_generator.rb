@@ -167,7 +167,6 @@ module Suspenders
       generate("suspenders:faker")
       generate("suspenders:security")
       generate("suspenders:import_dump")
-      generate("suspenders:jobs")
       generate("suspenders:inline_svg")
     end
 
