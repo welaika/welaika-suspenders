@@ -4,6 +4,13 @@
 * Change: use PostgreSQL 11
 * Change: edited rubocop rules
 * Documentation: update readme about suspenders
+* Feature: add sidekiq
+* Change: install foreman if it does not exist
+* Change: update rubocop rules
+* Fix: stick to style-lint 10 for now, because some plugins does not work with 11
+* Change: use bundler 2 by default
+* Feature: add inline_svg gem (from upstream)
+* Change: use a new way to migrate database on heroku (from upstream)
 
 
 2.33 (July 23th, 2019)
