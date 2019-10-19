@@ -293,6 +293,10 @@ config.public_file_server.headers = {
         "Rails.application.routes.draw do\nend"
     end
 
+    def run_rubocop_autocorrect
+      Bundler.with_clean_env { run "bundle exec rubocop -a" }
+    end
+
     def setup_rakefile
       # NOTE: we named our file `rakefile_template` and not
       # `Rakefile` because otherwise `copy_file` would copy the

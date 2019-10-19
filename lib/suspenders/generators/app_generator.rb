@@ -56,7 +56,6 @@ module Suspenders
       invoke :generate_deployment_default
       invoke :remove_config_comment_lines
       invoke :remove_routes_comment_lines
-      invoke :outro
     end
 
     def customize_gemfile
@@ -186,7 +185,9 @@ module Suspenders
       generate("suspenders:views")
     end
 
-    def outro
+    def generate_outro
+      build :run_rubocop_autocorrect
+
       say "Congratulations! You just pulled our suspenders."
       say "Read README.md!"
     end
