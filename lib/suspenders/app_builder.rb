@@ -200,7 +200,9 @@ config.public_file_server.headers = {
     end
 
     def set_up_forego
+      # NOTE: we want to use ruby foreman!
       copy_file "Procfile", "Procfile"
+      Bundler.with_clean_env { run "gem install foreman" }
     end
 
     def setup_default_directories
