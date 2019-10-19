@@ -1,14 +1,15 @@
+---
 require:
   - rubocop-rspec
   - rubocop-performance
   - rubocop-rails
+
 inherit_from: .rubocop_todo.yml
 
 AllCops:
   DisplayCopNames: true
   Exclude:
     - 'bin/*'
-    - 'config/**/*'
     - 'db/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
@@ -16,11 +17,15 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'app/admin/**/*'
+    - 'config/environments/*'
     - 'lib/tasks/*.rake'
     - 'spec/**/*'
 
 Metrics/LineLength:
   Max: 100
+  Exclude:
+    - 'config/initializers/backtrace_silencers.rb'
+    - 'config/initializers/content_security_policy.rb'
 
 Rails:
   Enabled: true
