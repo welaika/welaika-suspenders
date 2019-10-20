@@ -16,7 +16,7 @@ module Suspenders
       :set_heroku_remotes,
       :set_heroku_sentry_configuration,
       :set_heroku_smtp_settings,
-      :set_buildpacks,
+      :set_heroku_buildpacks,
     )
 
     def readme

@@ -94,7 +94,7 @@ module Suspenders
         end
       end
 
-      def set_buildpacks
+      def set_heroku_buildpacks
         %w(staging production).each do |environment|
           run_toolbelt_command(
             "buildpacks:add --index 1 heroku/nodejs",

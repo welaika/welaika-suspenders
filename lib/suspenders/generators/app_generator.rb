@@ -119,7 +119,7 @@ module Suspenders
         build :set_heroku_backup_schedule
         build :set_heroku_sentry_configuration
         build :set_heroku_smtp_settings
-        build :set_buildpacks
+        build :set_heroku_buildpacks
         build :create_heroku_pipeline
         build :configure_automatic_deployment
       end
