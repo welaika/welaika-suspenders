@@ -181,6 +181,10 @@ module Suspenders
       generate("suspenders:views")
     end
 
+    def generate_autoprefixer
+      generate("suspenders:autoprefixer")
+    end
+
     def generate_outro
       build :run_rubocop_autocorrect
 
