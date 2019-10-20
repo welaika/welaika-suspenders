@@ -1,3 +1,7 @@
+2.36 (October 20th, 2019)
+* Feature: add nvmrc with latest node lts (dubnium)
+* Fix: heroku auto migrate functionality
+
 2.35 (October 20th, 2019)
 * Change: add more exclusion to rubocop (from the default configuration on github)
 * Change: configure autoprefixer browsers list
