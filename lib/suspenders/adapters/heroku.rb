@@ -94,6 +94,15 @@ module Suspenders
         end
       end
 
+      def set_heroku_auto_migrate
+        %w(staging production).each do |environment|
+          run_toolbelt_command(
+            "config:add AUTO_MIGRATE_DB=true",
+            environment,
+          )
+        end
+      end
+
       def set_heroku_buildpacks
         %w(staging production).each do |environment|
           run_toolbelt_command(

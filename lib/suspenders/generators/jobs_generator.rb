@@ -10,7 +10,7 @@ module Suspenders
     def configure_foreman
       append_to_file(
         'Procfile',
-        'worker: bundle exec sidekiq -C config/sidekiq.yml'
+        "worker: bundle exec sidekiq -C config/sidekiq.yml\n"
       )
     end
 
@@ -45,7 +45,7 @@ module Suspenders
     def configure_active_job
       inject_into_file(
         "config/application.rb",
-        "\n    config.active_job.queue_adapter = :sidekiq",
+        "\n    config.active_job.queue_adapter = :sidekiq\n",
         before: "\n  end",
       )
     end

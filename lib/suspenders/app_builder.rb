@@ -11,6 +11,7 @@ module Suspenders
       :create_production_heroku_app,
       :create_staging_heroku_app,
       :set_heroku_application_host,
+      :set_heroku_auto_migrate,
       :set_heroku_backup_schedule,
       :set_heroku_rails_secrets,
       :set_heroku_remotes,
@@ -239,7 +240,9 @@ config.public_file_server.headers = {
     end
 
     def configure_automatic_deployment
-      append_file "Procfile", "release: bin/auto_migrate"
+      append_file "Procfile", "release: bin/auto_migrate\n"
+      copy_file "bin_auto_migrate", "bin/auto_migrate"
+      chmod "bin/auto_migrate", 0o755
     end
 
     def setup_bundler_audit

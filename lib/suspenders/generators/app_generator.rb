@@ -117,6 +117,7 @@ module Suspenders
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
         build :set_heroku_application_host
+        build :set_heroku_auto_migrate
         build :set_heroku_backup_schedule
         build :set_heroku_sentry_configuration
         build :set_heroku_smtp_settings
