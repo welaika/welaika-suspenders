@@ -300,6 +300,19 @@ config.public_file_server.headers = {
       copy_file 'rakefile_template.rb', 'Rakefile', force: true
     end
 
+    def configure_sourcemaps_for_sass
+      config = [
+        "  config.sass.inline_source_maps = true\n",
+        "  config.sass.line_comments = true\n"
+      ].join
+
+      inject_into_file(
+        "config/environments/development.rb",
+        config,
+        after: "  config.assets.debug = true\n"
+      )
+    end
+
     private
 
     def raise_on_missing_translations_in(environment)

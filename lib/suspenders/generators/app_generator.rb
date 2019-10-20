@@ -103,6 +103,7 @@ module Suspenders
       build :configure_action_mailer
       build :configure_locales_and_time_zone
       build :configure_time_formats
+      build :configure_sourcemaps_for_sass
       build :setup_rakefile
       build :replace_default_puma_configuration
       build :set_up_forego
