@@ -9,8 +9,10 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   DisplayCopNames: true
   Exclude:
+    - '.git/**/*'
     - 'bin/*'
     - 'db/**/*'
+    - 'node_modules/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
 
