@@ -5,5 +5,5 @@ module Suspenders
     read("#{File.dirname(__FILE__)}/../../.ruby-version").
     strip.
     freeze
-  VERSION = "2.34".freeze
+  VERSION = "2.35".freeze
 end

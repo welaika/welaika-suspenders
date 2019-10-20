@@ -1,3 +1,8 @@
+2.35 (October 20th, 2019)
+* Change: add more exclusion to rubocop (from the default configuration on github)
+* Change: configure autoprefixer browsers list
+* Feature: add sass sourcemaps (but they won't work if autoprefixer is present...)
+
 2.34 (October 19th, 2019)
 * Change: gitlab ci steps from prepare -> quality -> test to prepare -> test -> quality. We already run some quality checks with overcommit
 * Change: use :login instead of :plain as smtp authentication system
