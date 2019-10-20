@@ -1,3 +1,6 @@
+3.0 (October 20th, 2019)
+* Feature: Rails 6, but welaika-suspenders 2 still continue to support rails 5 for some time
+
 2.36 (October 20th, 2019)
 * Feature: add nvmrc with latest node lts (dubnium)
 * Fix: heroku auto migrate functionality
