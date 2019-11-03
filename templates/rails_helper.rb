@@ -2,6 +2,12 @@
 
 ENV['RACK_ENV'] = 'test'
 
+require File.expand_path('../../config/environment', __FILE__)
+
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
+
 require File.expand_path('../config/environment', __dir__)
 
 abort('DATABASE_URL environment variable is set') if ENV['DATABASE_URL']
