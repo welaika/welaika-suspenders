@@ -11,10 +11,11 @@ AllCops:
   Exclude:
     - '.git/**/*'
     - 'bin/*'
-    - 'db/**/*'
+    - 'db/migrate/**/*.rb'
+    - 'db/schema.rb'
     - 'node_modules/**/*'
     - 'tmp/**/*'
-    - 'vendor/**/*'
+    - 'vendor/bundle/**/*'
 
 Metrics/BlockLength:
   Exclude:
