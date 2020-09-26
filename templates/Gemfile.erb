@@ -34,10 +34,18 @@ gem 'webpacker', '~> 4.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# `debase`, `ruby-debug-ide` and `solargraph` gems are dedicated
+# to support the following vscode plugins out of the box:
+# * https://github.com/castwide/vscode-solargraph
+# * https://github.com/rubyide/vscode-ruby.git
+# that are part of our base workflow.
 group :development do
+  gem 'debase'
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rack-mini-profiler', require: false
+  gem 'ruby-debug-ide'
+  gem 'solargraph'
   gem 'web-console', '>= 3.3.0'
 end
 

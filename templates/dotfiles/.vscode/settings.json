@@ -1,0 +1,11 @@
+{
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "_ruby_comment": "codeCompletion, intellisense and useLanguageServer are all delegated to Solargraph, so we disable them in ruby extension",
+  "ruby.codeCompletion": false,
+  "ruby.intellisense": false,
+  "ruby.useLanguageServer": false,
+  "ruby.useBundler": true,
+  "solargraph.useBundler": true
+}

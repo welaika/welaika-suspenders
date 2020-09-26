@@ -44,6 +44,30 @@ Run the quality checks and the tests suite:
 
     $ rake
 
+### VSCode debug and intellisense
+
+If you're working with VSCode editor, you'd like to install dedicated extension running
+following commands into your terminal:
+
+```bash
+code --install-extension rebornix.ruby
+code --install-extension castwide.solargraph
+```
+
+For more information, please refer to respective repositories:
+
+* https://github.com/castwide/vscode-solargraph
+* https://github.com/rubyide/vscode-ruby.git
+
+> Please, note that Solargraph already handles Rubocop's checks into the editor; do not install
+> Rubocop-specific extensions or you'll get doubled messages.
+
+Last but not least, you have both `.vscode/launch.json` and `.vscode/settings.json`. You can
+manage settings directly within VSCode UI in the "workspace" tab.
+
+The only defaults provided ATM are - almost - only about plugins matter of this paragraph. PRs to
+add sane defaults for other aspects are welcome.
+
 ## Setup on Heroku (delete if not applicable):
 
 ### Database
